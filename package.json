@@ -1,0 +1,11 @@
+{
+  "devDependencies": {
+    "@taufik-nurrohman/factory": "^2.2.5"
+  },
+  "private": true,
+  "scripts": {
+    "pack": "pack --clean=false --from=.factory --to=."
+  },
+  "type": "module",
+  "version": "1.0.0"
+}

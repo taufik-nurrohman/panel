@@ -1,0 +1,92 @@
+*,
+::after,
+::before {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  background: 0 0;
+  border-color: inherit;
+  border: 0;
+  box-sizing: border-box;
+  color: inherit;
+  font: inherit;
+  margin: 0;
+  outline: 0;
+  padding: 0;
+  text-align: inherit;
+  text-decoration: none;
+  word-wrap: break-word;
+}
+
+::-moz-focus-inner {
+  border: 0;
+  margin: 0;
+  outline: 0;
+  padding: 0;
+}
+
+:root {
+  background: #fff;
+  border: 0 solid #000;
+  color: #000;
+}
+
+[role='application'] {
+  padding: 1px;
+}
+
+%blocks {
+  border: 1px solid;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 1px;
+  padding: 1px;
+}
+
+.block,
+.blocks {
+  @extend %blocks;
+}
+
+.block {
+  &__bar {
+    @extend %blocks;
+    flex-direction: row;
+    flex: 0 auto;
+  }
+  &__content {
+    border: 1px solid;
+    flex: 1;
+  }
+  &__icon {
+    border: 1px solid;
+    width: 1.25em;
+  }
+  &__title {
+    border: 1px solid;
+    cursor: move;
+    flex: 1;
+    padding: 0 0.25em;
+    user-select: none;
+  }
+  &__task {
+    border: 1px solid;
+    cursor: pointer;
+    min-width: 1em;
+    user-select: none;
+  }
+  &__tasks {
+    @extend %blocks;
+    flex-direction: row;
+    flex: 0 auto;
+  }
+}
+
+.blocks {
+  &[aria-orientation='horizontal'] {
+    flex-direction: row;
+  }
+}
+
+.content {
+  padding: 10px;
+}

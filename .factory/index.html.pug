@@ -1,0 +1,89 @@
+html(dir='ltr')
+  head
+    meta(charset='utf-8')
+    meta(content='width=device-width' name='viewport')
+    title Application
+    link(href='index.min.css?v=%(version)' rel='stylesheet')
+  body
+    div(role='application')
+      .blocks
+        .blocks(aria-orientation='horizontal')
+          each i in [1, 2, 3]
+            .block
+              .block__bar
+                .block__icon.icon
+                .block__title Block Title
+                .block__tasks(role='toolbar')
+                  .block__task
+                    .icon.icon-exit
+                  .block__task
+                    .icon.icon-screen
+                  .block__task
+                    .icon.icon-destroy
+              .block__content.content
+                h3 Block Title
+                p Block content.
+        .blocks(aria-orientation='horizontal')
+          each i in [1, 2, 3, 4]
+            .block
+              .block__bar
+                .block__icon.icon
+                .block__title Block Title
+                .block__tasks(role='toolbar')
+                  .block__task
+                    .icon.icon-exit
+                  .block__task
+                    .icon.icon-screen
+                  .block__task
+                    .icon.icon-destroy
+              .block__content.content
+                h3 Block Title
+                p Block content.
+        .blocks(aria-orientation='horizontal')
+          each i in [1, 2, 3, 4, 5]
+            .block
+              .block__bar
+                .block__icon.icon
+                .block__title Block Title
+                .block__tasks(role='toolbar')
+                  .block__task
+                    .icon.icon-exit
+                  .block__task
+                    .icon.icon-screen
+                  .block__task
+                    .icon.icon-destroy
+              .block__content.content
+                h3 Block Title
+                p Block content.
+        .blocks(aria-orientation='horizontal')
+          each i in [1, 2, 3, 4, 5]
+            .block
+              .block__bar
+                .block__icon.icon
+                .block__title Block Title
+                .block__tasks(role='toolbar')
+                  .block__task
+                    .icon.icon-exit
+                  .block__task
+                    .icon.icon-screen
+                  .block__task
+                    .icon.icon-destroy
+              .block__content.content
+                h3 Block Title
+                p Block content.
+          .blocks
+            each i in [1, 2, 3]
+              .block
+                .block__bar
+                  .block__icon.icon
+                  .block__title Block Title
+                  .block__tasks(role='toolbar')
+                    .block__task
+                      .icon.icon-exit
+                    .block__task
+                      .icon.icon-screen
+                    .block__task
+                      .icon.icon-destroy
+                .block__content.content
+                  h3 Block Title
+                  p Block content.
