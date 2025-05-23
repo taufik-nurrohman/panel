@@ -8,11 +8,52 @@ html(dir='ltr')
     div(role='application')
       .blocks
         .blocks(aria-orientation='horizontal')
-          each i in [1, 2, 3]
+          .block
+            .block__bar
+              .block__icon.icon
+              .block__title.title Block Title
+              .block__tasks(role='toolbar')
+                .block__task
+                  .icon.icon-exit
+                .block__task
+                  .icon.icon-screen
+                .block__task
+                  .icon.icon-destroy
+            .block__content.content
+              form.form
+                .fields
+                  .field
+                    .field__bar
+                      .field__title.title Field 1
+                    .field__content
+                      .field__entry
+                        input.form__control(type='text')
+                  .field
+                    .field__bar
+                      .field__title.title Field 2
+                    .field__content
+                      .field__entry
+                        .field__icon.icon
+                        input.form__control(type='text')
+                  .field
+                    .field__bar
+                      .field__title.title Field 3
+                    .field__content
+                      .field__entry
+                        .field__icon.icon
+                        input.form__control(type='text')
+                        .field__tasks
+                          .field__task
+                            .icon
+                          .field__task
+                            .icon
+                          .field__task
+                            .icon
+          each i in [1, 2]
             .block
               .block__bar
                 .block__icon.icon
-                .block__title Block Title
+                .block__title.title Block Title
                 .block__tasks(role='toolbar')
                   .block__task
                     .icon.icon-exit
@@ -28,7 +69,7 @@ html(dir='ltr')
             .block
               .block__bar
                 .block__icon.icon
-                .block__title Block Title
+                .block__title.title Block Title
                 .block__tasks(role='toolbar')
                   .block__task
                     .icon.icon-exit
@@ -44,7 +85,7 @@ html(dir='ltr')
             .block
               .block__bar
                 .block__icon.icon
-                .block__title Block Title
+                .block__title.title Block Title
                 .block__tasks(role='toolbar')
                   .block__task
                     .icon.icon-exit
@@ -60,7 +101,7 @@ html(dir='ltr')
             .block
               .block__bar
                 .block__icon.icon
-                .block__title Block Title
+                .block__title.title Block Title
                 .block__tasks(role='toolbar')
                   .block__task
                     .icon.icon-exit
@@ -76,7 +117,7 @@ html(dir='ltr')
               .block
                 .block__bar
                   .block__icon.icon
-                  .block__title Block Title
+                  .block__title.title Block Title
                   .block__tasks(role='toolbar')
                     .block__task
                       .icon.icon-exit

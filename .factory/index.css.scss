@@ -82,6 +82,8 @@
 }
 
 .blocks {
+  gap: 10px;
+  padding: 10px;
   &[aria-orientation='horizontal'] {
     flex-direction: row;
   }
@@ -89,4 +91,66 @@
 
 .content {
   padding: 10px;
+}
+
+.fields {
+  border: 1px solid;
+  padding: 1px;
+  display: flex;
+  gap: 1px;
+  flex-direction: column;
+}
+
+.field {
+  display: flex;
+  border: 1px solid;
+  border: 1px solid;
+  gap: 1px;
+  padding: 1px;
+}
+
+.field__bar {
+  padding: 10px;
+}
+
+.field__title {
+  border: 1px solid transparent;
+}
+
+.field__content {
+  padding: 10px;
+  flex: 1;
+}
+
+.field__entry {
+  display: flex;
+  border: 1px solid;
+}
+
+.field__entry:focus-within {
+  outline: 1px solid;
+}
+
+.form__control {
+  flex: 1;
+  padding: 0 0.25em;
+}
+
+.field__icon {
+  min-width: 1.25em;
+}
+.field__entry > * + * {
+  border-left: 1px solid;
+}
+
+.field__tasks {
+  display: flex;
+  padding: 1px;
+  gap: 1px;
+}
+.field__task {
+  min-width: 1em;
+  border: 1px solid;
+  user-select: none;
+  cursor: pointer;
 }
