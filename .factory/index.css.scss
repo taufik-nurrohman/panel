@@ -30,8 +30,54 @@
   font: 16px/24px sans-serif;
 }
 
-[role='application'] {
-  padding: 1px;
+.column {
+  flex: 1;
+  @for $i from 1 through 12 {
+    &.size-#{$i} {
+      flex-basis: calc(100% / 12 * #{$i});
+      max-width: calc(100% / 12 * #{$i});
+    }
+  }
+}
+
+.columns {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.content {
+  margin: {
+    bottom: -4px;
+    top: -4px;
+  }
+}
+
+.has {
+  &-gap {
+    padding: 24px;
+  }
+}
+
+.rows {
+  &.has-gap {
+    > .row {
+      > .columns {
+        margin: 0 -12px;
+        > .column {
+          margin: 0 12px;
+        }
+      }
+      + .row {
+        margin-top: 24px;
+      }
+    }
+  }
+}
+
+.has {
+  &-stroke {
+    border: 1px solid;
+  }
 }
 
 %blocks {
@@ -102,13 +148,6 @@
   padding: 24px;
   &[aria-orientation='horizontal'] {
     flex-direction: row;
-  }
-}
-
-.content {
-  margin: {
-    bottom: -4px;
-    top: -4px;
   }
 }
 
