@@ -27,6 +27,7 @@
   background: #fff;
   border: 0 solid #000;
   color: #000;
+  font: 16px/24px sans-serif;
 }
 
 [role='application'] {
@@ -34,17 +35,28 @@
 }
 
 %blocks {
-  border: 1px solid;
   display: flex;
   flex-direction: column;
   flex: 1;
-  gap: 1px;
-  padding: 1px;
 }
+
+%entry {
+  padding: 3px;
+}
+
+%icon {
+  display: inline-block;
+  height: 24px;
+  vertical-align: middle;
+  width: 24px;
+}
+
+%title {}
 
 .block,
 .blocks {
   @extend %blocks;
+  border: 1px solid;
 }
 
 .block {
@@ -52,73 +64,77 @@
     @extend %blocks;
     flex-direction: row;
     flex: 0 auto;
+    gap: 3px;
+    padding: 3px;
+    + .block__content {
+      border-top: 1px solid;
+    }
   }
   &__content {
-    border: 1px solid;
     flex: 1;
+    padding: 24px;
   }
   &__icon {
-    border: 1px solid;
-    width: 1.25em;
+    align-items: center;
+    display: flex;
   }
   &__title {
-    border: 1px solid;
+    @extend %title;
     cursor: move;
     flex: 1;
-    padding: 0 0.25em;
+    padding: 0 6px;
     user-select: none;
   }
   &__task {
-    border: 1px solid;
     cursor: pointer;
-    min-width: 1em;
     user-select: none;
   }
   &__tasks {
     @extend %blocks;
     flex-direction: row;
     flex: 0 auto;
+    gap: 3px;
   }
 }
 
 .blocks {
-  gap: 10px;
-  padding: 10px;
+  gap: 24px;
+  padding: 24px;
   &[aria-orientation='horizontal'] {
     flex-direction: row;
   }
 }
 
 .content {
-  padding: 10px;
+  margin: {
+    bottom: -4px;
+    top: -4px;
+  }
 }
 
 .fields {
-  border: 1px solid;
-  padding: 1px;
   display: flex;
-  gap: 1px;
   flex-direction: column;
+  gap: 24px;
 }
 
 .field {
   display: flex;
-  border: 1px solid;
-  border: 1px solid;
-  gap: 1px;
-  padding: 1px;
+  gap: 24px;
 }
 
-.field__bar {
-  padding: 10px;
-}
+.field__bar {}
 
 .field__title {
+  @extend %entry;
   border: 1px solid transparent;
+  padding: {
+    left: 0;
+    right: 0;
+  }
 }
 
 .field__content {
-  padding: 10px;
   flex: 1;
 }
 
@@ -131,26 +147,87 @@
   outline: 1px solid;
 }
 
-.form__control {
+.form__entry {
+  @extend %entry;
   flex: 1;
-  padding: 0 0.25em;
+  padding: {
+    left: 8px;
+    right: 8px;
+  }
 }
 
 .field__icon {
-  min-width: 1.25em;
-}
-.field__entry > * + * {
-  border-left: 1px solid;
+  @extend %entry;
+  border-right: 1px solid;
 }
 
 .field__tasks {
   display: flex;
+}
+.field__task {
+  @extend %entry;
+  border-left: 1px solid;
+  cursor: pointer;
+  display: flex;
+  user-select: none;
+  .task__title {
+    flex: 1;
+    padding: 0 6px;
+  }
+}
+
+.icon {
+  @extend %icon;
+}
+
+.menus {
+  display: flex;
+  border: 1px solid;
   padding: 1px;
   gap: 1px;
 }
-.field__task {
-  min-width: 1em;
+
+.menu,
+.menu__item,
+.menu__link {
+  display: flex;
+  gap: 1px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu {
   border: 1px solid;
-  user-select: none;
+  flex: 1;
+  gap: 1px;
+  padding: 1px;
+}
+
+.menu__item {
+  border: 1px solid;
+  padding: 1px;
+  flex: 1;
+}
+
+.menu__link {
+  border: 1px solid;
+  flex: 1;
+  padding: 0 6px;
+}
+
+.menu__arrow {
+  border: 1px solid;
+  display: flex;
+  align-items: center;
+  padding: 0 6px;
   cursor: pointer;
+}
+
+.menu__arrow::after {
+  content: "";
+  border: 0 solid transparent;
+  border-width: 8px 6px 0 6px;
+  border-top-color: inherit;
+  display: block;
 }
