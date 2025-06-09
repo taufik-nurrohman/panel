@@ -161,9 +161,6 @@
   align-items: center;
   display: flex;
 }
-.block__icon .icon {
-  display: block;
-}
 .block__title {
   cursor: move;
   flex: 1;
@@ -226,6 +223,9 @@
 
 .field__icon {
   border-right: 1px solid;
+}
+.field__icon .icon {
+  display: block;
 }
 
 .field__tasks {
