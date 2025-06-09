@@ -129,6 +129,9 @@
   &__icon {
     align-items: center;
     display: flex;
+    .icon {
+      display: block;
+    }
   }
   &__title {
     @extend %title;
@@ -207,6 +210,7 @@
 }
 
 .field__tasks {
+  align-items: center;
   display: flex;
 }
 .field__task {
