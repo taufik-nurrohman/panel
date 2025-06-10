@@ -230,53 +230,50 @@
 }
 
 .menus {
-  display: flex;
   border: 1px solid;
-  padding: 1px;
-  gap: 1px;
+  display: flex;
 }
 
 .menu,
 .menu__item,
 .menu__link {
   display: flex;
-  gap: 1px;
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
 .menu {
-  border: 1px solid;
-  flex: 1;
-  gap: 1px;
-  padding: 1px;
+  line-height: 36px;
 }
 
 .menu__item {
-  border: 1px solid;
-  padding: 1px;
   flex: 1;
+  + .menu__item {
+    border-left: 1px solid;
+  }
 }
 
 .menu__link {
-  border: 1px solid;
   flex: 1;
-  padding: 0 6px;
+  overflow: hidden;
+  padding: 0 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .menu__arrow {
-  border: 1px solid;
-  display: flex;
   align-items: center;
-  padding: 0 6px;
+  border-left: 1px solid;
   cursor: pointer;
+  display: flex;
+  padding: 0 8px;
 }
 
 .menu__arrow::after {
   content: "";
   border: 0 solid transparent;
-  border-width: 8px 6px 0 6px;
+  border-width: 6px 4px 0 4px;
   border-top-color: inherit;
   display: block;
 }
