@@ -231,7 +231,7 @@
 
 .link {
   align-items: center;
-  display: flex;
+  display: inline-flex;
   gap: 8px;
   &-arrow {
     align-items: center;
@@ -255,7 +255,7 @@
 
 .menu {
   display: flex;
-  line-height: 36px;
+  line-height: 30px;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -282,12 +282,15 @@
       color: inherit;
       right-width: 1px;
     }
+    &:focus-within {
+      background: rgba(0, 0, 225, 0.25);
+    }
   }
   &-link {
     @extend .menu;
     flex: 1;
     overflow: hidden;
-    padding: 0 12px;
+    padding: 0 8px;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
