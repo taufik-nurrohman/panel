@@ -302,3 +302,23 @@
     white-space: nowrap;
   }
 }
+
+.menu-item {
+  position: relative;
+}
+.menu .menu {
+  position: absolute;
+  top: 100%;
+  left: -1px;
+  z-index: 9999;
+}
+
+.menu-item .menu-items {
+  flex-direction: column;
+}
+.menu-item .menu-item {
+  border-right: 0;
+}
+.menu-item .menu-item + .menu-item {
+  border-top: 1px solid;
+}
