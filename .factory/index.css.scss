@@ -41,8 +41,7 @@
 }
 
 .columns {
-  display: flex;
-  flex-wrap: wrap;
+  @extend %flex;
   flex: 1;
 }
 
@@ -60,7 +59,7 @@
 }
 
 .row {
-  display: flex;
+  @extend %flex;
   flex-direction: column;
 }
 
@@ -87,13 +86,22 @@
 }
 
 %blocks {
-  display: flex;
+  @extend %flex;
   flex-direction: column;
   flex: 1;
 }
 
 %entry {
   padding: 3px;
+}
+
+%flex {
+  align-items: center;
+  display: flex;
+  flex: {
+    direction: row;
+    wrap: wrap;
+  }
 }
 
 %icon {
@@ -127,8 +135,7 @@
     padding: 24px;
   }
   &__icon {
-    align-items: center;
-    display: flex;
+    @extend %flex;
   }
   &__title {
     @extend %title;
@@ -158,13 +165,13 @@
 }
 
 .fields {
-  display: flex;
+  @extend %flex;
   flex-direction: column;
   gap: 24px;
 }
 
 .field {
-  display: flex;
+  @extend %flex;
   gap: 24px;
 }
 
@@ -184,7 +191,7 @@
 }
 
 .field__entry {
-  display: flex;
+  @extend %flex;
   border: 1px solid;
 }
 
@@ -210,14 +217,12 @@
 }
 
 .field__tasks {
-  align-items: center;
-  display: flex;
+  @extend %flex;
 }
 .field__task {
-  @extend %entry;
+  @extend %entry, %flex;
   border-left: 1px solid;
   cursor: pointer;
-  display: flex;
   user-select: none;
   .task__title {
     flex: 1;
@@ -234,8 +239,7 @@
   display: inline-flex;
   gap: 8px;
   &-arrow {
-    align-items: center;
-    display: flex;
+    @extend %flex;
     &::after {
       border: 0 solid transparent;
       border: {
@@ -254,16 +258,12 @@
 }
 
 .menu {
-  display: flex;
-  line-height: 30px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
+  @extend %flex;
+  border: 1px solid;
   &-arrow {
-    align-items: center;
+    @extend %flex;
     border-left: 1px solid;
     cursor: pointer;
-    display: flex;
     padding: 0 8px;
     &::after {
       border: 0 solid transparent;
@@ -275,28 +275,30 @@
     }
   }
   &-item {
-    @extend .menu;
-    flex: 1;
     border: 0 solid;
     border: {
       color: inherit;
       right-width: 1px;
     }
-    &:focus-within {
-      background: rgba(0, 0, 225, 0.25);
-    }
+    display: flex;
+    flex: 1;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  &-items {
+    display: flex;
+    line-height: 30px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
   }
   &-link {
-    @extend .menu;
+    display: flex;
     flex: 1;
     overflow: hidden;
     padding: 0 8px;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-}
-
-.menus {
-  border: 1px solid;
-  display: flex;
 }

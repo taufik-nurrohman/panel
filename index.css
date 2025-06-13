@@ -83,8 +83,6 @@
 }
 
 .columns {
-  display: flex;
-  flex-wrap: wrap;
   flex: 1;
 }
 
@@ -98,7 +96,6 @@
 }
 
 .row {
-  display: flex;
   flex-direction: column;
 }
 
@@ -120,7 +117,6 @@
 .block__bar,
 .block,
 .blocks {
-  display: flex;
   flex-direction: column;
   flex: 1;
 }
@@ -130,6 +126,27 @@
 .form__entry,
 .field__title {
   padding: 3px;
+}
+
+.menu-arrow,
+.menu,
+.link-arrow,
+.field__task,
+.field__tasks,
+.field__entry,
+.field,
+.fields,
+.block__icon,
+.columns,
+.row,
+.block__tasks,
+.block__bar,
+.block,
+.blocks {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .icon {
@@ -157,10 +174,6 @@
   flex: 1;
   padding: 24px;
 }
-.block__icon {
-  align-items: center;
-  display: flex;
-}
 .block__title {
   cursor: move;
   flex: 1;
@@ -186,13 +199,11 @@
 }
 
 .fields {
-  display: flex;
   flex-direction: column;
   gap: 24px;
 }
 
 .field {
-  display: flex;
   gap: 24px;
 }
 
@@ -207,7 +218,6 @@
 }
 
 .field__entry {
-  display: flex;
   border: 1px solid;
 }
 
@@ -228,15 +238,9 @@
   display: block;
 }
 
-.field__tasks {
-  align-items: center;
-  display: flex;
-}
-
 .field__task {
   border-left: 1px solid;
   cursor: pointer;
-  display: flex;
   user-select: none;
 }
 .field__task .task__title {
@@ -249,10 +253,6 @@
   display: inline-flex;
   gap: 8px;
 }
-.link-arrow {
-  align-items: center;
-  display: flex;
-}
 .link-arrow::after {
   border: 0 solid transparent;
   border-top-color: inherit;
@@ -260,20 +260,12 @@
   content: "";
 }
 
-.menu,
-.menu-link,
-.menu-item {
-  display: flex;
-  line-height: 30px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
+.menu {
+  border: 1px solid;
 }
 .menu-arrow {
-  align-items: center;
   border-left: 1px solid;
   cursor: pointer;
-  display: flex;
   padding: 0 8px;
 }
 .menu-arrow::after {
@@ -283,23 +275,27 @@
   content: "";
 }
 .menu-item {
-  flex: 1;
   border: 0 solid;
   border-color: inherit;
   border-right-width: 1px;
+  display: flex;
+  flex: 1;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
-.menu-item:focus-within {
-  background: rgba(0, 0, 225, 0.25);
+.menu-items {
+  display: flex;
+  line-height: 30px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 .menu-link {
+  display: flex;
   flex: 1;
   overflow: hidden;
   padding: 0 8px;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-.menus {
-  border: 1px solid;
-  display: flex;
 }
