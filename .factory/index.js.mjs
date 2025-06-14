@@ -1,75 +1,89 @@
-// Add a delay before expanding the menu on hover, and cancel it if the mouse leaves early
-
 let hoverTimeout = null;
 
-function onMouseLeaveMenuItem(e) {
-    this.removeEventListener('mouseleave', onMouseLeaveMenuItem, false);
-    let menuLink = this.querySelector(':scope>.menu-link');
-    if (!menuLink) {
-        return;
-    }
-    if (hoverTimeout) {
-        clearTimeout(hoverTimeout);
-        hoverTimeout = null;
-    }
-    if (menuLink.hasAttribute('aria-expanded')) {
-        hoverTimeout = setTimeout(() => {
-            menuLink.setAttribute('aria-expanded', 'false');
-            closeChildSubmenus(this);
-            hoverTimeout = null;
-        }, 300);
-    }
-}
+const closeAll = except => {
+    document.querySelectorAll(':where(.menu-arrow,.menu-link)[aria-expanded="true"]').forEach(el => {
+        let current = except;
+        let keepOpen = false;
+        while (current) {
+            if (el === current) {
+                keepOpen = true;
+                break;
+            }
+            if (current.matches && current.matches('.menu')) {
+                const parentLink = current.previousElementSibling;
+                if (parentLink && parentLink.getAttribute('aria-expanded') === 'true') {
+                    if (el === parentLink) {
+                        keepOpen = true;
+                        break;
+                    }
+                }
+            }
+            current = current.parentNode;
+        }
+        if (!keepOpen) {
+            el.classList.remove('is-active');
+            el.closest('.menu-item').classList.remove('is-open');
+            el.setAttribute('aria-expanded', 'false');
+        }
+    });
+};
 
-function handleEarlyLeave(menuItem) {
-    if (hoverTimeout) {
-        clearTimeout(hoverTimeout);
-        hoverTimeout = null;
-    }
-    let currentMenuLink = menuItem.querySelector(':scope>.menu-link');
-    if (currentMenuLink && currentMenuLink.getAttribute('aria-expanded') === 'true') {
-        hoverTimeout = setTimeout(() => {
-            currentMenuLink.setAttribute('aria-expanded', 'false');
-            closeChildSubmenus(menuItem);
-            hoverTimeout = null;
-        }, 300);
-    }
-    menuItem.removeEventListener('mouseleave', handleEarlyLeave, false);
-}
-
-function closeChildSubmenus(menuItem) {
-    const childLinks = menuItem.querySelectorAll(':scope .menu-link[aria-expanded="true"]');
-    childLinks.forEach(link => {
+const closeChildren = el =>
+    el.querySelectorAll(':scope :where(.menu-arrow,.menu-link)[aria-expanded="true"]').forEach(link => {
+        link.classList.remove('is-active');
+        link.closest('.menu-item').classList.remove('is-open');
         link.setAttribute('aria-expanded', 'false');
     });
+
+function leaveItem() {
+    this.removeEventListener('mouseleave', leaveItem);
+    const link = this.querySelector(':scope>.menu-link');
+    if (!link) return;
+    clearTimeout(hoverTimeout);
+    hoverTimeout = setTimeout(() => {
+        link.classList.remove('is-active');
+        link.closest('.menu-item').classList.remove('is-open');
+        link.setAttribute('aria-expanded', 'false');
+        closeChildren(this);
+        hoverTimeout = null;
+    }, 300);
 }
 
-function onDocumentMouseEnter(e) {
-    let menuLink = e.target.closest('.menu-link');
-    if (!menuLink) {
-        return;
-    }
-    let menuItem = menuLink.parentNode;
-    if (!menuItem) {
-        return;
-    }
-    let menu = menuItem.querySelector(':scope>.menu');
-    if (!menu) {
-        return;
-    }
-    if (menuLink.hasAttribute('aria-expanded')) {
-        if (hoverTimeout) {
-            clearTimeout(hoverTimeout);
-        }
-        hoverTimeout = setTimeout(() => {
-            menuItem.addEventListener('mouseleave', onMouseLeaveMenuItem, false);
-            menuLink.setAttribute('aria-expanded', 'true');
-        }, 300);
-
-        menuItem.addEventListener('mouseleave', function earlyLeaveHandler() {
-            handleEarlyLeave(menuItem);
-        }, false);
-    }
+function leaveItemToCancel() {
+    this.removeEventListener('mouseleave', leaveItemToCancel);
+    const link = this.querySelector(':scope>.menu-link[aria-expanded="false"]');
+    if (!link) return;
+    clearTimeout(hoverTimeout);
 }
 
-document.addEventListener('mouseenter', onDocumentMouseEnter, true);
+document.addEventListener('click', e => {
+    const arrow = e.target.closest('.menu-arrow');
+    if (!arrow) return closeAll();
+    const item = arrow.closest('.menu-item');
+    if (!item) return;
+    const menu = item.querySelector(':scope>.menu');
+    if (menu) {
+        let wasOpen = 'true' === arrow.getAttribute('aria-expanded');
+        arrow.classList[wasOpen ? 'remove' : 'add']('is-active');
+        arrow.setAttribute('aria-expanded', wasOpen ? 'false' : 'true');
+        item.classList[wasOpen ? 'remove' : 'add']('is-open');
+        closeAll(arrow);
+        e.preventDefault();
+    }
+}, true);
+
+document.addEventListener('mouseenter', e => {
+    const link = e.target.closest('.menu-link');
+    if (!link) return;
+    const item = link.closest('.menu-item');
+    if (!item.querySelector(':scope>.menu') || !link.hasAttribute('aria-expanded')) return;
+    item.addEventListener('mouseleave', leaveItemToCancel);
+    clearTimeout(hoverTimeout);
+    hoverTimeout = setTimeout(() => {
+        closeAll(link);
+        item.addEventListener('mouseleave', leaveItem);
+        item.classList.add('is-open');
+        link.classList.add('is-active');
+        link.setAttribute('aria-expanded', 'true');
+    }, 300);
+}, true);

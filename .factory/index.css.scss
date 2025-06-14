@@ -276,6 +276,12 @@
       }
       content: "";
     }
+    &.is-active {
+      background: rgb(0, 0, 0, 0.25);
+    }
+  }
+  &-icon {
+    margin: 0 3px;
   }
   &-item {
     @extend %flex;
@@ -289,7 +295,14 @@
     margin: 0;
     padding: 0;
     position: relative;
-    &[aria-expanded='false'] {
+    &:hover {
+      background: rgb(0, 0, 255, 0.125);
+    }
+    &.is-open,
+    &:focus-within {
+      background: rgb(0, 0, 255, 0.25);
+    }
+    &:not(.is-open) {
       > .menu {
         display: none;
       }
@@ -306,6 +319,7 @@
     line-height: 30px;
     list-style: none;
     margin: 0;
+    min-width: 144px;
     padding: 0;
   }
   &-link {
@@ -316,11 +330,6 @@
     padding: 0 8px;
     text-overflow: ellipsis;
     white-space: nowrap;
-    &[aria-expanded='false'] {
-      + .menu {
-        display: none;
-      }
-    }
   }
   .menu {
     left: -1px;
