@@ -128,8 +128,14 @@
   padding: 3px;
 }
 
-.menu-arrow,
+.title,
+.menu-link,
+.menu-items,
+.menu-item,
 .menu,
+.link,
+.menu-arrow,
+.link-title,
 .link-arrow,
 .field__task,
 .field__tasks,
@@ -144,9 +150,27 @@
 .block,
 .blocks {
   align-items: center;
-  display: flex;
+  display: inline-flex;
   flex-direction: row;
   flex-wrap: wrap;
+}
+
+.menu-arrow,
+.link-title,
+.link-arrow,
+.field__task,
+.field__tasks,
+.field__entry,
+.field,
+.fields,
+.block__icon,
+.columns,
+.row,
+.block__tasks,
+.block__bar,
+.block,
+.blocks {
+  display: flex;
 }
 
 .icon {
@@ -249,8 +273,6 @@
 }
 
 .link {
-  align-items: center;
-  display: inline-flex;
   gap: 8px;
 }
 .link-arrow::after {
@@ -259,6 +281,9 @@
   border-width: 6px 4px 0;
   content: "";
 }
+.link-title {
+  flex: 1;
+}
 
 .menu {
   border: 1px solid;
@@ -266,6 +291,7 @@
 .menu-arrow {
   border-left: 1px solid;
   cursor: pointer;
+  height: 100%;
   padding: 0 8px;
 }
 .menu-arrow::after {
@@ -277,48 +303,66 @@
 .menu-item {
   border: 0 solid;
   border-color: inherit;
-  border-right-width: 1px;
-  display: flex;
+  flex-wrap: nowrap;
   flex: 1;
   list-style: none;
   margin: 0;
   padding: 0;
+  position: relative;
+}
+.menu-item[aria-expanded=false] > .menu {
+  display: none;
+}
+.menu-item:not(:first-child) {
+  border-left-width: 1px;
 }
 .menu-items {
-  display: flex;
+  align-items: stretch;
   line-height: 30px;
   list-style: none;
   margin: 0;
   padding: 0;
 }
 .menu-link {
-  display: flex;
+  flex-wrap: nowrap;
   flex: 1;
   overflow: hidden;
   padding: 0 8px;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-
-.menu-item {
-  position: relative;
+.menu-link[aria-expanded=false] + .menu {
+  display: none;
 }
-
 .menu .menu {
+  left: -1px;
   position: absolute;
   top: 100%;
-  left: -1px;
   z-index: 9999;
 }
-
-.menu-item .menu-items {
+.menu .menu .menu-item:not(:first-child) {
+  border-left-width: 0;
+  border-top-width: 1px;
+}
+.menu .menu .menu-items {
   flex-direction: column;
 }
-
-.menu-item .menu-item {
-  border-right: 0;
+.menu .menu .menu-items .link-arrow::after {
+  border: 0 solid transparent;
+  border-left-color: inherit;
+  border-width: 4px 0 4px 6px;
+}
+.menu .menu .menu {
+  left: 100%;
+  top: -1px;
 }
 
-.menu-item .menu-item + .menu-item {
-  border-top: 1px solid;
+.title {
+  flex-wrap: nowrap;
+}
+.title-content {
+  flex: 1;
+}
+.title-hint {
+  color: rgb(128, 128, 128);
 }

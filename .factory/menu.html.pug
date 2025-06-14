@@ -9,77 +9,58 @@ html(dir='ltr')
       .menu(role='none')
         ul.menu-items(role='menu')
           li.menu-item(role='none')
-            a.link.menu-link(href='#' role='menuitem')
-              span.link-title.title
-                span.title-content File
-              span.link-arrow
+            a.link.menu-link(aria-expanded='false' aria-haspopup='true' href='#' role='menuitem')
+              span.link-title.title(role='none')
+                span.title-content(role='none') File
+              span.link-arrow(role='none')
             .menu(role='none')
               ul.menu-items(role='menu')
                 li.menu-item(role='none')
                   a.link.menu-link(href='#' role='menuitem')
-                    span.link-title.title
-                      span.title-content New&hellip;
+                    span.link-title.title(role='none')
+                      span.title-content(role='none') Save
+                      kbd.title-hint(role='none') ⌘+S
+                li.menu-item(role='none')
+                  a.link.menu-link(aria-expanded='false' aria-haspopup='true' href='#' role='menuitem')
+                    span.link-title.title(role='none')
+                      span.title-content(role='none') Save As&hellip;
+                    span.link-arrow(role='none')
+                  .menu(role='none')
+                    ul.menu-items(role='menu')
+                      li.menu-item(role='none')
+                        a.link.menu-link(href='#' role='menuitem')
+                          span.link-title.title(role='none')
+                            span.title-content(role='none') Word Document
+                      li.menu-item(role='none')
+                        a.link.menu-link(href='#' role='menuitem')
+                          span.link-title.title(role='none')
+                            span.title-content(role='none') Portable Document Format
                 li.menu-item(role='none')
                   a.link.menu-link(href='#' role='menuitem')
-                    span.link-title.title
-                      span.title-content Open&hellip;
+                    span.link-title.title(role='none')
+                      span.title-content(role='none') Print
                 li.menu-item(role='none')
                   a.link.menu-link(href='#' role='menuitem')
-                    span.link-title.title
-                      span.title-content Close
-                li.menu-item(role='none')
-                  a.link.menu-link(href='#' role='menuitem')
-                    span.link-title.title
-                      span.title-content Save
-                li.menu-item(role='none')
-                  a.link.menu-link(href='#' role='menuitem')
-                    span.link-title.title
-                      span.title-content Save as&hellip;
-                li.menu-item(role='none')
-                  a.link.menu-link(href='#' role='menuitem')
-                    span.link-title.title
-                      span.title-content Print
-                li.menu-item(role='none')
-                  a.link.menu-link(href='#' role='menuitem')
-                    span.link-title.title
-                      span.title-content Properties
+                    span.link-title.title(role='none')
+                      span.title-content(role='none') Close
           li.menu-item(role='none')
             a.link.menu-link(href='#' role='menuitem')
-              span.link-title.title
-                span.title-content Edit
+              span.link-title.title(role='none')
+                span.title-content(role='none') Edit
+              span.link-arrow(role='none')
+          li.menu-item(role='none')
+            a.link.menu-link(href='#' role='menuitem')
+              span.link-title.title(role='none')
+                span.title-content(role='none') Insert
+              span.link-arrow(role='none')
+          li.menu-item(role='none')
+            a.link.menu-link(href='#' role='menuitem')
+              span.link-title.title(role='none')
+                span.title-content(role='none') Format
               span.link-arrow
           li.menu-item(role='none')
             a.link.menu-link(href='#' role='menuitem')
-              span.link-title.title
-                span.title-content View
-              span.link-arrow
-          li.menu-item(role='none')
-            a.link.menu-link(href='#' role='menuitem')
-              span.link-title.title
-                span.title-content Insert
-              span.link-arrow
-          li.menu-item(role='none')
-            a.link.menu-link(href='#' role='menuitem')
-              span.link-title.title
-                span.title-content Format
-              span.link-arrow
-          li.menu-item(role='none')
-            a.link.menu-link(href='#' role='menuitem')
-              span.link-title.title
-                span.title-content Tools
-              span.link-arrow
-          li.menu-item(role='none')
-            a.link.menu-link(href='#' role='menuitem')
-              span.link-title.title
-                span.title-content Table
-              span.link-arrow
-          li.menu-item(role='none')
-            a.link.menu-link(href='#' role='menuitem')
-              span.link-title.title
-                span.title-content Window
-              span.link-arrow
-          li.menu-item(role='none')
-            a.link.menu-link(href='#' role='menuitem')
-              span.link-title.title
-                span.title-content Help
-            a.menu-arrow
+              span.link-title.title(role='none')
+                span.title-content(role='none') Help
+            a.menu-arrow(aria-expanded='false' aria-haspopup='true' role='none')
+    script(src='index.min.js?v=%(version)')

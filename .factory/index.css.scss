@@ -41,7 +41,7 @@
 }
 
 .columns {
-  @extend %flex;
+  @extend %flex-block;
   flex: 1;
 }
 
@@ -59,7 +59,7 @@
 }
 
 .row {
-  @extend %flex;
+  @extend %flex-block;
   flex-direction: column;
 }
 
@@ -86,7 +86,7 @@
 }
 
 %blocks {
-  @extend %flex;
+  @extend %flex-block;
   flex-direction: column;
   flex: 1;
 }
@@ -97,11 +97,16 @@
 
 %flex {
   align-items: center;
-  display: flex;
+  display: inline-flex;
   flex: {
     direction: row;
     wrap: wrap;
   }
+}
+
+%flex-block {
+  @extend %flex;
+  display: flex;
 }
 
 %icon {
@@ -135,7 +140,7 @@
     padding: 24px;
   }
   &__icon {
-    @extend %flex;
+    @extend %flex-block;
   }
   &__title {
     @extend %title;
@@ -165,13 +170,13 @@
 }
 
 .fields {
-  @extend %flex;
+  @extend %flex-block;
   flex-direction: column;
   gap: 24px;
 }
 
 .field {
-  @extend %flex;
+  @extend %flex-block;
   gap: 24px;
 }
 
@@ -191,7 +196,7 @@
 }
 
 .field__entry {
-  @extend %flex;
+  @extend %flex-block;
   border: 1px solid;
 }
 
@@ -217,10 +222,10 @@
 }
 
 .field__tasks {
-  @extend %flex;
+  @extend %flex-block;
 }
 .field__task {
-  @extend %entry, %flex;
+  @extend %entry, %flex-block;
   border-left: 1px solid;
   cursor: pointer;
   user-select: none;
@@ -235,11 +240,10 @@
 }
 
 .link {
-  align-items: center;
-  display: inline-flex;
+  @extend %flex;
   gap: 8px;
   &-arrow {
-    @extend %flex;
+    @extend %flex-block;
     &::after {
       border: 0 solid transparent;
       border: {
@@ -249,21 +253,20 @@
       content: "";
     }
   }
-}
-
-.link-arrow {
-}
-
-.link-arrow::after {
+  &-title {
+    @extend %flex-block;
+    flex: 1;
+  }
 }
 
 .menu {
   @extend %flex;
   border: 1px solid;
   &-arrow {
-    @extend %flex;
+    @extend %flex-block;
     border-left: 1px solid;
     cursor: pointer;
+    height: 100%;
     padding: 0 8px;
     &::after {
       border: 0 solid transparent;
@@ -275,50 +278,89 @@
     }
   }
   &-item {
+    @extend %flex;
     border: 0 solid;
     border: {
       color: inherit;
-      right-width: 1px;
     }
-    display: flex;
+    flex-wrap: nowrap;
     flex: 1;
     list-style: none;
     margin: 0;
     padding: 0;
+    position: relative;
+    &[aria-expanded='false'] {
+      > .menu {
+        display: none;
+      }
+    }
+    &:not(:first-child) {
+      border: {
+        left-width: 1px;
+      }
+    }
   }
   &-items {
-    display: flex;
+    @extend %flex;
+    align-items: stretch;
     line-height: 30px;
     list-style: none;
     margin: 0;
     padding: 0;
   }
   &-link {
-    display: flex;
+    @extend %flex;
+    flex-wrap: nowrap;
     flex: 1;
     overflow: hidden;
     padding: 0 8px;
     text-overflow: ellipsis;
     white-space: nowrap;
+    &[aria-expanded='false'] {
+      + .menu {
+        display: none;
+      }
+    }
+  }
+  .menu {
+    left: -1px;
+    position: absolute;
+    top: 100%;
+    z-index: 9999;
+    .menu-item {
+      &:not(:first-child) {
+        border: {
+          left-width: 0;
+          top-width: 1px;
+        }
+      }
+    }
+    .menu-items {
+      flex-direction: column;
+      .link-arrow {
+        &::after {
+          border: 0 solid transparent;
+          border: {
+            left-color: inherit;
+            width: 4px 0 4px 6px;
+          }
+        }
+      }
+    }
+    .menu {
+      left: 100%;
+      top: -1px;
+    }
   }
 }
 
-.menu-item {
-  position: relative;
-}
-.menu .menu {
-  position: absolute;
-  top: 100%;
-  left: -1px;
-  z-index: 9999;
-}
-
-.menu-item .menu-items {
-  flex-direction: column;
-}
-.menu-item .menu-item {
-  border-right: 0;
-}
-.menu-item .menu-item + .menu-item {
-  border-top: 1px solid;
+.title {
+  @extend %flex;
+  flex-wrap: nowrap;
+  &-content {
+    flex: 1;
+  }
+  &-hint {
+    color: rgb(128, 128, 128);
+  }
 }
