@@ -2,18 +2,18 @@
     'use strict';
     var hoverTimeout = null;
     var closeAll = function closeAll(except) {
-        document.querySelectorAll(':where(.menu-arrow,.menu-link)[aria-expanded="true"]').forEach(function (el) {
+        document.querySelectorAll(':where(.menu-arrow,.menu-link)[aria-expanded="true"]').forEach(function (v) {
             var current = except;
             var keepOpen = false;
             while (current) {
-                if (el === current) {
+                if (v === current) {
                     keepOpen = true;
                     break;
                 }
                 if (current.matches && current.matches('.menu')) {
                     var parentLink = current.previousElementSibling;
                     if (parentLink && parentLink.getAttribute('aria-expanded') === 'true') {
-                        if (el === parentLink) {
+                        if (v === parentLink) {
                             keepOpen = true;
                             break;
                         }
@@ -22,17 +22,19 @@
                 current = current.parentNode;
             }
             if (!keepOpen) {
-                el.classList.remove('is-active');
-                el.closest('.menu-item').classList.remove('is-open');
-                el.setAttribute('aria-expanded', 'false');
+                v.classList.remove('is-active');
+                v.closest('.menu-item').classList.remove('is-open');
+                v.setAttribute('aria-expanded', 'false');
+                v.blur();
             }
         });
     };
-    var closeChildren = function closeChildren(el) {
-        return el.querySelectorAll(':scope :where(.menu-arrow,.menu-link)[aria-expanded="true"]').forEach(function (link) {
-            link.classList.remove('is-active');
-            link.closest('.menu-item').classList.remove('is-open');
-            link.setAttribute('aria-expanded', 'false');
+    var closeChildren = function closeChildren(v) {
+        return v.querySelectorAll(':scope :where(.menu-arrow,.menu-link)[aria-expanded="true"]').forEach(function (v) {
+            v.classList.remove('is-active');
+            v.closest('.menu-item').classList.remove('is-open');
+            v.setAttribute('aria-expanded', 'false');
+            v.blur();
         });
     };
 
@@ -46,6 +48,7 @@
             link.classList.remove('is-active');
             link.closest('.menu-item').classList.remove('is-open');
             link.setAttribute('aria-expanded', 'false');
+            link.blur();
             closeChildren(_this);
             hoverTimeout = null;
         }, 300);

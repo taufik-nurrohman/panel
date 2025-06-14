@@ -1,18 +1,18 @@
 let hoverTimeout = null;
 
 const closeAll = except => {
-    document.querySelectorAll(':where(.menu-arrow,.menu-link)[aria-expanded="true"]').forEach(el => {
+    document.querySelectorAll(':where(.menu-arrow,.menu-link)[aria-expanded="true"]').forEach(v => {
         let current = except;
         let keepOpen = false;
         while (current) {
-            if (el === current) {
+            if (v === current) {
                 keepOpen = true;
                 break;
             }
             if (current.matches && current.matches('.menu')) {
                 const parentLink = current.previousElementSibling;
                 if (parentLink && parentLink.getAttribute('aria-expanded') === 'true') {
-                    if (el === parentLink) {
+                    if (v === parentLink) {
                         keepOpen = true;
                         break;
                     }
@@ -21,18 +21,20 @@ const closeAll = except => {
             current = current.parentNode;
         }
         if (!keepOpen) {
-            el.classList.remove('is-active');
-            el.closest('.menu-item').classList.remove('is-open');
-            el.setAttribute('aria-expanded', 'false');
+            v.classList.remove('is-active');
+            v.closest('.menu-item').classList.remove('is-open');
+            v.setAttribute('aria-expanded', 'false');
+            v.blur();
         }
     });
 };
 
-const closeChildren = el =>
-    el.querySelectorAll(':scope :where(.menu-arrow,.menu-link)[aria-expanded="true"]').forEach(link => {
-        link.classList.remove('is-active');
-        link.closest('.menu-item').classList.remove('is-open');
-        link.setAttribute('aria-expanded', 'false');
+const closeChildren = v =>
+    v.querySelectorAll(':scope :where(.menu-arrow,.menu-link)[aria-expanded="true"]').forEach(v => {
+        v.classList.remove('is-active');
+        v.closest('.menu-item').classList.remove('is-open');
+        v.setAttribute('aria-expanded', 'false');
+        v.blur();
     });
 
 function leaveItem() {
@@ -44,6 +46,7 @@ function leaveItem() {
         link.classList.remove('is-active');
         link.closest('.menu-item').classList.remove('is-open');
         link.setAttribute('aria-expanded', 'false');
+        link.blur();
         closeChildren(this);
         hoverTimeout = null;
     }, 300);
