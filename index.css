@@ -134,6 +134,7 @@
 .menu-item,
 .menu,
 .link,
+.menus,
 .menu-arrow,
 .link-title,
 .link-arrow,
@@ -155,6 +156,7 @@
   flex-wrap: wrap;
 }
 
+.menus,
 .menu-arrow,
 .link-title,
 .link-arrow,
@@ -273,6 +275,7 @@
 }
 
 .link {
+  cursor: pointer;
   gap: 8px;
 }
 .link-arrow::after {
@@ -286,7 +289,10 @@
 }
 
 .menu {
-  border: 1px solid;
+  background: #fff;
+  border: 1px solid #000;
+  color: #000;
+  cursor: default;
 }
 .menu-arrow {
   border-left: 1px solid;
@@ -316,11 +322,16 @@
   padding: 0;
   position: relative;
 }
-.menu-item:hover {
+.menu-item.has-link {
+  cursor: pointer;
+}
+.menu-item.has-link:hover {
   background: rgba(0, 0, 255, 0.125);
 }
-.menu-item.is-open,
-.menu-item:focus-within {
+.menu-item.has-link:focus-within {
+  background: rgba(0, 0, 255, 0.25);
+}
+.menu-item.has-link.is-open {
   background: rgba(0, 0, 255, 0.25);
 }
 .menu-item:not(.is-open) > .menu {
@@ -334,7 +345,6 @@
   line-height: 30px;
   list-style: none;
   margin: 0;
-  min-width: 144px;
   padding: 0;
 }
 .menu-link {
@@ -345,7 +355,11 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+.menu-link.link .link-icon {
+  margin-left: -4px;
+}
 .menu .menu {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25), 0 2px 4px rgba(0, 0, 0, 0.25);
   left: -1px;
   position: absolute;
   top: 100%;
@@ -357,6 +371,7 @@
 }
 .menu .menu .menu-items {
   flex-direction: column;
+  min-width: 144px;
 }
 .menu .menu .menu-items .link-arrow::after {
   border: 0 solid transparent;
@@ -366,6 +381,10 @@
 .menu .menu .menu {
   left: 100%;
   top: -1px;
+}
+
+.menus {
+  gap: 24px;
 }
 
 .title {
