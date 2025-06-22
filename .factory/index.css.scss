@@ -24,18 +24,28 @@
 }
 
 :root {
-  background: #fff;
-  border: 0 solid #000;
-  color: #000;
+  background: rgb(238, 238, 238);
+  border: 0 solid rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
   font: 16px/24px sans-serif;
+}
+
+a {
+  color: rgb(0, 0, 225);
+}
+
+p {
+  + p {
+    margin-top: 12px;
+  }
 }
 
 .column {
   flex: 1;
   @for $i from 1 through 12 {
     &.size-#{$i} {
-      flex-basis: calc(100% / 12 * #{$i});
-      max-width: calc(100% / 12 * #{$i});
+      flex-basis: calc(100% / #{12 * $i});
+      max-width: calc(100% / #{12 * $i});
     }
   }
 }
@@ -111,6 +121,7 @@
 
 %icon {
   display: inline-block;
+  fill: currentColor;
   height: 24px;
   vertical-align: middle;
   width: 24px;
@@ -236,6 +247,19 @@
   }
 }
 
+
+
+
+
+
+
+.card {
+  background: rgb(255, 255, 255);
+  border: 1px solid rgb(0, 0, 0);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  padding: 24px;
+}
+
 .icon {
   @extend %icon;
 }
@@ -243,9 +267,11 @@
 .link {
   @extend %flex;
   cursor: pointer;
-  gap: 8px;
+  gap: 4px;
+  vertical-align: middle;
   &-arrow {
     @extend %flex-block;
+    color: rgb(0, 0, 0);
     &::after {
       border: 0 solid transparent;
       border: {
@@ -258,18 +284,26 @@
   &-title {
     @extend %flex-block;
     flex: 1;
+    + .link-arrow {
+      margin-left: 2px;
+    }
   }
 }
 
 .menu {
   @extend %flex;
-  background: #fff;
-  border: 1px solid #000;
-  color: #000;
+  background: rgb(255, 255, 255);
+  border: 1px solid rgb(0, 0, 0);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  color: rgb(0, 0, 0);
   cursor: default;
   &-arrow {
     @extend %flex-block;
-    border-left: 1px solid;
+    color: rgb(0, 0, 0);
+    border: {
+      left: 1px solid;
+      left-color: inherit;
+    }
     cursor: pointer;
     height: 100%;
     padding: 0 8px;
@@ -282,7 +316,7 @@
       content: "";
     }
     &.is-active {
-      background: rgb(0, 0, 0, 0.25);
+      background: rgba(0, 0, 0, 0.25);
     }
   }
   &-icon {
@@ -303,13 +337,20 @@
     &.has-link {
       cursor: pointer;
       &:hover {
-        background: rgb(0, 0, 255, 0.125);
+        background: rgba(0, 0, 225, 0.125);
       }
       &:focus-within {
-        background: rgb(0, 0, 255, 0.25);
+        background: rgba(0, 0, 225, 0.25);
+      }
+      &.is-current {
+        background: rgb(0, 0, 225);
+        color: rgb(255, 255, 255);
+        > .menu-link {
+          color: inherit;
+        }
       }
       &.is-open {
-        background: rgb(0, 0, 255, 0.25);
+        background: rgba(0, 0, 225, 0.25);
       }
     }
     &:not(.is-open) {
@@ -326,6 +367,7 @@
   &-items {
     @extend %flex;
     align-items: stretch;
+    border-color: inherit;
     line-height: 30px;
     list-style: none;
     margin: 0;
@@ -387,10 +429,11 @@
 .title {
   @extend %flex;
   flex-wrap: nowrap;
+  vertical-align: middle;
   &-content {
     flex: 1;
   }
   &-hint {
-    color: rgb(128, 128, 128);
+    color: rgba(0, 0, 0, 0.5);
   }
 }

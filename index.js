@@ -378,11 +378,13 @@
                 return;
             }
             var item = getParent(link, '.menu-item');
-            if (!getElement(':scope>.menu', item) || !hasAria(link, 'expanded')) {
+            if (!getElement(':scope>.menu', item) || getElement(':scope>.menu-arrow', item)) {
                 return;
             }
             onEvent('mouseleave', item, onMouseLeaveMenuItemToCancel);
             lazyOpenMenu(300, link, item);
+            !hasAria(link, 'expanded') && setAria(link, 'expanded', false);
+            !hasAria(link, 'haspopup') && setAria(link, 'haspopup', 'menu');
         }, true);
     }
     Menu();

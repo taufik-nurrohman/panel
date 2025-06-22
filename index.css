@@ -24,62 +24,70 @@
 }
 
 :root {
-  background: #fff;
-  border: 0 solid #000;
-  color: #000;
+  background: rgb(238, 238, 238);
+  border: 0 solid rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
   font: 16px/24px sans-serif;
+}
+
+a {
+  color: rgb(0, 0, 225);
+}
+
+p + p {
+  margin-top: 12px;
 }
 
 .column {
   flex: 1;
 }
 .column.size-1 {
-  flex-basis: calc(8.3333333333% * 1);
-  max-width: calc(8.3333333333% * 1);
+  flex-basis: calc(100% / 12);
+  max-width: calc(100% / 12);
 }
 .column.size-2 {
-  flex-basis: calc(8.3333333333% * 2);
-  max-width: calc(8.3333333333% * 2);
+  flex-basis: calc(100% / 24);
+  max-width: calc(100% / 24);
 }
 .column.size-3 {
-  flex-basis: calc(8.3333333333% * 3);
-  max-width: calc(8.3333333333% * 3);
+  flex-basis: calc(100% / 36);
+  max-width: calc(100% / 36);
 }
 .column.size-4 {
-  flex-basis: calc(8.3333333333% * 4);
-  max-width: calc(8.3333333333% * 4);
+  flex-basis: calc(100% / 48);
+  max-width: calc(100% / 48);
 }
 .column.size-5 {
-  flex-basis: calc(8.3333333333% * 5);
-  max-width: calc(8.3333333333% * 5);
+  flex-basis: calc(100% / 60);
+  max-width: calc(100% / 60);
 }
 .column.size-6 {
-  flex-basis: calc(8.3333333333% * 6);
-  max-width: calc(8.3333333333% * 6);
+  flex-basis: calc(100% / 72);
+  max-width: calc(100% / 72);
 }
 .column.size-7 {
-  flex-basis: calc(8.3333333333% * 7);
-  max-width: calc(8.3333333333% * 7);
+  flex-basis: calc(100% / 84);
+  max-width: calc(100% / 84);
 }
 .column.size-8 {
-  flex-basis: calc(8.3333333333% * 8);
-  max-width: calc(8.3333333333% * 8);
+  flex-basis: calc(100% / 96);
+  max-width: calc(100% / 96);
 }
 .column.size-9 {
-  flex-basis: calc(8.3333333333% * 9);
-  max-width: calc(8.3333333333% * 9);
+  flex-basis: calc(100% / 108);
+  max-width: calc(100% / 108);
 }
 .column.size-10 {
-  flex-basis: calc(8.3333333333% * 10);
-  max-width: calc(8.3333333333% * 10);
+  flex-basis: calc(100% / 120);
+  max-width: calc(100% / 120);
 }
 .column.size-11 {
-  flex-basis: calc(8.3333333333% * 11);
-  max-width: calc(8.3333333333% * 11);
+  flex-basis: calc(100% / 132);
+  max-width: calc(100% / 132);
 }
 .column.size-12 {
-  flex-basis: calc(8.3333333333% * 12);
-  max-width: calc(8.3333333333% * 12);
+  flex-basis: calc(100% / 144);
+  max-width: calc(100% / 144);
 }
 
 .columns {
@@ -177,6 +185,7 @@
 
 .icon {
   display: inline-block;
+  fill: currentColor;
   height: 24px;
   vertical-align: middle;
   width: 24px;
@@ -274,9 +283,20 @@
   padding: 0 6px;
 }
 
+.card {
+  background: rgb(255, 255, 255);
+  border: 1px solid rgb(0, 0, 0);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  padding: 24px;
+}
+
 .link {
   cursor: pointer;
-  gap: 8px;
+  gap: 4px;
+  vertical-align: middle;
+}
+.link-arrow {
+  color: rgb(0, 0, 0);
 }
 .link-arrow::after {
   border: 0 solid transparent;
@@ -287,15 +307,21 @@
 .link-title {
   flex: 1;
 }
+.link-title + .link-arrow {
+  margin-left: 2px;
+}
 
 .menu {
-  background: #fff;
-  border: 1px solid #000;
-  color: #000;
+  background: rgb(255, 255, 255);
+  border: 1px solid rgb(0, 0, 0);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  color: rgb(0, 0, 0);
   cursor: default;
 }
 .menu-arrow {
+  color: rgb(0, 0, 0);
   border-left: 1px solid;
+  border-left-color: inherit;
   cursor: pointer;
   height: 100%;
   padding: 0 8px;
@@ -326,13 +352,20 @@
   cursor: pointer;
 }
 .menu-item.has-link:hover {
-  background: rgba(0, 0, 255, 0.125);
+  background: rgba(0, 0, 225, 0.125);
 }
 .menu-item.has-link:focus-within {
-  background: rgba(0, 0, 255, 0.25);
+  background: rgba(0, 0, 225, 0.25);
+}
+.menu-item.has-link.is-current {
+  background: rgb(0, 0, 225);
+  color: rgb(255, 255, 255);
+}
+.menu-item.has-link.is-current > .menu-link {
+  color: inherit;
 }
 .menu-item.has-link.is-open {
-  background: rgba(0, 0, 255, 0.25);
+  background: rgba(0, 0, 225, 0.25);
 }
 .menu-item:not(.is-open) > .menu {
   display: none;
@@ -342,6 +375,7 @@
 }
 .menu-items {
   align-items: stretch;
+  border-color: inherit;
   line-height: 30px;
   list-style: none;
   margin: 0;
@@ -389,10 +423,11 @@
 
 .title {
   flex-wrap: nowrap;
+  vertical-align: middle;
 }
 .title-content {
   flex: 1;
 }
 .title-hint {
-  color: rgb(128, 128, 128);
+  color: rgba(0, 0, 0, 0.5);
 }

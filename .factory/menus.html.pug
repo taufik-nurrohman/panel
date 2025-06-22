@@ -9,7 +9,7 @@ html(dir='ltr')
       .has-items.menus(role='menubar')
         .has-items.menu.menus-items(role='none')
           ul.menu-items(role='menu')
-            li.has-link.menu-item(role='none')
+            li.has-link.is-current.menu-item(role='none')
               a.has-icon.has-title.link.menu-link( href='#' role='menuitem')
                 svg.icon.link-icon(height='24' viewBox='0 0 24 24' width='24')
                   path(d='M10 20v-6h4v6h5v-8h3L12 3L2 12h3v8Z')
@@ -20,10 +20,31 @@ html(dir='ltr')
                 span.link-title.title(role='none')
                   span.title-content(role='none') About
             li.has-link.menu-item(role='none')
-              a.has-arrow.has-title.link.menu-link(href='#' role='menuitem')
+              a.has-arrow.has-menu.has-title.link.menu-link(href='#' role='menuitem')
                 span.link-title.title(role='none')
                   span.title-content(role='none') Archive
                 span.link-arrow
+              .has-items.menu(role='none')
+                ul.menu-items(role='menu')
+                  each year in [2020, 2022, 2023, 2024, 2025]
+                    li.has-icon.has-link.menu-item(role='none')
+                      svg.icon.menu-icon(height='24' viewBox='0 0 24 24' width='24')
+                        path(d='M7 11h2v2H7zm14-6v14c0 1.11-.89 2-2 2H5a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2h1V1h2v2h8V1h2v2h1a2 2 0 0 1 2 2M5 7h14V5H5zm14 12V9H5v10zm-4-6v-2h2v2zm-4 0v-2h2v2zm-4 2h2v2H7zm8 2v-2h2v2zm-4 0v-2h2v2z')
+                      a.has-arrow.has-title.link.menu-link(href='#' role='menuitem')
+                        span.link-title.title(role='none')
+                          span.title-content(role='none')
+                            = year
+                        span.link-arrow
+                      .has-items.menu(role='none')
+                        ul.menu-items(role='menu')
+                          each month in ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+                            li.has-icon.has-link.menu-item(role='none')
+                              svg.icon.menu-icon(height='24' viewBox='0 0 24 24' width='24')
+                                path(d='M7 11h2v2H7zm14-6v14c0 1.11-.89 2-2 2H5a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2h1V1h2v2h8V1h2v2h1a2 2 0 0 1 2 2M5 7h14V5H5zm14 12V9H5v10zm-4-6v-2h2v2zm-4 0v-2h2v2zm-4 2h2v2H7zm8 2v-2h2v2zm-4 0v-2h2v2z')
+                              a.has-arrow.has-title.link.menu-link(href='#' role='menuitem')
+                                span.link-title.title(role='none')
+                                  span.title-content(role='none')
+                                    = month
             li.has-link.menu-item(role='none')
               a.has-title.link.menu-link(href='#' role='menuitem')
                 span.link-title.title(role='none')
