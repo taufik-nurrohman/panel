@@ -8,9 +8,10 @@ html(dir='ltr')
     .has-gap.rows
       .row
         .columns
-          .column
-            .card
-              .content
+          .column.size-3
+          .column.size-6
+            .zone
+              .content.zone-content
                 p
                   = 'A link with title: '
                   a.has-title.link(href='#link')
@@ -44,8 +45,5 @@ html(dir='ltr')
                     svg.icon.link-icon(height='24' viewBox='0 0 24 24' width='24')
                       path(d='M21.79 13L16 16l1 2l-4-.75V21h-2v-3.75L7 18l1-2l-5.79-3l1-1.73L1.61 8l3.6-.23l1-1.77l3.42 3.9L8 5h2l2-3l2 3h2l-1.63 4.9L17.79 6l1 1.73l3.6.23l-1.6 3.23z')
                     span.link-arrow
-          .column
-            .card
-              .content
-                p This is an example link.
+          .column.size-3
     script(src='index.min.js?v=%(version)')

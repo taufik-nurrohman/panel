@@ -1,0 +1,49 @@
+html(dir='ltr')
+  head
+    meta(charset='utf-8')
+    meta(content='width=device-width' name='viewport')
+    title Application Button
+    link(href='index.min.css?v=%(version)' rel='stylesheet')
+  body(role='application')
+    .has-gap.rows
+      .row
+        .columns
+          .column.size-3
+          .column.size-6
+            .zone
+              .content.zone-content
+                p
+                  = 'A button with title: '
+                  button.has-title.button
+                    span.button-title Button
+                p
+                  = 'A button with an arrow and a title: '
+                  button.has-arrow.has-title.button
+                    span.button-title Button
+                    span.button-arrow
+                p
+                  = 'A button with an icon and a title: '
+                  button.has-icon.has-title.button
+                    svg.icon.button-icon(height='24' viewBox='0 0 24 24' width='24')
+                      path(d='M21.79 13L16 16l1 2l-4-.75V21h-2v-3.75L7 18l1-2l-5.79-3l1-1.73L1.61 8l3.6-.23l1-1.77l3.42 3.9L8 5h2l2-3l2 3h2l-1.63 4.9L17.79 6l1 1.73l3.6.23l-1.6 3.23z')
+                    span.button-title Button
+                p
+                  = 'A button with an arrow and an icon and a title: '
+                  button.has-arrow.has-icon.has-title.button
+                    svg.icon.button-icon(height='24' viewBox='0 0 24 24' width='24')
+                      path(d='M21.79 13L16 16l1 2l-4-.75V21h-2v-3.75L7 18l1-2l-5.79-3l1-1.73L1.61 8l3.6-.23l1-1.77l3.42 3.9L8 5h2l2-3l2 3h2l-1.63 4.9L17.79 6l1 1.73l3.6.23l-1.6 3.23z')
+                    span.button-title Button
+                    span.button-arrow
+                p
+                  = 'A button with icon: '
+                  button.has-icon.button
+                    svg.icon.button-icon(height='24' viewBox='0 0 24 24' width='24')
+                      path(d='M21.79 13L16 16l1 2l-4-.75V21h-2v-3.75L7 18l1-2l-5.79-3l1-1.73L1.61 8l3.6-.23l1-1.77l3.42 3.9L8 5h2l2-3l2 3h2l-1.63 4.9L17.79 6l1 1.73l3.6.23l-1.6 3.23z')
+                p
+                  = 'A button with an arrow and an icon: '
+                  button.has-arrow.has-icon.button
+                    svg.icon.button-icon(height='24' viewBox='0 0 24 24' width='24')
+                      path(d='M21.79 13L16 16l1 2l-4-.75V21h-2v-3.75L7 18l1-2l-5.79-3l1-1.73L1.61 8l3.6-.23l1-1.77l3.42 3.9L8 5h2l2-3l2 3h2l-1.63 4.9L17.79 6l1 1.73l3.6.23l-1.6 3.23z')
+                    span.button-arrow
+          .column.size-3
+    script(src='index.min.js?v=%(version)')
