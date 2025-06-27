@@ -565,3 +565,6 @@ p + p {
 .zone.has-content .zone-bar {
   border-bottom-width: 1px;
 }
+.zone + .zone {
+  margin-top: 24px;
+}
