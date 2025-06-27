@@ -1,0 +1,13 @@
+html(dir='ltr')
+  head
+    meta(charset='utf-8')
+    meta(content='width=device-width' name='viewport')
+    title Title with Arrow, Content, and Icon
+    link(href='../../index.min.css?v=%(version)' rel='stylesheet')
+  body.has-gap(role='application')
+    h1.has-arrow.has-content.has-icon.title
+      svg.icon.title-icon(height='24' role='none' viewBox='0 0 24 24' width='24')
+        path(d='M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z')
+      span.content.title-content Title
+      span.arrow.title-arrow(role='none')
+    script(src='../../index.min.js?v=%(version)')

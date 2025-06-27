@@ -1,0 +1,12 @@
+html(dir='ltr')
+  head
+    meta(charset='utf-8')
+    meta(content='width=device-width' name='viewport')
+    title Title with Content and Icon
+    link(href='../../index.min.css?v=%(version)' rel='stylesheet')
+  body.has-gap(role='application')
+    h1.has-content.has-icon.title
+      span.content.title-content Title
+      svg.icon.title-icon(height='24' role='none' viewBox='0 0 24 24' width='24')
+        path(d='M4 5h16v2H4zm0 4h16v2H4zm0 4h16v2H4zm0 4h10v2H4z')
+    script(src='../../index.min.js?v=%(version)')

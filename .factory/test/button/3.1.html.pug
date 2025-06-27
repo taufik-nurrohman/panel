@@ -1,0 +1,12 @@
+html(dir='ltr')
+  head
+    meta(charset='utf-8')
+    meta(content='width=device-width' name='viewport')
+    title Button with Arrow and Title
+    link(href='../../index.min.css?v=%(version)' rel='stylesheet')
+  body.has-gap(role='application')
+    p
+      button.has-arrow.has-title.button
+        span.button-title.title Button
+        span.arrow.button-arrow(role='none')
+    script(src='../../index.min.js?v=%(version)')
