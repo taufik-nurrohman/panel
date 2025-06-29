@@ -3,11 +3,29 @@
   <head>
     <meta charset="utf-8">
     <meta content="width=device-width" name="viewport">
-    <title>Button with Title and Arrow</title>
-    <link href="../../index.min.css?v=1.0.0" rel="stylesheet">
+    <link href="../../index.min.css?v=%(version)" rel="stylesheet">
+    <title>Pressed Button</title>
   </head>
   <body class="has-gap" role="application">
-    <p><button class="has-icon has-title button"><span class="button-title">Button</span><span class="button-arrow"></span></button></p>
-    <script src="../../index.min.js?v=1.0.0"></script>
+    <p class="buttons has-items" role="group"><button class="button has-title is-active"><span class="button-title title">Button</span></button></p>
+    <p class="buttons has-items" role="group"><button class="button has-arrow has-title is-active" aria-pressed="true"><span class="button-title title">Button</span><span class="arrow button-arrow" role="none"></span></button> <button class="button has-arrow has-title is-active" aria-pressed="true"><span class="arrow button-arrow" role="none"></span><span class="button-title title">Button</span><span class="arrow button-arrow" role="none"></span></button> <button class="button has-arrow has-title is-active" aria-pressed="true"><span class="arrow button-arrow" role="none"></span><span class="button-title title">Button</span></button></p>
+    <p class="buttons has-items" role="group"><button class="button has-icon has-title is-active" aria-pressed="true"><span class="button-title title">Button</span><svg class="button-icon icon" height="24" role="none" viewBox="0 0 24 24" width="24">
+          <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"></path>
+        </svg></button> <button class="button has-icon has-title is-active" aria-pressed="true"><svg class="button-icon icon" height="24" role="none" viewBox="0 0 24 24" width="24">
+          <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"></path>
+        </svg><span class="button-title title">Button</span><svg class="button-icon icon" height="24" role="none" viewBox="0 0 24 24" width="24">
+          <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"></path>
+        </svg></button> <button class="button has-icon has-title is-active" aria-pressed="true"><svg class="button-icon icon" height="24" role="none" viewBox="0 0 24 24" width="24">
+          <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"></path>
+        </svg><span class="button-title title">Button</span></button></p>
+    <p class="buttons has-items" role="group"><button class="button has-arrow has-icon has-title is-active" aria-pressed="true"><svg class="button-icon icon" height="24" role="none" viewBox="0 0 24 24" width="24">
+          <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"></path>
+        </svg><span class="button-title title">Button</span><span class="arrow arrow button-arrow" role="none"></span></button></p>
+    <p class="buttons has-items" role="group"><button class="button has-icon is-active" aria-label="Button" aria-pressed="true"><svg class="button-icon icon" height="24" role="none" viewBox="0 0 24 24" width="24">
+          <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"></path>
+        </svg></button> <button class="button has-arrow is-active" aria-label="Button" aria-pressed="true"><span class="arrow button-arrow" role="none"></span></button> <button class="button has-arrow has-icon is-active" aria-label="Button" aria-pressed="true"><svg class="button-icon icon" height="24" role="none" viewBox="0 0 24 24" width="24">
+          <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"></path>
+        </svg><span class="arrow button-arrow" role="none"></span></button></p>
+    <script src="../../index.min.js?v=%(version)"></script>
   </body>
 </html>

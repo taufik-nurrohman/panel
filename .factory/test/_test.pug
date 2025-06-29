@@ -2,11 +2,8 @@ html(dir='ltr')
   head
     meta(charset='utf-8')
     meta(content='width=device-width' name='viewport')
-    title Button with Icon
     link(href='../../index.min.css?v=%(version)' rel='stylesheet')
+    block style
   body.has-gap(role='application')
-    p
-      button.has-icon.button(aria-label='Button')
-        svg.button-icon.icon(height='24' role='none' viewBox='0 0 24 24' width='24')
-          path(d='M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z')
+    block content
     script(src='../../index.min.js?v=%(version)')

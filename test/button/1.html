@@ -3,11 +3,29 @@
   <head>
     <meta charset="utf-8">
     <meta content="width=device-width" name="viewport">
-    <title>Button with Title</title>
-    <link href="../../index.min.css?v=1.0.0" rel="stylesheet">
+    <link href="../../index.min.css?v=%(version)" rel="stylesheet">
+    <title>Button</title>
   </head>
   <body class="has-gap" role="application">
-    <p><button class="has-title button"><span class="button-title title">Button</span></button></p>
-    <script src="../../index.min.js?v=1.0.0"></script>
+    <p class="buttons has-items" role="group"><button class="button has-title"><span class="button-title title">Button</span></button></p>
+    <p class="buttons has-items" role="group"><button class="button has-arrow has-title"><span class="button-title title">Button</span><span class="arrow button-arrow" role="none"></span></button> <button class="button has-arrow has-title"><span class="arrow button-arrow" role="none"></span><span class="button-title title">Button</span><span class="arrow button-arrow" role="none"></span></button> <button class="button has-arrow has-title"><span class="arrow button-arrow" role="none"></span><span class="button-title title">Button</span></button></p>
+    <p class="buttons has-items" role="group"><button class="button has-icon has-title"><span class="button-title title">Button</span><svg class="button-icon icon" height="24" role="none" viewBox="0 0 24 24" width="24">
+          <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"></path>
+        </svg></button> <button class="button has-icon has-title"><svg class="button-icon icon" height="24" role="none" viewBox="0 0 24 24" width="24">
+          <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"></path>
+        </svg><span class="button-title title">Button</span><svg class="button-icon icon" height="24" role="none" viewBox="0 0 24 24" width="24">
+          <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"></path>
+        </svg></button> <button class="button has-icon has-title"><svg class="button-icon icon" height="24" role="none" viewBox="0 0 24 24" width="24">
+          <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"></path>
+        </svg><span class="button-title title">Button</span></button></p>
+    <p class="buttons has-items" role="group"><button class="button has-arrow has-icon has-title"><svg class="button-icon icon" height="24" role="none" viewBox="0 0 24 24" width="24">
+          <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"></path>
+        </svg><span class="button-title title">Button</span><span class="arrow button-arrow" role="none"></span></button></p>
+    <p class="buttons has-items" role="group"><button class="button has-icon" aria-label="Button"><svg class="button-icon icon" height="24" role="none" viewBox="0 0 24 24" width="24">
+          <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"></path>
+        </svg></button> <button class="button has-arrow" aria-label="Options"><span class="arrow button-arrow" role="none"></span></button> <button class="button has-arrow has-icon" aria-label="Button"><svg class="button-icon icon" height="24" role="none" viewBox="0 0 24 24" width="24">
+          <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"></path>
+        </svg><span class="arrow button-arrow" role="none"></span></button></p>
+    <script src="../../index.min.js?v=%(version)"></script>
   </body>
 </html>

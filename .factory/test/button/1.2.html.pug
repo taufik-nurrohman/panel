@@ -1,57 +1,57 @@
 extends ../_test.pug
 
 block style
-  title Disabled Button
+  title Pressed Button
 
 block content
   p.buttons.has-items(role='group')
-    button.button.has-title.not-active(disabled)
+    button.button.has-title.is-active
       span.button-title.title Button
   p.buttons.has-items(role='group')
-    button.button.has-arrow.has-title.not-active(disabled)
+    button.button.has-arrow.has-title.is-active(aria-pressed='true')
       span.button-title.title Button
       span.arrow.button-arrow(role='none')
     = ' '
-    button.button.has-arrow.has-title.not-active(disabled)
+    button.button.has-arrow.has-title.is-active(aria-pressed='true')
       span.arrow.button-arrow(role='none')
       span.button-title.title Button
       span.arrow.button-arrow(role='none')
     = ' '
-    button.button.has-arrow.has-title.not-active(disabled)
+    button.button.has-arrow.has-title.is-active(aria-pressed='true')
       span.arrow.button-arrow(role='none')
       span.button-title.title Button
   p.buttons.has-items(role='group')
-    button.button.has-icon.has-title.not-active(disabled)
+    button.button.has-icon.has-title.is-active(aria-pressed='true')
       span.button-title.title Button
       svg.button-icon.icon(height='24' role='none' viewBox='0 0 24 24' width='24')
         path(d='M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z')
     = ' '
-    button.button.has-icon.has-title.not-active(disabled)
+    button.button.has-icon.has-title.is-active(aria-pressed='true')
       svg.button-icon.icon(height='24' role='none' viewBox='0 0 24 24' width='24')
         path(d='M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z')
       span.button-title.title Button
       svg.button-icon.icon(height='24' role='none' viewBox='0 0 24 24' width='24')
         path(d='M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z')
     = ' '
-    button.button.has-icon.has-title.not-active(disabled)
+    button.button.has-icon.has-title.is-active(aria-pressed='true')
       svg.button-icon.icon(height='24' role='none' viewBox='0 0 24 24' width='24')
         path(d='M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z')
       span.button-title.title Button
   p.buttons.has-items(role='group')
-    button.button.has-arrow.has-icon.has-title.not-active(disabled)
+    button.button.has-arrow.has-icon.has-title.is-active(aria-pressed='true')
       svg.button-icon.icon(height='24' role='none' viewBox='0 0 24 24' width='24')
         path(d='M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z')
       span.button-title.title Button
-      span.arrow.button-arrow(role='none')
+      span.arrow.arrow.button-arrow(role='none')
   p.buttons.has-items(role='group')
-    button.button.has-icon.not-active(aria-label='Button' disabled)
+    button.button.has-icon.is-active(aria-label='Button' aria-pressed='true')
       svg.button-icon.icon(height='24' role='none' viewBox='0 0 24 24' width='24')
         path(d='M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z')
     = ' '
-    button.button.has-arrow.not-active(aria-label='Options' disabled)
+    button.button.has-arrow.is-active(aria-label='Button' aria-pressed='true')
       span.arrow.button-arrow(role='none')
     = ' '
-    button.button.has-arrow.has-icon.not-active(aria-label='Button' disabled)
+    button.button.has-arrow.has-icon.is-active(aria-label='Button' aria-pressed='true')
       svg.button-icon.icon(height='24' role='none' viewBox='0 0 24 24' width='24')
         path(d='M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z')
       span.arrow.button-arrow(role='none')

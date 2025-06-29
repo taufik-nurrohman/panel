@@ -103,6 +103,9 @@
     var isString = function isString(x) {
         return 'string' === typeof x;
     };
+    var hasValue = function hasValue(x, data) {
+        return -1 !== data.indexOf(x);
+    };
     var _fromValue = function fromValue(x) {
         if (isArray(x)) {
             return x.map(function (v) {
@@ -125,6 +128,9 @@
             return 'true';
         }
         return "" + x;
+    };
+    var toCaseLower = function toCaseLower(x) {
+        return x.toLowerCase();
     };
     var toCount = function toCount(x) {
         return x.length;
@@ -209,11 +215,17 @@
     var getElements = function getElements(query, scope) {
         return _toArray$1((scope || D).querySelectorAll(query));
     };
+    var getName = function getName(node) {
+        return toCaseLower(node && node.nodeName || "") || null;
+    };
     var getParent = function getParent(node, query) {
         if (query) {
             return node.closest(query) || null;
         }
         return node.parentNode || null;
+    };
+    var getRole = function getRole(node) {
+        return getAttribute(node, 'role');
     };
     var hasAria = function hasAria(node, aria) {
         return hasAttribute(node, 'aria-' + aria);
@@ -239,6 +251,53 @@
     var setClass = function setClass(node, value) {
         return node.classList.add(value), node;
     };
+
+    function Button() {
+        var elements = getElements('.button');
+        toCount(elements) && forEachArray(elements, function (element) {
+            if ('button' === getName(element)) {
+                if (hasAttribute(element, 'disabled') && !hasClass(element, 'not-active')) {
+                    console.warn(['Missing `not-active` class', element]);
+                    return 0;
+                }
+                if (hasClass(element, 'not-active') && !hasAttribute(element, 'disabled')) {
+                    console.warn(['Missing `disabled` attribute', element]);
+                    return 0;
+                }
+                return 1;
+            }
+            if ('input' === getName(element) && hasValue(element.type, ['button', 'image', 'reset', 'submit'])) {
+                if (hasAttribute(element, 'disabled') && !hasClass(element, 'not-active')) {
+                    console.warn(['Missing `not-active` class', element]);
+                    return 0;
+                }
+                if (hasClass(element, 'not-active') && !hasAttribute(element, 'disabled')) {
+                    console.warn(['Missing `disabled` attribute', element]);
+                    return 0;
+                }
+                return 1;
+            }
+            console.warn(['Missing `role="button"` attribute', element]);
+        });
+    }
+
+    function ButtonSet() {
+        var elements = getElements('.button-set');
+        toCount(elements) && forEachArray(elements, function (element) {
+            if ('group' !== getRole(element)) {
+                console.warn(['Missing `role="group"` attribute', element]);
+            }
+        });
+    }
+
+    function Buttons() {
+        var elements = getElements('.buttons');
+        toCount(elements) && forEachArray(elements, function (element) {
+            if ('group' !== getRole(element)) {
+                console.warn(['Missing `role="group"` attribute', element]);
+            }
+        });
+    }
 
     function _toArray(iterable) {
         return Array.from(iterable);
@@ -387,5 +446,8 @@
             !hasAria(link, 'haspopup') && setAria(link, 'haspopup', 'menu');
         }, true);
     }
+    Button();
+    ButtonSet();
+    Buttons();
     Menu();
 })();
