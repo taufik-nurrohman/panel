@@ -37,6 +37,102 @@
   cursor: not-allowed;
 }
 
+:where(address,
+  article,
+  aside,
+  blockquote,
+  dd,
+  details,
+  div,
+  dl,
+  dt,
+  fieldset,
+  figure,
+  footer,
+  form,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  header,
+  hgroup,
+  hr,
+  main,
+  nav,
+  ol,
+  p,
+  pre,
+  search,
+  section,
+  table,
+  ul) + :where(address,
+  article,
+  aside,
+  blockquote,
+  dd,
+  details,
+  div,
+  dl,
+  dt,
+  fieldset,
+  figure,
+  footer,
+  form,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  header,
+  hgroup,
+  hr,
+  main,
+  nav,
+  ol,
+  p,
+  pre,
+  search,
+  section,
+  table,
+  ul) {
+  margin-top: 12px;
+}
+
+li:where(:not(:first-child)) > :where(address,
+  article,
+  aside,
+  blockquote,
+  dd,
+  details,
+  div,
+  dl,
+  dt,
+  fieldset,
+  figure,
+  footer,
+  form,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  header,
+  hgroup,
+  hr,
+  main,
+  nav,
+  p,
+  pre,
+  search,
+  section,
+  table):where(:first-child) {
+  margin-top: 12px;
+}
+
 a {
   color: rgb(0, 0, 125);
 }
@@ -46,10 +142,6 @@ button {
   border-width: 1px;
   cursor: pointer;
   padding: 0 6px;
-}
-
-p + p {
-  margin-top: 12px;
 }
 
 .arrow {
@@ -643,10 +735,11 @@ p + p {
 }
 .zones.has-gap {
   gap: 24px;
+  padding: 0;
 }
-.zones.has-gap > .zone {
+.zones.has-gap > .zone:not(:first-child) {
   margin-top: 0;
 }
-.zones > .zone {
+.zones > .zone:not(:first-child) {
   margin-top: -1px;
 }
