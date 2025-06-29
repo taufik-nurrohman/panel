@@ -364,7 +364,7 @@ p {
 
 .buttons {
   @extend %flex-block;
-  gap: 4px;
+  gap: 12px;
   justify-content: inherit;
   &.to-center {
     justify-content: center;
@@ -421,6 +421,24 @@ p {
   &-title {
     @extend %flex-block;
     flex: 1;
+  }
+}
+
+.links {
+  @extend %flex-block;
+  gap: 12px;
+  justify-content: inherit;
+  &.to-center {
+    justify-content: center;
+  }
+  &.to-fill {
+    justify-content: space-between;
+  }
+  &.to-start {
+    justify-content: start;
+  }
+  &.to-end {
+    justify-content: end;
   }
 }
 

@@ -186,6 +186,12 @@
         }
         return array;
     };
+    var getValueInMap = function getValueInMap(k, map) {
+        return map.get(k);
+    };
+    var setValueInMap = function setValueInMap(k, v, map) {
+        return map.set(k, v);
+    };
 
     function _toArray$1(iterable) {
         return Array.from(iterable);
@@ -251,34 +257,64 @@
     var setClass = function setClass(node, value) {
         return node.classList.add(value), node;
     };
-
-    function Button() {
-        var elements = getElements('.button');
-        toCount(elements) && forEachArray(elements, function (element) {
-            if ('button' === getName(element)) {
-                if (hasAttribute(element, 'disabled') && !hasClass(element, 'not-active')) {
-                    console.warn(['Missing `not-active` class', element]);
-                    return 0;
-                }
-                if (hasClass(element, 'not-active') && !hasAttribute(element, 'disabled')) {
-                    console.warn(['Missing `disabled` attribute', element]);
-                    return 0;
-                }
-                return 1;
-            }
-            if ('input' === getName(element) && hasValue(element.type, ['button', 'image', 'reset', 'submit'])) {
-                if (hasAttribute(element, 'disabled') && !hasClass(element, 'not-active')) {
-                    console.warn(['Missing `not-active` class', element]);
-                    return 0;
-                }
-                if (hasClass(element, 'not-active') && !hasAttribute(element, 'disabled')) {
-                    console.warn(['Missing `disabled` attribute', element]);
-                    return 0;
+    var toggleClass = function toggleClass(node, name, force) {
+        return node.classList.toggle(name, force), node;
+    };
+    var warn$1 = W.console.warn;
+    var observed$1 = new WeakMap();
+    var observer$1 = new MutationObserver(function (list, self) {
+        forEachArray(list, function (v) {
+            var attributeName = v.attributeName,
+                target = v.target,
+                type = v.type;
+            if ('attributes' === type) {
+                if ('class' === attributeName) {
+                    target.disabled = hasClass(target, 'not-active');
+                } else if ('disabled' === attributeName) {
+                    toggleClass(target, 'not-active', target.disabled);
                 }
                 return 1;
             }
-            console.warn(['Missing `role="button"` attribute', element]);
+            if ('childList' === type) {
+                var arrow = getElement(':scope>.button-arrow', target),
+                    icon = getElement(':scope>.button-icon', target),
+                    title = getElement(':scope>.button-title', target);
+                arrow && setClass(arrow, 'arrow');
+                icon && setClass(icon, 'icon');
+                title && setClass(title, 'title');
+                toggleClass(target, 'has-arrow', !!arrow);
+                toggleClass(target, 'has-icon', !!icon);
+                toggleClass(target, 'has-title', !!title);
+            }
         });
+        // console.log(list);
+    });
+
+    function Button(watch, nodes) {
+        nodes = nodes || getElements('.button');
+        if (!toCount(nodes)) {
+            return;
+        }
+        forEachArray(nodes, function (node) {
+            if ('button' === getName(node) || 'input' === getName(node) && hasValue(node.type, ['button', 'image', 'reset', 'submit'])) {
+                if (node.disabled && !hasClass(node, 'not-active')) {
+                    warn$1('Missing `not-active` class at ', node);
+                } else if (hasClass(node, 'not-active') && !node.disabled) {
+                    warn$1('Missing `disabled` attribute at ', node);
+                }
+            } else {
+                warn$1('Missing `role="button"` attribute at ', node);
+            }
+            if (!getValueInMap(node, observed$1)) {
+                observer$1.observe(node, {
+                    attributes: true,
+                    childList: true,
+                    subtree: true
+                });
+                setValueInMap(node, 1, observed$1);
+            }
+        });
+        return nodes;
     }
 
     function ButtonSet() {
@@ -297,6 +333,62 @@
                 console.warn(['Missing `role="group"` attribute', element]);
             }
         });
+    }
+    var warn = W.console.warn;
+    var observed = new WeakMap();
+    var observer = new MutationObserver(function (list, self) {
+        forEachArray(list, function (v) {
+            var attributeName = v.attributeName,
+                target = v.target,
+                type = v.type;
+            if ('attributes' === type) {
+                if ('class' === attributeName) {
+                    target.disabled = hasClass(target, 'not-active');
+                } else if ('aria-disabled' === attributeName) {
+                    toggleClass(target, 'not-active', target.disabled);
+                }
+                return 1;
+            }
+            if ('childList' === type) {
+                var arrow = getElement(':scope>.link-arrow', target),
+                    icon = getElement(':scope>.link-icon', target),
+                    title = getElement(':scope>.link-title', target);
+                arrow && setClass(arrow, 'arrow');
+                icon && setClass(icon, 'icon');
+                title && setClass(title, 'title');
+                toggleClass(target, 'has-arrow', !!arrow);
+                toggleClass(target, 'has-icon', !!icon);
+                toggleClass(target, 'has-title', !!title);
+            }
+        });
+        // console.log(list);
+    });
+
+    function Link(watch, nodes) {
+        nodes = nodes || getElements('.link');
+        if (!toCount(nodes)) {
+            return;
+        }
+        forEachArray(nodes, function (node) {
+            if ('a' === getName(node)) {
+                if (getAria(node, 'disabled') && !hasClass(node, 'not-active')) {
+                    warn('Missing `not-active` class at ', node);
+                } else if (hasClass(node, 'not-active') && !getAria(node, 'disabled')) {
+                    warn('Missing `aria-disabled` attribute at ', node);
+                }
+            } else {
+                warn('Missing `role="link"` attribute at ', node);
+            }
+            if (!getValueInMap(node, observed)) {
+                observer.observe(node, {
+                    attributes: true,
+                    childList: true,
+                    subtree: true
+                });
+                setValueInMap(node, 1, observed);
+            }
+        });
+        return nodes;
     }
 
     function _toArray(iterable) {
@@ -449,5 +541,6 @@
     Button();
     ButtonSet();
     Buttons();
+    Link();
     Menu();
 })();
