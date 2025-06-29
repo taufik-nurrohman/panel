@@ -72,9 +72,11 @@
     var isInstance = function isInstance(x, of, exact) {
         if (!x || 'object' !== typeof x) {
             return false;
-        } {
+        }
+        if (exact) {
             return isSet(of) && isSet(x.constructor) && of === x.constructor;
         }
+        return isSet(of) && x instanceof of ;
     };
     var isInteger = function isInteger(x) {
         return isNumber(x) && 0 === x % 1;
@@ -95,7 +97,7 @@
         if (!x || 'object' !== typeof x) {
             return false;
         }
-        return isPlain ? isInstance(x, Object) : true;
+        return isPlain ? isInstance(x, Object, 1) : true;
     };
     var isSet = function isSet(x) {
         return isDefined(x) && !isNull(x);
@@ -215,6 +217,13 @@
         var value = node.getAttribute(attribute);
         return parseValue ? _toValue(value) : value;
     };
+    var getChildFirst = function getChildFirst(parent, anyNode) {
+        return parent['first' + ('Element') + 'Child'] || null;
+    };
+    var getChildren = function getChildren(parent, index, anyNode) {
+        var children = _toArray$1(parent['child' + ('ren')]);
+        return isNumber(index) ? children[index] || null : children;
+    };
     var getElement = function getElement(query, scope) {
         return (scope || D).querySelector(query);
     };
@@ -233,6 +242,9 @@
     var getRole = function getRole(node) {
         return getAttribute(node, 'role');
     };
+    var getType = function getType(node) {
+        return node && node.nodeType || null;
+    };
     var hasAria = function hasAria(node, aria) {
         return hasAttribute(node, 'aria-' + aria);
     };
@@ -241,6 +253,18 @@
     };
     var hasClass = function hasClass(node, value) {
         return node.classList.contains(value);
+    };
+    var isElement = function isElement(node) {
+        return isNode(node) && /* Node.ELEMENT_NODE */ 1 === getType(node);
+    };
+    var isNode = function isNode(node) {
+        return isInstance(node, Node);
+    };
+    var letAria = function letAria(node, aria) {
+        return letAttribute(node, 'aria-' + aria);
+    };
+    var letAttribute = function letAttribute(node, attribute) {
+        return node.removeAttribute(attribute), node;
     };
     var letClass = function letClass(node, value) {
         return node.classList.remove(value), node;
@@ -260,9 +284,9 @@
     var toggleClass = function toggleClass(node, name, force) {
         return node.classList.toggle(name, force), node;
     };
-    var warn$1 = W.console.warn;
-    var observed$1 = new WeakMap();
-    var observer$1 = new MutationObserver(function (list, self) {
+    var warn$5 = W.console.warn;
+    var observed$5 = new WeakMap();
+    var observer$5 = new MutationObserver(function (list, self) {
         forEachArray(list, function (v) {
             var attributeName = v.attributeName,
                 target = v.target,
@@ -285,6 +309,7 @@
                 toggleClass(target, 'has-arrow', !!arrow);
                 toggleClass(target, 'has-icon', !!icon);
                 toggleClass(target, 'has-title', !!title);
+                return 1;
             }
         });
         // console.log(list);
@@ -298,54 +323,187 @@
         forEachArray(nodes, function (node) {
             if ('button' === getName(node) || 'input' === getName(node) && hasValue(node.type, ['button', 'image', 'reset', 'submit'])) {
                 if (node.disabled && !hasClass(node, 'not-active')) {
-                    warn$1('Missing `not-active` class at ', node);
+                    warn$5('Missing `not-active` class at ', node);
                 } else if (hasClass(node, 'not-active') && !node.disabled) {
-                    warn$1('Missing `disabled` attribute at ', node);
+                    warn$5('Missing `disabled` attribute at ', node);
                 }
             } else {
-                warn$1('Missing `role="button"` attribute at ', node);
+                warn$5('Missing `role="button"` attribute at ', node);
             }
-            if (!getValueInMap(node, observed$1)) {
-                observer$1.observe(node, {
+            if (!getValueInMap(node, observed$5)) {
+                observer$5.observe(node, {
                     attributes: true,
-                    childList: true,
-                    subtree: true
+                    childList: true
                 });
-                setValueInMap(node, 1, observed$1);
+                setValueInMap(node, 1, observed$5);
             }
         });
         return nodes;
     }
+    var warn$4 = W.console.warn;
+    var observed$4 = new WeakMap();
+    var observer$4 = new MutationObserver(function (list, self) {
+        forEachArray(list, function (v) {
+            var addedNodes = v.addedNodes,
+                attributeName = v.attributeName,
+                target = v.target,
+                type = v.type;
+            if ('attributes' === type) {
+                if ('class' === attributeName) {
+                    if (hasClass(target, 'has-items')) {
+                        if (!getChildFirst(target)) {
+                            warn$4('Missing child nodes in ', node);
+                            return 1;
+                        }
+                        var children = getChildren(target).filter(function (v) {
+                            return isElement(v) && (hasClass(v, 'button') || hasClass(v, 'entry'));
+                        });
+                        if (!toCount(children)) {
+                            warn$4('Child nodes can only be `.button` and/or `.entry` in ', node);
+                            return 1;
+                        }
+                    }
+                    if (hasClass(target, 'not-active')) {
+                        setAria(target, 'disabled', true);
+                        forEachArray(getChildren(target), function (v) {
+                            setClass(v, 'not-active');
+                        });
+                    } else {
+                        letAria(target, 'disabled');
+                        forEachArray(getChildren(target), function (v) {
+                            letClass(v, 'not-active');
+                        });
+                    }
+                } else if ('aria-disabled' === attributeName) {
+                    toggleClass(target, 'not-active', getAria(target, 'disabled'));
+                }
+                return 1;
+            }
+            if ('childList' === type) {
+                forEachArray(addedNodes, function (node) {
+                    if (!isElement(node) || !hasClass(node, 'button') && !hasClass(node, 'entry')) {
+                        warn$4('Invalid node ', node, ' has been inserted to ', target);
+                    }
+                });
+                var hasItems = toCount(getChildren(target).filter(function (v) {
+                    return isElement(v) && (hasClass(v, 'button') || hasClass(v, 'entry'));
+                })) > 0;
+                target.hidden = !hasItems;
+                toggleClass(target, 'has-items', hasItems);
+                return 1;
+            }
+        });
+        // console.log(list);
+    });
 
-    function ButtonSet() {
-        var elements = getElements('.button-set');
-        toCount(elements) && forEachArray(elements, function (element) {
-            if ('group' !== getRole(element)) {
-                console.warn(['Missing `role="group"` attribute', element]);
+    function ButtonSet(watch, nodes) {
+        nodes = nodes || getElements('.button-set');
+        if (!toCount(nodes)) {
+            return;
+        }
+        forEachArray(nodes, function (node) {
+            if ('group' !== getRole(node)) {
+                warn$4('Missing `role="group"` attribute at ', node);
+            }
+            if (!getValueInMap(node, observed$4)) {
+                observer$4.observe(node, {
+                    attributes: true,
+                    childList: true
+                });
+                setValueInMap(node, 1, observed$4);
             }
         });
     }
+    var warn$3 = W.console.warn;
+    var observed$3 = new WeakMap();
+    var observer$3 = new MutationObserver(function (list, self) {
+        forEachArray(list, function (v) {
+            var addedNodes = v.addedNodes,
+                attributeName = v.attributeName,
+                target = v.target,
+                type = v.type;
+            if ('attributes' === type) {
+                if ('class' === attributeName) {
+                    if (hasClass(target, 'has-items')) {
+                        if (!getChildFirst(target)) {
+                            warn$3('Missing child nodes in ', node);
+                            return 1;
+                        }
+                        var children = getChildren(target).filter(function (v) {
+                            return isElement(v) && (hasClass(v, 'button') || hasClass(v, 'button-set') || hasClass(v, 'entry') || hasClass(v, 'entry-set'));
+                        });
+                        if (!toCount(children)) {
+                            warn$3('Child nodes can only be `.button`, `.button-set`, `.entry`, and/or `.entry-set` in ', node);
+                            return 1;
+                        }
+                    }
+                    if (hasClass(target, 'not-active')) {
+                        setAria(target, 'disabled', true);
+                        forEachArray(getChildren(target), function (v) {
+                            setClass(v, 'not-active');
+                        });
+                    } else {
+                        letAria(target, 'disabled');
+                        forEachArray(getChildren(target), function (v) {
+                            letClass(v, 'not-active');
+                        });
+                    }
+                } else if ('aria-disabled' === attributeName) {
+                    toggleClass(target, 'not-active', getAria(target, 'disabled'));
+                }
+                return 1;
+            }
+            if ('childList' === type) {
+                forEachArray(addedNodes, function (node) {
+                    if (!isElement(node) || !hasClass(node, 'button') && !hasClass(node, 'button-set') && !hasClass(node, 'entry') && !hasClass(node, 'entry-set')) {
+                        warn$3('Invalid node ', node, ' has been inserted to ', target);
+                    }
+                });
+                var hasItems = toCount(getChildren(target).filter(function (v) {
+                    return isElement(v) && (hasClass(v, 'button') || hasClass(v, 'button-set') || hasClass(v, 'entry') || hasClass(v, 'entry-set'));
+                })) > 0;
+                target.hidden = !hasItems;
+                toggleClass(target, 'has-items', hasItems);
+                return 1;
+            }
+        });
+        // console.log(list);
+    });
 
-    function Buttons() {
-        var elements = getElements('.buttons');
-        toCount(elements) && forEachArray(elements, function (element) {
-            if ('group' !== getRole(element)) {
-                console.warn(['Missing `role="group"` attribute', element]);
+    function Buttons(watch, nodes) {
+        nodes = nodes || getElements('.buttons');
+        if (!toCount(nodes)) {
+            return;
+        }
+        forEachArray(nodes, function (node) {
+            if ('group' !== getRole(node)) {
+                warn$3('Missing `role="group"` attribute at ', node);
+            }
+            if (!getValueInMap(node, observed$3)) {
+                observer$3.observe(node, {
+                    attributes: true,
+                    childList: true
+                });
+                setValueInMap(node, 1, observed$3);
             }
         });
     }
-    var warn = W.console.warn;
-    var observed = new WeakMap();
-    var observer = new MutationObserver(function (list, self) {
+    var warn$2 = W.console.warn;
+    var observed$2 = new WeakMap();
+    var observer$2 = new MutationObserver(function (list, self) {
         forEachArray(list, function (v) {
             var attributeName = v.attributeName,
                 target = v.target,
                 type = v.type;
             if ('attributes' === type) {
                 if ('class' === attributeName) {
-                    target.disabled = hasClass(target, 'not-active');
+                    if (hasClass(target, 'not-active')) {
+                        setAria(target, 'disabled', true);
+                    } else {
+                        letAria(target, 'disabled');
+                    }
                 } else if ('aria-disabled' === attributeName) {
-                    toggleClass(target, 'not-active', target.disabled);
+                    toggleClass(target, 'not-active', getAria(target, 'disabled'));
                 }
                 return 1;
             }
@@ -359,6 +517,7 @@
                 toggleClass(target, 'has-arrow', !!arrow);
                 toggleClass(target, 'has-icon', !!icon);
                 toggleClass(target, 'has-title', !!title);
+                return 1;
             }
         });
         // console.log(list);
@@ -372,23 +531,170 @@
         forEachArray(nodes, function (node) {
             if ('a' === getName(node)) {
                 if (getAria(node, 'disabled') && !hasClass(node, 'not-active')) {
-                    warn('Missing `not-active` class at ', node);
+                    warn$2('Missing `not-active` class at ', node);
                 } else if (hasClass(node, 'not-active') && !getAria(node, 'disabled')) {
-                    warn('Missing `aria-disabled` attribute at ', node);
+                    warn$2('Missing `aria-disabled` attribute at ', node);
                 }
             } else {
-                warn('Missing `role="link"` attribute at ', node);
+                warn$2('Missing `role="link"` attribute at ', node);
+            }
+            if (!getValueInMap(node, observed$2)) {
+                observer$2.observe(node, {
+                    attributes: true,
+                    childList: true
+                });
+                setValueInMap(node, 1, observed$2);
+            }
+        });
+        return nodes;
+    }
+    var warn$1 = W.console.warn;
+    var observed$1 = new WeakMap();
+    var observer$1 = new MutationObserver(function (list, self) {
+        forEachArray(list, function (v) {
+            var addedNodes = v.addedNodes,
+                attributeName = v.attributeName,
+                target = v.target,
+                type = v.type;
+            if ('attributes' === type) {
+                if ('class' === attributeName) {
+                    if (hasClass(target, 'has-items')) {
+                        if (!getChildFirst(target)) {
+                            warn$1('Missing child nodes in ', node);
+                            return 1;
+                        }
+                        var children = getChildren(target).filter(function (v) {
+                            return isElement(v) && hasClass(v, 'link');
+                        });
+                        if (!toCount(children)) {
+                            warn$1('Child nodes can only be `.link` in ', node);
+                            return 1;
+                        }
+                    }
+                    if (hasClass(target, 'not-active')) {
+                        setAria(target, 'disabled', true);
+                        forEachArray(getChildren(target), function (v) {
+                            setClass(v, 'not-active');
+                        });
+                    } else {
+                        letAria(target, 'disabled');
+                        forEachArray(getChildren(target), function (v) {
+                            letClass(v, 'not-active');
+                        });
+                    }
+                } else if ('aria-disabled' === attributeName) {
+                    toggleClass(target, 'not-active', getAria(target, 'disabled'));
+                }
+                return 1;
+            }
+            if ('childList' === type) {
+                forEachArray(addedNodes, function (node) {
+                    if (!isElement(node) || !hasClass(node, 'link')) {
+                        warn$1('Invalid node ', node, ' has been inserted to ', target);
+                    }
+                });
+                var hasItems = toCount(getChildren(target).filter(function (v) {
+                    return isElement(v) && hasClass(v, 'link');
+                })) > 0;
+                target.hidden = !hasItems;
+                toggleClass(target, 'has-items', hasItems);
+                return 1;
+            }
+        });
+        // console.log(list);
+    });
+
+    function LinkSet(watch, nodes) {
+        nodes = nodes || getElements('.link-set');
+        if (!toCount(nodes)) {
+            return;
+        }
+        forEachArray(nodes, function (node) {
+            if ('group' !== getRole(node)) {
+                warn$1('Missing `role="group"` attribute at ', node);
+            }
+            if (!getValueInMap(node, observed$1)) {
+                observer$1.observe(node, {
+                    attributes: true,
+                    childList: true
+                });
+                setValueInMap(node, 1, observed$1);
+            }
+        });
+    }
+    var warn = W.console.warn;
+    var observed = new WeakMap();
+    var observer = new MutationObserver(function (list, self) {
+        forEachArray(list, function (v) {
+            var addedNodes = v.addedNodes,
+                attributeName = v.attributeName,
+                target = v.target,
+                type = v.type;
+            if ('attributes' === type) {
+                if ('class' === attributeName) {
+                    if (hasClass(target, 'has-items')) {
+                        if (!getChildFirst(target)) {
+                            warn('Missing child nodes in ', node);
+                            return 1;
+                        }
+                        var children = getChildren(target).filter(function (v) {
+                            return isElement(v) && (hasClass(v, 'link') || hasClass(v, 'link-set'));
+                        });
+                        if (!toCount(children)) {
+                            warn('Child nodes can only be `.link` and/or `.link-set` in ', node);
+                            return 1;
+                        }
+                    }
+                    if (hasClass(target, 'not-active')) {
+                        setAria(target, 'disabled', true);
+                        forEachArray(getChildren(target), function (v) {
+                            setClass(v, 'not-active');
+                        });
+                    } else {
+                        letAria(target, 'disabled');
+                        forEachArray(getChildren(target), function (v) {
+                            letClass(v, 'not-active');
+                        });
+                    }
+                } else if ('aria-disabled' === attributeName) {
+                    toggleClass(target, 'not-active', getAria(target, 'disabled'));
+                }
+                return 1;
+            }
+            if ('childList' === type) {
+                forEachArray(addedNodes, function (node) {
+                    if (!isElement(node) || !hasClass(node, 'link') && !hasClass(node, 'link-set')) {
+                        warn('Invalid node ', node, ' has been inserted to ', target);
+                    }
+                });
+                var hasItems = toCount(getChildren(target).filter(function (v) {
+                    return isElement(v) && (hasClass(v, 'link') || hasClass(v, 'link-set'));
+                })) > 0;
+                target.hidden = !hasItems;
+                toggleClass(target, 'has-items', hasItems);
+                return 1;
+            }
+        });
+        // console.log(list);
+    });
+
+    function Links(watch, nodes) {
+        nodes = nodes || getElements('.links');
+        if (!toCount(nodes)) {
+            return;
+        }
+        forEachArray(nodes, function (node) {
+            if ('group' !== getRole(node)) {
+                warn('Missing `role="group"` attribute at ', node);
             }
             if (!getValueInMap(node, observed)) {
                 observer.observe(node, {
                     attributes: true,
-                    childList: true,
-                    subtree: true
+                    childList: true
                 });
                 setValueInMap(node, 1, observed);
             }
         });
-        return nodes;
     }
 
     function _toArray(iterable) {
@@ -542,5 +848,7 @@
     ButtonSet();
     Buttons();
     Link();
+    LinkSet();
+    Links();
     Menu();
 })();

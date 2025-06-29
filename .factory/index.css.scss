@@ -319,6 +319,7 @@ p {
     @extend %flex;
     align-items: stretch;
     box-shadow: 0 1px 2px rgb(0 0 0 / 0.5);
+    position: relative;
     vertical-align: middle;
     > .button {
       box-shadow: none;
@@ -417,6 +418,12 @@ p {
     &:last-child {
       margin-right: 0;
     }
+  }
+  &-set {
+    @extend %flex;
+    align-items: stretch;
+    position: relative;
+    vertical-align: middle;
   }
   &-title {
     @extend %flex-block;

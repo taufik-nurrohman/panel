@@ -15,9 +15,9 @@ const observer = new MutationObserver(function (list, self) {
                         warn('Missing child nodes in ', node);
                         return 1;
                     }
-                    let children = getChildren(target).filter(v => isElement(v) && (hasClass(v, 'button') || hasClass(v, 'button-set') || hasClass(v, 'entry') || hasClass(v, 'entry-set')));
+                    let children = getChildren(target).filter(v => isElement(v) && (hasClass(v, 'link') || hasClass(v, 'link-set')));
                     if (!toCount(children)) {
-                        warn('Child nodes can only be `.button`, `.button-set`, `.entry`, and/or `.entry-set` in ', node);
+                        warn('Child nodes can only be `.link` and/or `.link-set` in ', node);
                         return 1;
                     }
                 }
@@ -39,11 +39,11 @@ const observer = new MutationObserver(function (list, self) {
         }
         if ('childList' === type) {
             forEachArray(addedNodes, node => {
-                if (!isElement(node) || (!hasClass(node, 'button') && !hasClass(node, 'button-set') && !hasClass(node, 'entry') && !hasClass(node, 'entry-set'))) {
+                if (!isElement(node) || (!hasClass(node, 'link') && !hasClass(node, 'link-set'))) {
                     warn('Invalid node ', node, ' has been inserted to ', target);
                 }
             });
-            let hasItems = toCount(getChildren(target).filter(v => isElement(v) && (hasClass(v, 'button') || hasClass(v, 'button-set') || hasClass(v, 'entry') || hasClass(v, 'entry-set')))) > 0;
+            let hasItems = toCount(getChildren(target).filter(v => isElement(v) && (hasClass(v, 'link') || hasClass(v, 'link-set')))) > 0;
             target.hidden = !hasItems;
             toggleClass(target, 'has-items', hasItems);
             return 1;
@@ -53,7 +53,7 @@ const observer = new MutationObserver(function (list, self) {
 });
 
 export default function (watch, nodes) {
-    nodes = nodes || getElements('.buttons');
+    nodes = nodes || getElements('.links');
     if (!toCount(nodes)) {
         return;
     }

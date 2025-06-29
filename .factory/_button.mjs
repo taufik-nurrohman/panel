@@ -27,6 +27,7 @@ const observer = new MutationObserver(function (list, self) {
             toggleClass(target, 'has-arrow', !!arrow);
             toggleClass(target, 'has-icon', !!icon);
             toggleClass(target, 'has-title', !!title);
+            return 1;
         }
     });
     // console.log(list);
@@ -50,8 +51,7 @@ export default function (watch, nodes) {
         if (watch && !getValueInMap(node, observed)) {
             observer.observe(node, {
                 attributes: true,
-                childList: true,
-                subtree: true
+                childList: true
             });
             setValueInMap(node, 1, observed);
         }

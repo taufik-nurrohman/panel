@@ -1,5 +1,5 @@
 import {forEachArray, getValueInMap, setValueInMap} from '@taufik-nurrohman/f';
-import {W, getAria, getElement, getElements, getName, hasAttribute, hasClass, setClass, toggleClass} from '@taufik-nurrohman/document';
+import {W, getAria, getElement, getElements, getName, hasAttribute, hasClass, letAria, setAria, setClass, toggleClass} from '@taufik-nurrohman/document';
 import {hasValue} from '@taufik-nurrohman/has';
 import {toCount} from '@taufik-nurrohman/to';
 
@@ -11,9 +11,13 @@ const observer = new MutationObserver(function (list, self) {
         let {attributeName, target, type} = v;
         if ('attributes' === type) {
             if ('class' === attributeName) {
-                target.disabled = hasClass(target, 'not-active');
+                if (hasClass(target, 'not-active')) {
+                    setAria(target, 'disabled', true);
+                } else {
+                    letAria(target, 'disabled');
+                }
             } else if ('aria-disabled' === attributeName) {
-                toggleClass(target, 'not-active', target.disabled);
+                toggleClass(target, 'not-active', getAria(target, 'disabled'));
             }
             return 1;
         }
@@ -27,6 +31,7 @@ const observer = new MutationObserver(function (list, self) {
             toggleClass(target, 'has-arrow', !!arrow);
             toggleClass(target, 'has-icon', !!icon);
             toggleClass(target, 'has-title', !!title);
+            return 1;
         }
     });
     // console.log(list);
@@ -50,8 +55,7 @@ export default function (watch, nodes) {
         if (watch && !getValueInMap(node, observed)) {
             observer.observe(node, {
                 attributes: true,
-                childList: true,
-                subtree: true
+                childList: true
             });
             setValueInMap(node, 1, observed);
         }
