@@ -1,3 +1,86 @@
+.block,
+.blocks,
+.block__bar,
+.block__tasks {
+  flex-direction: column;
+  flex: 1;
+}
+
+.field__title,
+.form__entry,
+.field__icon,
+.field__task {
+  padding: 3px;
+}
+
+.button,
+.button-set,
+.link,
+.link-set,
+.menu,
+.menu-item,
+.menu-items,
+.menu-link,
+.title,
+.bar,
+.columns,
+.row,
+.block__icon,
+.fields,
+.field,
+.field__entry,
+.field__tasks,
+.field__task,
+.arrow,
+.button-arrow,
+.button-title,
+.buttons,
+.link-arrow,
+.link-title,
+.links,
+.menu-arrow,
+.menus,
+.title-arrow,
+.zone-title,
+.zones,
+.block,
+.blocks,
+.block__bar,
+.block__tasks {
+  align-items: center;
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.bar,
+.columns,
+.row,
+.block__icon,
+.fields,
+.field,
+.field__entry,
+.field__tasks,
+.field__task,
+.arrow,
+.button-arrow,
+.button-title,
+.buttons,
+.link-arrow,
+.link-title,
+.links,
+.menu-arrow,
+.menus,
+.title-arrow,
+.zone-title,
+.zones,
+.block,
+.blocks,
+.block__bar,
+.block__tasks {
+  display: flex;
+}
+
 *,
 ::after,
 ::before {
@@ -33,7 +116,9 @@
 :disabled,
 .button:disabled,
 [aria-disabled=true],
-.button[aria-disabled=true] {
+.button[aria-disabled=true],
+a[aria-disabled=true],
+a:not([href]) {
   cursor: not-allowed;
 }
 
@@ -135,6 +220,21 @@ li:where(:not(:first-child)) > :where(address,
 
 a {
   color: rgb(0, 0, 125);
+  cursor: pointer;
+}
+a:focus,
+a:hover {
+  color: rgb(38.25, 38.25, 144.5);
+}
+a:active {
+  color: rgb(0, 0, 106.25);
+}
+a:not([href]) {
+  color: inherit;
+}
+a[aria-disabled=true],
+a.button[aria-disabled=true] {
+  color: inherit;
 }
 
 button {
@@ -142,10 +242,6 @@ button {
   border-width: 1px;
   cursor: pointer;
   padding: 0 6px;
-}
-
-.arrow {
-  opacity: 0.5;
 }
 
 .bar {
@@ -236,95 +332,6 @@ button {
 
 .has-stroke {
   border: 1px solid;
-}
-
-.block__tasks,
-.block__bar,
-.block,
-.blocks {
-  flex-direction: column;
-  flex: 1;
-}
-
-.field__task,
-.field__icon,
-.form__entry,
-.field__title {
-  padding: 3px;
-}
-
-.title,
-.menu-link,
-.menu-items,
-.menu-item,
-.menu,
-.link-set,
-.link,
-.button-set,
-.button,
-.zones,
-.zone-title,
-.title-arrow,
-.menus,
-.menu-arrow,
-.links,
-.link-title,
-.link-arrow,
-.buttons,
-.button-title,
-.button-arrow,
-.field__task,
-.field__tasks,
-.field__entry,
-.field,
-.fields,
-.block__icon,
-.bar,
-.columns,
-.row,
-.block__tasks,
-.block__bar,
-.block,
-.blocks {
-  align-items: center;
-  display: inline-flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-
-.zones,
-.zone-title,
-.title-arrow,
-.menus,
-.menu-arrow,
-.links,
-.link-title,
-.link-arrow,
-.buttons,
-.button-title,
-.button-arrow,
-.field__task,
-.field__tasks,
-.field__entry,
-.field,
-.fields,
-.block__icon,
-.bar,
-.columns,
-.row,
-.block__tasks,
-.block__bar,
-.block,
-.blocks {
-  display: flex;
-}
-
-.icon {
-  display: inline-block;
-  fill: currentColor;
-  height: 24px;
-  vertical-align: middle;
-  width: 24px;
 }
 
 .block,
@@ -419,6 +426,16 @@ button {
   padding: 0 6px;
 }
 
+.arrow {
+  opacity: 0.5;
+}
+.arrow::after {
+  border: 0 solid transparent;
+  border-top-color: inherit;
+  border-width: 5px 4px 0;
+  content: "";
+}
+
 .button {
   align-items: stretch;
   background: rgb(63.75, 63.75, 157.5);
@@ -435,29 +452,11 @@ button {
 .button-arrow {
   margin: 0 4px;
 }
-.button-arrow::after {
-  border: 0 solid transparent;
-  border-top-color: inherit;
-  border-width: 5px 4px 0;
-  content: "";
-}
 .button-arrow:first-child {
   margin-left: 0;
 }
 .button-arrow:last-child {
   margin-right: 0;
-}
-.button-set {
-  align-items: stretch;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-  position: relative;
-  vertical-align: middle;
-}
-.button-set > .button {
-  box-shadow: none;
-}
-.button-set > .button:not(:first-child) {
-  margin-left: -1px;
 }
 .button-icon:first-child {
   margin-left: -6px;
@@ -483,6 +482,19 @@ button {
   border-color: rgb(63.75, 63.75, 56.25);
   box-shadow: none;
 }
+.button-set {
+  align-items: stretch;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  position: relative;
+  vertical-align: middle;
+}
+.button-set > .button {
+  box-shadow: none;
+}
+.button-set > .button:not(:first-child) {
+  margin-left: -1px;
+}
+
 .buttons {
   gap: 12px;
   justify-content: inherit;
@@ -508,7 +520,16 @@ button {
   margin-top: 0;
 }
 
+.icon {
+  display: inline-block;
+  fill: currentColor;
+  height: 24px;
+  vertical-align: middle;
+  width: 24px;
+}
+
 .link {
+  color: rgb(0, 0, 125);
   cursor: pointer;
   gap: 4px;
   position: relative;
@@ -517,25 +538,38 @@ button {
 .link-arrow {
   margin: 0 4px;
 }
-.link-arrow::after {
-  border: 0 solid transparent;
-  border-top-color: inherit;
-  border-width: 5px 4px 0;
-  content: "";
-}
 .link-arrow:first-child {
   margin-left: 0;
 }
 .link-arrow:last-child {
   margin-right: 0;
 }
-.link-set {
-  align-items: stretch;
-  position: relative;
-  vertical-align: middle;
-}
 .link-title {
   flex: 1;
+}
+.link:focus,
+.link:hover {
+  color: rgb(38.25, 38.25, 144.5);
+  z-index: 10;
+}
+.link:focus > .arrow,
+.link:hover > .arrow {
+  opacity: 0.45;
+}
+.link.is-active,
+.link:active {
+  color: rgb(0, 0, 106.25);
+  z-index: 10;
+}
+.link.is-active > .arrow,
+.link:active > .arrow {
+  opacity: 0.65;
+}
+.link-set {
+  align-items: stretch;
+  gap: 6px;
+  position: relative;
+  vertical-align: middle;
 }
 
 .links {

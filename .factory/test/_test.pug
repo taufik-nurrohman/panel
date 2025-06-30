@@ -2,8 +2,8 @@ html(dir='ltr')
   head
     meta(charset='utf-8')
     meta(content='width=device-width' name='viewport')
-    link(href='../../index.min.css?v=%(version)' rel='stylesheet')
+    link(href='../'.repeat(file.to.split('/').length - 2) + 'index.min.css?v=%(version)' rel='stylesheet')
     block style
   body.has-gap(role='application')
     block content
-    script(src='../../index.min.js?v=%(version)')
+    script(src='../'.repeat(file.to.split('/').length - 2) + 'index.min.js?v=%(version)')

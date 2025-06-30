@@ -1,0 +1,106 @@
+extends ../_test.pug
+
+block style
+  title Link Set
+
+block content
+  p.has-items.links(role='group')
+    span.has-items.link-set(role='group')
+      a.has-title.link(href='#link')
+        span.link-title.title Link
+    = ' '
+    span.has-items.link-set(role='group')
+      a.has-title.link(href='#link')
+        span.link-title.title Link
+      a.has-title.link(href='#link')
+        span.link-title.title Link
+      a.has-title.link(href='#link')
+        span.link-title.title Link
+  p.has-items.links(role='group')
+    span.has-items.link-set(role='group')
+      a.has-icon.link(aria-label='Link' href='#link')
+        svg.icon.link-icon(height='24' role='none' viewBox='0 0 24 24' width='24')
+          path(d='M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z')
+      = ' '
+    span.has-items.link-set(role='group')
+      a.has-arrow.link(aria-label='Options' href='#link')
+        span.arrow.link-arrow(role='none')
+      = ' '
+    span.has-items.link-set(role='group')
+      a.has-icon.link(aria-label='Link' href='#link')
+        svg.icon.link-icon(height='24' role='none' viewBox='0 0 24 24' width='24')
+          path(d='M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z')
+      a.has-arrow.link(aria-label='Options' href='#link')
+        span.arrow.link-arrow(role='none')
+      = ' '
+    span.has-items.link-set(role='group')
+      a.has-icon.link(aria-label='Link' href='#link')
+        svg.icon.link-icon(height='24' role='none' viewBox='0 0 24 24' width='24')
+          path(d='M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z')
+      a.has-icon.link(aria-label='Link' href='#link')
+        svg.icon.link-icon(height='24' role='none' viewBox='0 0 24 24' width='24')
+          path(d='M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z')
+      a.has-icon.link(aria-label='Link' href='#link')
+        svg.icon.link-icon(height='24' role='none' viewBox='0 0 24 24' width='24')
+          path(d='M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z')
+  p.has-items.links(role='group')
+    span.has-items.link-set(role='group')
+      a.has-title.link(href='#link')
+        span.link-title.title Link
+      a.has-arrow.link(aria-label='Options' href='#link')
+        span.arrow.link-arrow(role='none')
+    = ' '
+    span.has-items.link-set(role='group')
+      a.has-arrow.link(aria-label='Options' href='#link')
+        span.arrow.link-arrow(role='none')
+      a.has-title.link(href='#link')
+        span.link-title.title Link
+      a.has-arrow.link(aria-label='Options' href='#link')
+        span.arrow.link-arrow(role='none')
+    = ' '
+    span.has-items.link-set(role='group')
+      a.has-arrow.link(aria-label='Options' href='#link')
+        span.arrow.link-arrow(role='none')
+      a.has-title.link(href='#link')
+        span.link-title.title Link
+  p.has-items.links(role='group')
+    span.has-items.link-set(role='group')
+      a.has-title.link(href='#link')
+        span.link-title.title Link
+      a.has-icon.link(href='#link')
+        svg.icon.link-icon(height='24' role='none' viewBox='0 0 24 24' width='24')
+          path(d='M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z')
+    = ' '
+    span.has-items.link-set(role='group')
+      a.has-icon.link(href='#link')
+        svg.icon.link-icon(height='24' role='none' viewBox='0 0 24 24' width='24')
+          path(d='M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z')
+      a.has-title.link(href='#link')
+        span.link-title.title Link
+      a.has-icon.link(href='#link')
+        svg.icon.link-icon(height='24' role='none' viewBox='0 0 24 24' width='24')
+          path(d='M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z')
+    = ' '
+    span.has-items.link-set(role='group')
+      a.has-title.link(href='#link')
+        span.link-title.title Link
+      a.has-icon.link(href='#link')
+        svg.icon.link-icon(height='24' role='none' viewBox='0 0 24 24' width='24')
+          path(d='M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z')
+  p.has-items.links(role='group')
+    span.has-items.link-set(role='group')
+      a.has-icon.link(href='#link')
+        svg.icon.link-icon(height='24' role='none' viewBox='0 0 24 24' width='24')
+          path(d='M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z')
+      a.has-title.link(href='#link')
+        span.link-title.title Link
+      a.has-arrow.link(aria-label='Options' href='#link')
+        span.arrow.link-arrow(role='none')
+  p.has-items.links(role='group')
+    span.has-items.link-set(role='group')
+      a.has-icon.link(href='#link')
+        svg.icon.link-icon(height='24' role='none' viewBox='0 0 24 24' width='24')
+          path(d='M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z')
+      a.has-arrow.has-title.link(href='#link')
+        span.link-title.title Link
+        span.arrow.link-arrow(role='none')

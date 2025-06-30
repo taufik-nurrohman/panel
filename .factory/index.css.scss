@@ -1,5 +1,18 @@
 @use 'sass:color';
 
+@use './_.scss' as *;
+@use './_arrow.scss' as *;
+@use './_button-set.scss' as *;
+@use './_button.scss' as *;
+@use './_buttons.scss' as *;
+@use './_content.scss' as *;
+@use './_description.scss' as *;
+@use './_icon.scss' as *;
+@use './_link-set.scss' as *;
+@use './_link.scss' as *;
+@use './_links.scss' as *;
+@use './_title.scss' as *;
+
 *,
 ::after,
 ::before {
@@ -114,6 +127,22 @@ li {
 
 a {
   color: rgb(0 0 125);
+  cursor: pointer;
+  &:focus,
+  &:hover {
+    color: color.mix(rgb(0 0 125), rgb(255 255 255), 85%);
+  }
+  &:active {
+    color: color.mix(rgb(0 0 125), rgb(0 0 0), 85%);
+  }
+  &:not([href]) {
+    @extend :disabled;
+    color: inherit;
+  }
+  &[aria-disabled='true'] {
+    @extend :disabled;
+    color: inherit;
+  }
 }
 
 button {
@@ -127,10 +156,6 @@ button {
 
 [aria-disabled='true'] {
   @extend :disabled;
-}
-
-.arrow {
-  opacity: 0.5;
 }
 
 .bar {
@@ -196,41 +221,6 @@ button {
   &-stroke {
     border: 1px solid;
   }
-}
-
-%blocks {
-  @extend %flex-block;
-  flex-direction: column;
-  flex: 1;
-}
-
-%entry {
-  padding: 3px;
-}
-
-%flex {
-  align-items: center;
-  display: inline-flex;
-  flex: {
-    direction: row;
-    wrap: wrap;
-  }
-}
-
-%flex-block {
-  @extend %flex;
-  display: flex;
-}
-
-%icon {
-  display: inline-block;
-  fill: currentColor;
-  height: 24px;
-  vertical-align: middle;
-  width: 24px;
-}
-
-%title {
 }
 
 .block,
@@ -350,173 +340,38 @@ button {
   }
 }
 
-
-
-
+.arrow {
+  @include arrow;
+}
 
 .button {
-  @extend %flex;
-  align-items: stretch;
-  background: color.mix(rgb(0 0 125), rgb(255 255 255), 75%);
-  border: 1px solid rgb(0 0 0);
-  box-shadow: 0 1px 2px rgb(0 0 0 / 0.5);
-  color: rgb(255 255 255);
-  cursor: pointer;
-  gap: 4px;
-  min-height: 30px;
-  padding: 2px 8px;
-  position: relative;
-  vertical-align: middle;
-  &-arrow {
-    @extend %flex-block;
-    margin: 0 4px;
-    &::after {
-      border: 0 solid transparent;
-      border: {
-        top-color: inherit;
-        width: 5px 4px 0;
-      }
-      content: "";
-    }
-    &:first-child {
-      margin-left: 0;
-    }
-    &:last-child {
-      margin-right: 0;
-    }
-  }
+  @include button;
   &-set {
-    @extend %flex;
-    align-items: stretch;
-    box-shadow: 0 1px 2px rgb(0 0 0 / 0.5);
-    position: relative;
-    vertical-align: middle;
-    > .button {
-      box-shadow: none;
-      &:not(:first-child) {
-        margin-left: -1px;
-      }
-    }
-  }
-  &-icon {
-    &:first-child {
-      margin-left: -6px;
-    }
-    &:last-child {
-      margin-right: -6px;
-    }
-  }
-  &-title {
-    @extend %flex-block;
-    flex: 1;
-  }
-  &:focus,
-  &:hover {
-    background: color.mix(rgb(0 0 125), rgb(255 255 255), 80%);
-    z-index: 10;
-  }
-  &.is-active,
-  &:active {
-    background: color.mix(rgb(0 0 125), rgb(255 255 255), 85%);
-    z-index: 10;
-  }
-  &.not-active {
-    background: color.mix(rgb(0 0 125), rgb(255 255 255), 50%);
-    border-color: color.mix(rgb(0 0 0), rgb(255 255 225), 75%);
-    box-shadow: none;
-  }
-  &:disabled {
-    @extend :disabled;
-  }
-  &[aria-disabled='true'] {
-    @extend [aria-disabled='true'];
+    @include button-set;
   }
 }
 
 .buttons {
-  @extend %flex-block;
-  gap: 12px;
-  justify-content: inherit;
-  &.to-center {
-    justify-content: center;
-  }
-  &.to-fill {
-    justify-content: space-between;
-  }
-  &.to-start {
-    justify-content: start;
-  }
-  &.to-end {
-    justify-content: end;
-  }
+  @include buttons;
 }
 
 .description {
-  color: color.mix(rgb(0 0 0), rgb(255 255 255), 75%);
-  &-content {
-    margin: {
-      bottom: 0;
-      top: 0;
-    }
-  }
+  @include description;
 }
 
 .icon {
-  @extend %icon;
+  @include icon;
 }
 
 .link {
-  @extend %flex;
-  cursor: pointer;
-  gap: 4px;
-  position: relative;
-  vertical-align: middle;
-  &-arrow {
-    @extend %flex-block;
-    margin: 0 4px;
-    &::after {
-      border: 0 solid transparent;
-      border: {
-        top-color: inherit;
-        width: 5px 4px 0;
-      }
-      content: "";
-    }
-    &:first-child {
-      margin-left: 0;
-    }
-    &:last-child {
-      margin-right: 0;
-    }
-  }
+  @include link;
   &-set {
-    @extend %flex;
-    align-items: stretch;
-    position: relative;
-    vertical-align: middle;
-  }
-  &-title {
-    @extend %flex-block;
-    flex: 1;
+    @include link-set;
   }
 }
 
 .links {
-  @extend %flex-block;
-  gap: 12px;
-  justify-content: inherit;
-  &.to-center {
-    justify-content: center;
-  }
-  &.to-fill {
-    justify-content: space-between;
-  }
-  &.to-start {
-    justify-content: start;
-  }
-  &.to-end {
-    justify-content: end;
-  }
+  @include links;
 }
 
 .menu {

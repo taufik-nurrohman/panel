@@ -1,0 +1,42 @@
+@use 'sass:color';
+
+@use './_.scss' as *;
+
+@mixin link {
+  @extend %flex;
+  color: rgb(0 0 125);
+  cursor: pointer;
+  gap: 4px;
+  position: relative;
+  vertical-align: middle;
+  &-arrow {
+    @extend %flex-block;
+    margin: 0 4px;
+    &:first-child {
+      margin-left: 0;
+    }
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+  &-title {
+    @extend %flex-block;
+    flex: 1;
+  }
+  &:focus,
+  &:hover {
+    color: color.mix(rgb(0 0 125), rgb(255 255 255), 85%);
+    z-index: 10;
+    > .arrow {
+      opacity: 0.45;
+    }
+  }
+  &.is-active,
+  &:active {
+    color: color.mix(rgb(0 0 125), rgb(0 0 0), 85%);
+    z-index: 10;
+    > .arrow {
+      opacity: 0.65;
+    }
+  }
+}

@@ -1,0 +1,15 @@
+@use './_.scss' as *;
+
+@mixin button-set {
+  @extend %flex;
+  align-items: stretch;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.5);
+  position: relative;
+  vertical-align: middle;
+  > .button {
+    box-shadow: none;
+    &:not(:first-child) {
+      margin-left: -1px;
+    }
+  }
+}

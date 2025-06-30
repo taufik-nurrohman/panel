@@ -1,0 +1,26 @@
+%blocks {
+  @extend %flex-block;
+  flex-direction: column;
+  flex: 1;
+}
+
+%entry {
+  padding: 3px;
+}
+
+%flex {
+  align-items: center;
+  display: inline-flex;
+  flex: {
+    direction: row;
+    wrap: wrap;
+  }
+}
+
+%flex-block {
+  @extend %flex;
+  display: flex;
+}
+
+%title {
+}

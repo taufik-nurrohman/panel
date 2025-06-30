@@ -1,0 +1,9 @@
+@use './_.scss' as *;
+
+@mixin link-set {
+  @extend %flex;
+  align-items: stretch;
+  gap: 6px;
+  position: relative;
+  vertical-align: middle;
+}

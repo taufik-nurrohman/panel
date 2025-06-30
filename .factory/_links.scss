@@ -1,0 +1,19 @@
+@use './_.scss' as *;
+
+@mixin links {
+  @extend %flex-block;
+  gap: 12px;
+  justify-content: inherit;
+  &.to-center {
+    justify-content: center;
+  }
+  &.to-fill {
+    justify-content: space-between;
+  }
+  &.to-start {
+    justify-content: start;
+  }
+  &.to-end {
+    justify-content: end;
+  }
+}

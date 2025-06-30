@@ -3,34 +3,54 @@ import {W, getAria, getElement, getElements, getName, hasAttribute, hasClass, le
 import {hasValue} from '@taufik-nurrohman/has';
 import {toCount} from '@taufik-nurrohman/to';
 
-const {warn} = W.console;
+import {
+    TOKEN_ARIA_DISABLED,
+    TOKEN_ATTRIBUTES,
+    TOKEN_CHILD_LIST,
+    TOKEN_CLASS,
+    TOKEN_CLASS_ARROW,
+    TOKEN_CLASS_HAS_ARROW,
+    TOKEN_CLASS_HAS_ICON,
+    TOKEN_CLASS_HAS_TITLE,
+    TOKEN_CLASS_ICON,
+    TOKEN_CLASS_LINK,
+    TOKEN_CLASS_LINK_ARROW,
+    TOKEN_CLASS_LINK_ICON,
+    TOKEN_CLASS_LINK_TITLE,
+    TOKEN_CLASS_NOT_ACTIVE,
+    TOKEN_CLASS_TITLE,
+    TOKEN_DISABLED,
+    TOKEN_ROLE_LINK,
+    TOKEN_SELECTOR_SCOPE,
+    warn,
+} from './_.mjs';
 
 const observed = new WeakMap;
 const observer = new MutationObserver(function (list, self) {
     forEachArray(list, v => {
         let {attributeName, target, type} = v;
-        if ('attributes' === type) {
-            if ('class' === attributeName) {
-                if (hasClass(target, 'not-active')) {
-                    setAria(target, 'disabled', true);
+        if (TOKEN_ATTRIBUTES === type) {
+            if (TOKEN_CLASS === attributeName) {
+                if (hasClass(target, TOKEN_CLASS_NOT_ACTIVE)) {
+                    setAria(target, TOKEN_DISABLED, true);
                 } else {
-                    letAria(target, 'disabled');
+                    letAria(target, TOKEN_DISABLED);
                 }
-            } else if ('aria-disabled' === attributeName) {
-                toggleClass(target, 'not-active', getAria(target, 'disabled'));
+            } else if (TOKEN_ARIA_DISABLED === attributeName) {
+                toggleClass(target, TOKEN_CLASS_NOT_ACTIVE, getAria(target, TOKEN_DISABLED));
             }
             return 1;
         }
-        if ('childList' === type) {
-            let arrow = getElement(':scope>.link-arrow', target),
-                icon = getElement(':scope>.link-icon', target),
-                title = getElement(':scope>.link-title', target);
-            arrow && setClass(arrow, 'arrow');
-            icon && setClass(icon, 'icon');
-            title && setClass(title, 'title');
-            toggleClass(target, 'has-arrow', !!arrow);
-            toggleClass(target, 'has-icon', !!icon);
-            toggleClass(target, 'has-title', !!title);
+        if (TOKEN_CHILD_LIST === type) {
+            let arrow = getElement(TOKEN_SELECTOR_SCOPE + '.' + TOKEN_CLASS_LINK_ARROW, target),
+                icon = getElement(TOKEN_SELECTOR_SCOPE + '.' + TOKEN_CLASS_LINK_ICON, target),
+                title = getElement(TOKEN_SELECTOR_SCOPE + '.' + TOKEN_CLASS_LINK_TITLE, target);
+            arrow && setClass(arrow, TOKEN_CLASS_ARROW);
+            icon && setClass(icon, TOKEN_CLASS_ICON);
+            title && setClass(title, TOKEN_CLASS_TITLE);
+            toggleClass(target, TOKEN_CLASS_HAS_ARROW, !!arrow);
+            toggleClass(target, TOKEN_CLASS_HAS_ICON, !!icon);
+            toggleClass(target, TOKEN_CLASS_HAS_TITLE, !!title);
             return 1;
         }
     });
@@ -38,19 +58,19 @@ const observer = new MutationObserver(function (list, self) {
 });
 
 export default function (watch, nodes) {
-    nodes = nodes || getElements('.link');
+    nodes = nodes || getElements('.' + TOKEN_CLASS_LINK);
     if (!toCount(nodes)) {
         return;
     }
     forEachArray(nodes, node => {
         if ('a' === getName(node)) {
-            if (getAria(node, 'disabled') && !hasClass(node, 'not-active')) {
-                warn('Missing `not-active` class at ', node);
-            } else if (hasClass(node, 'not-active') && !getAria(node, 'disabled')) {
-                warn('Missing `aria-disabled` attribute at ', node);
+            if (getAria(node, TOKEN_DISABLED) && !hasClass(node, TOKEN_CLASS_NOT_ACTIVE)) {
+                warn('Missing `' + TOKEN_CLASS_NOT_ACTIVE + '` class at ', node);
+            } else if (hasClass(node, TOKEN_CLASS_NOT_ACTIVE) && !getAria(node, TOKEN_DISABLED)) {
+                warn('Missing `' + TOKEN_ARIA_DISABLED + '` attribute at ', node);
             }
         } else {
-            warn('Missing `role="link"` attribute at ', node);
+            warn('Missing `role="' + TOKEN_ROLE_LINK + '"` attribute at ', node);
         }
         if (watch && !getValueInMap(node, observed)) {
             observer.observe(node, {

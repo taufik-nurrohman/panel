@@ -1,0 +1,14 @@
+@use './_.scss' as *;
+
+@mixin arrow {
+  @extend %flex-block;
+  &::after {
+    border: 0 solid transparent;
+    border: {
+      top-color: inherit;
+      width: 5px 4px 0;
+    }
+    content: "";
+  }
+  opacity: 0.5;
+}
