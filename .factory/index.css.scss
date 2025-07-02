@@ -16,7 +16,7 @@
 *,
 ::after,
 ::before {
-  -webkit-tap-highlight-color: rgb(0 0 0);
+  -webkit-tap-highlight-color: rgb(0 0 0 / 0);
   background: 0 0;
   border: 0;
   border-color: inherit;
@@ -39,9 +39,9 @@
 }
 
 :root {
-  background: color.mix(rgb(0 0 125), rgb(255 255 255), 35%);
-  border: 0 solid rgb(0 0 0);
-  color: rgb(0 0 0);
+  background: color.mix(#00f, #fff, 35%);
+  border: 0 solid #000;
+  color: #000;
   font: 16px/24px sans-serif;
 }
 
@@ -126,14 +126,14 @@ li {
 }
 
 a {
-  color: rgb(0 0 125);
+  color: #00f;
   cursor: pointer;
   &:focus,
   &:hover {
-    color: color.mix(rgb(0 0 125), rgb(255 255 255), 85%);
+    color: color.mix(#00f, #fff, 85%);
   }
   &:active {
-    color: color.mix(rgb(0 0 125), rgb(0 0 0), 85%);
+    color: color.mix(#00f, #000, 85%);
   }
   &:not([href]) {
     @extend :disabled;
@@ -376,10 +376,10 @@ button {
 
 .menu {
   @extend %flex;
-  background: rgb(255 255 255);
-  border: 1px solid rgb(0 0 0);
+  background: #fff;
+  border: 1px solid #000;
   box-shadow: 0 1px 2px rgb(0 0 0 / 0.25);
-  color: rgb(0 0 0);
+  color: #000;
   cursor: default;
   &-arrow {
     @extend %flex-block;
@@ -399,7 +399,7 @@ button {
       content: "";
     }
     &.is-active {
-      background: color.mix(rgb(0 0 0), rgb(255 255 255), 25%);
+      background: color.mix(#000, #fff, 25%);
     }
   }
   &-icon {
@@ -420,26 +420,26 @@ button {
     &.has-link {
       cursor: pointer;
       &:hover {
-        background: color.mix(rgb(0 0 125), rgb(255 255 255), 12.5%);
+        background: color.mix(#00f, #fff, 12.5%);
       }
       &:focus-within {
-        background: color.mix(rgb(0 0 125), rgb(255 255 255), 25%);
+        background: color.mix(#00f, #fff, 25%);
       }
       &.is-current {
-        background: color.mix(rgb(0 0 125), rgb(255 255 255), 85%);
-        color: rgb(255 255 255);
+        background: color.mix(#00f, #fff, 85%);
+        color: #fff;
         &:hover {
-          background: color.mix(rgb(0 0 125), rgb(255 255 255), 95%);
+          background: color.mix(#00f, #fff, 95%);
         }
         &:focus-within {
-          background: color.mix(rgb(0 0 125), rgb(255 255 255), 95%);
+          background: color.mix(#00f, #fff, 95%);
         }
         > .menu-link {
           color: inherit;
         }
       }
       &.is-open {
-        background: color.mix(rgb(0 0 125), rgb(255 255 255), 25%);
+        background: color.mix(#00f, #fff, 25%);
       }
     }
     &:not(.is-open) {
@@ -548,16 +548,16 @@ button {
     }
   }
   &-hint {
-    color: color.mix(rgb(0 0 0), rgb(255 255 255), 50%);
+    color: color.mix(#000, #fff, 50%);
   }
 }
 
 .zone {
-  background: rgb(255 255 255);
-  border: 1px solid rgb(0 0 0);
+  background: #fff;
+  border: 1px solid #000;
   box-shadow: 0 1px 2px rgb(0 0 0 / 0.25);
   &-bar {
-    background: color.mix(rgb(0 0 125), rgb(255 255 255), 12.5%);
+    background: color.mix(#00f, #fff, 12.5%);
   }
   &-content {
     margin: 0;

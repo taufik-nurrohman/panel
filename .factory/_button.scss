@@ -5,10 +5,10 @@
 @mixin button {
   @extend %flex;
   align-items: stretch;
-  background: color.mix(rgb(0 0 125), rgb(255 255 255), 75%);
-  border: 1px solid rgb(0 0 0);
+  background: color.mix(#00f, #fff, 75%);
+  border: 1px solid #000;
   box-shadow: 0 1px 2px rgb(0 0 0 / 0.5);
-  color: rgb(255 255 255);
+  color: #fff;
   cursor: pointer;
   gap: 4px;
   min-height: 30px;
@@ -39,17 +39,17 @@
   }
   &:focus,
   &:hover {
-    background: color.mix(rgb(0 0 125), rgb(255 255 255), 80%);
+    background: color.mix(#00f, #fff, 80%);
     z-index: 10;
   }
   &.is-active,
   &:active {
-    background: color.mix(rgb(0 0 125), rgb(255 255 255), 85%);
+    background: color.mix(#00f, #fff, 85%);
     z-index: 10;
   }
   &.not-active {
-    background: color.mix(rgb(0 0 125), rgb(255 255 255), 50%);
-    border-color: color.mix(rgb(0 0 0), rgb(255 255 225), 75%);
+    background: color.mix(#00f, #fff, 50%);
+    border-color: color.mix(#000, #fff, 75%);
     box-shadow: none;
   }
   &:disabled {

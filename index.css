@@ -84,7 +84,7 @@
 *,
 ::after,
 ::before {
-  -webkit-tap-highlight-color: rgb(0, 0, 0);
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   background: 0 0;
   border: 0;
   border-color: inherit;
@@ -107,9 +107,9 @@
 }
 
 :root {
-  background: rgb(165.75, 165.75, 209.5);
-  border: 0 solid rgb(0, 0, 0);
-  color: rgb(0, 0, 0);
+  background: rgb(165.75, 165.75, 255);
+  border: 0 solid #000;
+  color: #000;
   font: 16px/24px sans-serif;
 }
 
@@ -219,15 +219,15 @@ li:where(:not(:first-child)) > :where(address,
 }
 
 a {
-  color: rgb(0, 0, 125);
+  color: #00f;
   cursor: pointer;
 }
 a:focus,
 a:hover {
-  color: rgb(38.25, 38.25, 144.5);
+  color: rgb(38.25, 38.25, 255);
 }
 a:active {
-  color: rgb(0, 0, 106.25);
+  color: rgb(0, 0, 216.75);
 }
 a:not([href]) {
   color: inherit;
@@ -438,10 +438,10 @@ button {
 
 .button {
   align-items: stretch;
-  background: rgb(63.75, 63.75, 157.5);
-  border: 1px solid rgb(0, 0, 0);
+  background: rgb(63.75, 63.75, 255);
+  border: 1px solid #000;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-  color: rgb(255, 255, 255);
+  color: #fff;
   cursor: pointer;
   gap: 4px;
   min-height: 30px;
@@ -469,17 +469,17 @@ button {
 }
 .button:focus,
 .button:hover {
-  background: #333397;
+  background: #3333ff;
   z-index: 10;
 }
 .button.is-active,
 .button:active {
-  background: rgb(38.25, 38.25, 144.5);
+  background: rgb(38.25, 38.25, 255);
   z-index: 10;
 }
 .button.not-active {
-  background: rgb(127.5, 127.5, 190);
-  border-color: rgb(63.75, 63.75, 56.25);
+  background: rgb(127.5, 127.5, 255);
+  border-color: rgb(63.75, 63.75, 63.75);
   box-shadow: none;
 }
 .button-set {
@@ -529,7 +529,7 @@ button {
 }
 
 .link {
-  color: rgb(0, 0, 125);
+  color: #00f;
   cursor: pointer;
   gap: 4px;
   position: relative;
@@ -549,7 +549,7 @@ button {
 }
 .link:focus,
 .link:hover {
-  color: rgb(38.25, 38.25, 144.5);
+  color: rgb(38.25, 38.25, 255);
   z-index: 10;
 }
 .link:focus > .arrow,
@@ -558,7 +558,7 @@ button {
 }
 .link.is-active,
 .link:active {
-  color: rgb(0, 0, 106.25);
+  color: rgb(0, 0, 216.75);
   z-index: 10;
 }
 .link.is-active > .arrow,
@@ -590,10 +590,10 @@ button {
 }
 
 .menu {
-  background: rgb(255, 255, 255);
-  border: 1px solid rgb(0, 0, 0);
+  background: #fff;
+  border: 1px solid #000;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
-  color: rgb(0, 0, 0);
+  color: #000;
   cursor: default;
 }
 .menu-arrow {
@@ -629,26 +629,26 @@ button {
   cursor: pointer;
 }
 .menu-item.has-link:hover {
-  background: rgb(223.125, 223.125, 238.75);
+  background: rgb(223.125, 223.125, 255);
 }
 .menu-item.has-link:focus-within {
-  background: rgb(191.25, 191.25, 222.5);
+  background: rgb(191.25, 191.25, 255);
 }
 .menu-item.has-link.is-current {
-  background: rgb(38.25, 38.25, 144.5);
-  color: rgb(255, 255, 255);
+  background: rgb(38.25, 38.25, 255);
+  color: #fff;
 }
 .menu-item.has-link.is-current:hover {
-  background: rgb(12.75, 12.75, 131.5);
+  background: rgb(12.75, 12.75, 255);
 }
 .menu-item.has-link.is-current:focus-within {
-  background: rgb(12.75, 12.75, 131.5);
+  background: rgb(12.75, 12.75, 255);
 }
 .menu-item.has-link.is-current > .menu-link {
   color: inherit;
 }
 .menu-item.has-link.is-open {
-  background: rgb(191.25, 191.25, 222.5);
+  background: rgb(191.25, 191.25, 255);
 }
 .menu-item:not(.is-open) > .menu {
   display: none;
@@ -736,12 +736,12 @@ button {
 }
 
 .zone {
-  background: rgb(255, 255, 255);
-  border: 1px solid rgb(0, 0, 0);
+  background: #fff;
+  border: 1px solid #000;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
 }
 .zone-bar {
-  background: rgb(223.125, 223.125, 238.75);
+  background: rgb(223.125, 223.125, 255);
 }
 .zone-content {
   margin: 0;
