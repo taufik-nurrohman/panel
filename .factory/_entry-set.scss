@@ -1,0 +1,13 @@
+@use './_.scss' as *;
+
+@mixin entry-set {
+  @extend %flex;
+  align-items: stretch;
+  position: relative;
+  vertical-align: middle;
+  > .entry {
+    &:not(:first-child) {
+      margin-left: -1px;
+    }
+  }
+}

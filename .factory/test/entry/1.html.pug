@@ -1,0 +1,16 @@
+extends ../_test.pug
+
+block style
+  title Entry
+
+block content
+  p.entries.has-items(role='group')
+    input.entry(type='text')
+    = ' '
+    select.entry
+      option Option 1
+      option Option 2
+      option(value='3') Option 3
+      option(disabled) Option 4
+  p.entries.has-items(role='group')
+    textarea.entry(placeholder!='Content goes here&hellip;')

@@ -7,6 +7,9 @@
 @use './_buttons.scss' as *;
 @use './_content.scss' as *;
 @use './_description.scss' as *;
+@use './_entries.scss' as *;
+@use './_entry-set.scss' as *;
+@use './_entry.scss' as *;
 @use './_icon.scss' as *;
 @use './_link-set.scss' as *;
 @use './_link.scss' as *;
@@ -29,6 +32,11 @@
   text-align: inherit;
   text-decoration: none;
   word-wrap: break-word;
+}
+
+::placeholder {
+  color: inherit;
+  opacity: 0.5;
 }
 
 ::-moz-focus-inner {
@@ -357,6 +365,17 @@ button {
 
 .description {
   @include description;
+}
+
+.entries {
+  @include entries;
+}
+
+.entry {
+  @include entry;
+  &-set {
+    @include entry-set;
+  }
 }
 
 .icon {
