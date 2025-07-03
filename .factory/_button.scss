@@ -44,12 +44,12 @@
   }
   &.is-active,
   &:active {
-    background: color.mix(#00f, #fff, 85%);
+    background: color.mix(#00f, #fff, 95%);
     z-index: 10;
   }
   &.not-active {
     background: color.mix(#00f, #fff, 50%);
-    border-color: color.mix(#000, #fff, 75%);
+    border-color: color.mix(#000, #fff, 80%);
     box-shadow: none;
   }
   &:disabled {

@@ -107,7 +107,7 @@
 }
 
 :root {
-  background: rgb(165.75, 165.75, 255);
+  background: #cccccc;
   border: 0 solid #000;
   color: #000;
   font: 16px/24px sans-serif;
@@ -474,12 +474,12 @@ button {
 }
 .button.is-active,
 .button:active {
-  background: rgb(38.25, 38.25, 255);
+  background: rgb(12.75, 12.75, 255);
   z-index: 10;
 }
 .button.not-active {
   background: rgb(127.5, 127.5, 255);
-  border-color: rgb(63.75, 63.75, 63.75);
+  border-color: #333333;
   box-shadow: none;
 }
 .button-set {
