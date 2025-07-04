@@ -1,5 +1,6 @@
-import {forEachArray, getValueInMap, setValueInMap} from '@taufik-nurrohman/f';
 import {W, getAria, getChildFirst, getChildren, getElement, getElements, getRole, hasClass, isElement, letAria, letClass, setAria, setClass, toggleClass} from '@taufik-nurrohman/document';
+import {forEachArray, getValueInMap, setValueInMap} from '@taufik-nurrohman/f';
+import {isSet} from '@taufik-nurrohman/is';
 import {toCount} from '@taufik-nurrohman/to';
 
 import {
