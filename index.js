@@ -1,4 +1,4 @@
-var application = (function () {
+var panel = (function () {
     'use strict';
 
     function _arrayLikeToArray(r, a) {
@@ -131,11 +131,22 @@ var application = (function () {
         }
         return "" + x;
     };
+    var toCaseCamel = function toCaseCamel(x) {
+        return x.replace(/[-_.](\w)/g, function (m0, m1) {
+            return toCaseUpper(m1);
+        });
+    };
     var toCaseLower = function toCaseLower(x) {
         return x.toLowerCase();
     };
+    var toCaseUpper = function toCaseUpper(x) {
+        return x.toUpperCase();
+    };
     var toCount = function toCount(x) {
         return x.length;
+    };
+    var toJSON = function toJSON(x) {
+        return JSON.stringify(x);
     };
     var toNumber = function toNumber(x, base) {
         if (base === void 0) {
@@ -187,6 +198,23 @@ var application = (function () {
             }
         }
         return array;
+    };
+    var forEachObject = function forEachObject(object, at) {
+        var v;
+        for (var k in object) {
+            v = at.call(object, object[k], k);
+            if (-1 === v) {
+                delete object[k];
+                continue;
+            }
+            if (0 === v) {
+                break;
+            }
+            if (1 === v) {
+                continue;
+            }
+        }
+        return object;
     };
     var getValueInMap = function getValueInMap(k, map) {
         return map.get(k);
@@ -254,6 +282,9 @@ var application = (function () {
     var hasClass = function hasClass(node, value) {
         return node.classList.contains(value);
     };
+    var hasState = function hasState(node, state) {
+        return state in node;
+    };
     var isElement = function isElement(node) {
         return isNode(node) && /* Node.ELEMENT_NODE */ 1 === getType(node);
     };
@@ -269,8 +300,23 @@ var application = (function () {
     var letClass = function letClass(node, value) {
         return node.classList.remove(value), node;
     };
+    var letDatum = function letDatum(node, datum) {
+        return letAttribute(node, 'data-' + datum);
+    };
+    var letHTML = function letHTML(node) {
+        var state = 'innerHTML';
+        return hasState(node, state) && (node[state] = ""), node;
+    };
+    var letStyle = function letStyle(node, style) {
+        return node.style[toCaseCamel(style)] = null, node;
+    };
     var setAria = function setAria(node, aria, value) {
         return setAttribute(node, 'aria-' + aria, true === value ? 'true' : value);
+    };
+    var setArias = function setArias(node, data) {
+        return forEachObject(data, function (v, k) {
+            v || "" === v || 0 === v ? setAria(node, k, v) : letAria(node, k);
+        }), node;
     };
     var setAttribute = function setAttribute(node, attribute, value) {
         if (true === value) {
@@ -278,54 +324,325 @@ var application = (function () {
         }
         return node.setAttribute(attribute, _fromValue(value)), node;
     };
+    var setAttributes = function setAttributes(node, attributes) {
+        return forEachObject(attributes, function (v, k) {
+            if ('aria' === k && isObject(v)) {
+                return setArias(node, v), 1;
+            }
+            if ('class' === k) {
+                return setClasses(node, v), 1;
+            }
+            if ('data' === k && isObject(v)) {
+                return setData(node, v), 1;
+            }
+            if ('style' === k && isObject(v)) {
+                return setStyles(node, v), 1;
+            }
+            v || "" === v || 0 === v ? setAttribute(node, k, v) : letAttribute(node, k);
+        }), node;
+    };
+    var setChildLast = function setChildLast(parent, node) {
+        return parent.append(node), node;
+    };
     var setClass = function setClass(node, value) {
         return node.classList.add(value), node;
+    };
+    var setClasses = function setClasses(node, classes) {
+        if (isArray(classes)) {
+            return forEachArray(classes, function (k) {
+                return setClass(node, k);
+            }), node;
+        }
+        if (isObject(classes)) {
+            return forEachObject(classes, function (v, k) {
+                return v ? setClass(node, k) : letClass(node, k);
+            }), node;
+        }
+        return node.className = classes, node;
+    };
+    var setData = function setData(node, data) {
+        return forEachObject(data, function (v, k) {
+            v || "" === v || 0 === v ? setDatum(node, k, v) : letDatum(node, k);
+        }), node;
+    };
+    var setDatum = function setDatum(node, datum, value) {
+        if (isArray(value) || isObject(value)) {
+            value = toJSON(value);
+        }
+        return setAttribute(node, 'data-' + datum, true === value ? 'true' : value);
+    };
+    var setElement = function setElement(node, content, attributes, options) {
+        node = isString(node) ? D.createElement(node, isString(options) ? {
+            is: options
+        } : options) : node;
+        if (isArray(content) && toCount(content)) {
+            letHTML(node);
+            forEachArray(content, function (v) {
+                return setChildLast(isString(v) ? setElementText(v) : v);
+            });
+        } else if (isObject(content)) {
+            attributes = content;
+            content = false;
+        }
+        if (isString(content)) {
+            setHTML(node, content);
+        }
+        if (isObject(attributes)) {
+            return setAttributes(node, attributes), node;
+        }
+        return node;
+    };
+    var setElementText = function setElementText(text) {
+        return isString(text) ? text = D.createTextNode(text) : text, text;
+    };
+    var setHTML = function setHTML(node, content, trim) {
+        if (trim === void 0) {
+            trim = true;
+        }
+        if (null === content) {
+            return node;
+        }
+        var state = 'innerHTML';
+        return hasState(node, state) && (node[state] = trim ? content.trim() : content), node;
+    };
+    var setStyle = function setStyle(node, style, value) {
+        if (isNumber(value)) {
+            value += 'px';
+        }
+        return node.style[toCaseCamel(style)] = _fromValue(value), node;
+    };
+    var setStyles = function setStyles(node, styles) {
+        return forEachObject(styles, function (v, k) {
+            v || "" === v || 0 === v ? setStyle(node, k, v) : letStyle(node, k);
+        }), node;
     };
     var toggleClass = function toggleClass(node, name, force) {
         return node.classList.toggle(name, force), node;
     };
-    var _W$console = W.console,
-        warn = _W$console.warn;
+    var _console = console,
+        info = _console.info,
+        warn = _console.warn;
     var TOKEN_ATTRIBUTES = 'attributes';
     var TOKEN_BUTTON = 'button';
     var TOKEN_CHILD_LIST = 'childList';
-    var TOKEN_CLASS = 'class';
     var TOKEN_DISABLED = 'disabled';
+    var TOKEN_HEIGHT = 'height';
     var TOKEN_HIDDEN = 'hidden';
     var TOKEN_INPUT = 'input';
-    var TOKEN_ARIA = 'aria-';
-    var TOKEN_CLASS_HAS = 'has-';
-    var TOKEN_CLASS_NOT = 'not-';
-    var TOKEN_ARIA_DISABLED = TOKEN_ARIA + TOKEN_DISABLED;
-    var TOKEN_CLASS_ACTIVE = 'active';
+    var TOKEN_LINK = 'link';
+    var TOKEN_MAX = 'max';
+    var TOKEN_MIN = 'min';
+    var TOKEN_PLACEHOLDER = 'placeholder';
+    var TOKEN_READONLY = 'readonly';
+    var TOKEN_REQUIRED = 'required';
+    var TOKEN_SELECTED = 'selected';
+    var TOKEN_WIDTH = 'width';
+    var TOKEN_ARIA = 'aria';
+    var TOKEN_CLASS = 'class';
+    var TOKEN_DATA = 'data';
+    var TOKEN_STYLE = 'style';
+    var TOKEN_ACTIVE = 'active';
+    var TOKEN_ARE = 'are';
+    var TOKEN_AS = 'as';
+    var TOKEN_CAN = 'can';
+    var TOKEN_CONTENT = 'content';
+    var TOKEN_CURRENT = 'current';
+    var TOKEN_DESCRIPTION = 'description';
+    var TOKEN_FIX = 'fix';
+    var TOKEN_FLEX = 'flex';
+    var TOKEN_GAP = 'gap';
+    var TOKEN_HAS = 'has';
+    var TOKEN_HINT = 'hint';
+    var TOKEN_HORIZONTAL = 'horizontal';
+    var TOKEN_IS = 'is';
+    var TOKEN_KEY = 'key';
+    var TOKEN_LABEL = 'label';
+    var TOKEN_LEVEL = 'level';
+    var TOKEN_LOT = 'lot';
+    var TOKEN_MARK = 'mark';
+    var TOKEN_NOT = 'not';
+    var TOKEN_OF = 'of';
+    var TOKEN_ORIENTATION = 'orientation';
+    var TOKEN_STACK = 'stack';
+    var TOKEN_TITLE = 'title';
+    var TOKEN_VERTICAL = 'vertical';
+    var TOKEN_VITAL = 'vital';
+    var TOKEN_WITH = 'with';
+    var TOKEN_ARIA_DISABLED = TOKEN_ARIA + '-' + TOKEN_DISABLED;
+    var TOKEN_CLASS_ACTIVE = TOKEN_ACTIVE;
     var TOKEN_CLASS_ARROW = 'arrow';
     var TOKEN_CLASS_BUTTON = TOKEN_BUTTON;
     var TOKEN_CLASS_BUTTONS = TOKEN_CLASS_BUTTON + 's';
     var TOKEN_CLASS_ICON = 'icon';
     var TOKEN_CLASS_ITEM = 'item';
     var TOKEN_CLASS_ITEMS = TOKEN_CLASS_ITEM + 's';
-    var TOKEN_CLASS_LINK = 'link';
+    var TOKEN_CLASS_LINK = TOKEN_LINK;
     var TOKEN_CLASS_LINKS = TOKEN_CLASS_LINK + 's';
     var TOKEN_CLASS_SET = 'set';
-    var TOKEN_CLASS_TITLE = 'title';
+    var TOKEN_CLASS_TITLE = TOKEN_TITLE;
     var TOKEN_CLASS_BUTTON_ARROW = TOKEN_CLASS_BUTTON + '-' + TOKEN_CLASS_ARROW;
     var TOKEN_CLASS_BUTTON_ICON = TOKEN_CLASS_BUTTON + '-' + TOKEN_CLASS_ICON;
     var TOKEN_CLASS_BUTTON_SET = TOKEN_CLASS_BUTTON + '-' + TOKEN_CLASS_SET;
     var TOKEN_CLASS_BUTTON_TITLE = TOKEN_CLASS_BUTTON + '-' + TOKEN_CLASS_TITLE;
     var TOKEN_CLASS_ENTRY = 'entry';
     var TOKEN_CLASS_ENTRY_SET = TOKEN_CLASS_ENTRY + '-' + TOKEN_CLASS_SET;
-    var TOKEN_CLASS_HAS_ARROW = TOKEN_CLASS_HAS + TOKEN_CLASS_ARROW;
-    var TOKEN_CLASS_HAS_ICON = TOKEN_CLASS_HAS + TOKEN_CLASS_ICON;
-    var TOKEN_CLASS_HAS_ITEMS = TOKEN_CLASS_HAS + TOKEN_CLASS_ITEMS;
-    var TOKEN_CLASS_HAS_TITLE = TOKEN_CLASS_HAS + TOKEN_CLASS_TITLE;
+    var TOKEN_CLASS_HAS_ARROW = TOKEN_HAS + '-' + TOKEN_CLASS_ARROW;
+    var TOKEN_CLASS_HAS_ICON = TOKEN_HAS + '-' + TOKEN_CLASS_ICON;
+    var TOKEN_CLASS_HAS_ITEMS = TOKEN_HAS + '-' + TOKEN_CLASS_ITEMS;
+    var TOKEN_CLASS_HAS_TITLE = TOKEN_HAS + '-' + TOKEN_CLASS_TITLE;
     var TOKEN_CLASS_LINK_ARROW = TOKEN_CLASS_LINK + '-' + TOKEN_CLASS_ARROW;
     var TOKEN_CLASS_LINK_ICON = TOKEN_CLASS_LINK + '-' + TOKEN_CLASS_ICON;
     var TOKEN_CLASS_LINK_SET = TOKEN_CLASS_LINK + '-' + TOKEN_CLASS_SET;
     var TOKEN_CLASS_LINK_TITLE = TOKEN_CLASS_LINK + '-' + TOKEN_CLASS_TITLE;
-    var TOKEN_CLASS_NOT_ACTIVE = TOKEN_CLASS_NOT + TOKEN_CLASS_ACTIVE;
+    var TOKEN_CLASS_NOT_ACTIVE = TOKEN_NOT + '-' + TOKEN_CLASS_ACTIVE;
     var TOKEN_ROLE_GROUP = 'group';
-    var TOKEN_ROLE_LINK = 'link';
+    var TOKEN_ROLE_LINK = TOKEN_LINK;
     var TOKEN_SELECTOR_SCOPE = ':scope>';
+
+    function dataToNode(data, state) {
+        var _data$TOKEN_GAP, _ref3, _data$TOKEN_HEIGHT$2, _data$TOKEN_MARK, _ref4, _data$TOKEN_WIDTH$2, _data$TOKEN_CURRENT, _data$TOKEN_FIX, _data$TOKEN_FLEX, _data$TOKEN_VITAL, _data$TOKEN_KEY, _data$TOKEN_STACK, _data$, _data$2;
+        isObject(data[2]) || (data[2] = {});
+        forEachArray([TOKEN_ARIA, TOKEN_CLASS, TOKEN_DATA, TOKEN_STYLE], function (key) {
+            hasState(data[2], key) || (data[2][key] = {});
+        });
+        var tags = data.tags || {},
+            tones = data.tones || {};
+        if (isArray(tags)) {
+            forEachArray(tags, function (tag) {
+                data.tags[tag] = true;
+            });
+        } else if (!isObject(tags)) {
+            data.tags = {};
+        }
+        if (isArray(tones)) {
+            forEachArray(tones, function (tone) {
+                data.tones[tone] = true;
+            });
+        } else if (!isObject(tones)) {
+            data.tones = {};
+        }
+        tags = data.tags;
+        tones = data.tones;
+        var hasGap = (_data$TOKEN_GAP = data[TOKEN_GAP]) != null ? _data$TOKEN_GAP : false,
+            hasHeight = (_ref3 = (_data$TOKEN_HEIGHT$2 = data[TOKEN_HEIGHT[0]]) != null ? _data$TOKEN_HEIGHT$2 : data[TOKEN_HEIGHT]) != null ? _ref3 : 0,
+            hasMark = (_data$TOKEN_MARK = data[TOKEN_MARK]) != null ? _data$TOKEN_MARK : false,
+            hasWidth = (_ref4 = (_data$TOKEN_WIDTH$2 = data[TOKEN_WIDTH[0]]) != null ? _data$TOKEN_WIDTH$2 : data[TOKEN_WIDTH]) != null ? _ref4 : 0,
+            isActive = !hasState(data, TOKEN_ACTIVE) || data[TOKEN_ACTIVE],
+            isCurrent = (_data$TOKEN_CURRENT = data[TOKEN_CURRENT]) != null ? _data$TOKEN_CURRENT : false,
+            isFix = (_data$TOKEN_FIX = data[TOKEN_FIX]) != null ? _data$TOKEN_FIX : false,
+            isFlex = (_data$TOKEN_FLEX = data[TOKEN_FLEX]) != null ? _data$TOKEN_FLEX : false,
+            isVital = (_data$TOKEN_VITAL = data[TOKEN_VITAL]) != null ? _data$TOKEN_VITAL : false;
+        hasGap && (tags[TOKEN_HAS + '-' + TOKEN_GAP] = hasGap);
+        if (hasHeight) {
+            tags[TOKEN_HAS + '-' + TOKEN_HEIGHT] = true;
+            if (isArray(hasHeight)) {
+                var _hasHeight$, _hasHeight$2, _hasHeight$3;
+                hasHeight[0] = (_hasHeight$ = hasHeight[0]) != null ? _hasHeight$ : '0%';
+                hasHeight[1] = (_hasHeight$2 = hasHeight[1]) != null ? _hasHeight$2 : 0;
+                hasHeight[2] = (_hasHeight$3 = hasHeight[2]) != null ? _hasHeight$3 : '100%';
+                tones[TOKEN_HEIGHT] = hasHeight[1];
+                tones[TOKEN_MAX + '-' + TOKEN_HEIGHT] = hasHeight[2];
+                tones[TOKEN_MIN + '-' + TOKEN_HEIGHT] = hasHeight[0];
+            } else {
+                tones[TOKEN_HEIGHT] = hasHeight;
+            }
+        }
+        if (hasMark) {
+            data[2][TOKEN_ARIA][TOKEN_SELECTED] = true;
+            tags[TOKEN_HAS + '-' + TOKEN_MARK] = true;
+            if (isString(hasMark)) {
+                tags[TOKEN_HAS + '-' + TOKEN_MARK + '-' + hasMark] = true;
+            }
+        }
+        if (hasWidth) {
+            tags[TOKEN_HAS + '-' + TOKEN_WIDTH] = true;
+            if (isArray(hasWidth)) {
+                var _hasWidth$, _hasWidth$2, _hasWidth$3;
+                hasWidth[0] = (_hasWidth$ = hasWidth[0]) != null ? _hasWidth$ : '0%';
+                hasWidth[1] = (_hasWidth$2 = hasWidth[1]) != null ? _hasWidth$2 : 0;
+                hasWidth[2] = (_hasWidth$3 = hasWidth[2]) != null ? _hasWidth$3 : '100%';
+                tones[TOKEN_WIDTH] = hasWidth[1];
+                tones[TOKEN_MAX + '-' + TOKEN_WIDTH] = hasWidth[2];
+                tones[TOKEN_MIN + '-' + TOKEN_WIDTH] = hasWidth[0];
+            } else {
+                tones[TOKEN_WIDTH] = hasWidth;
+            }
+        }
+        if (isActive) {
+            tags[TOKEN_IS + '-' + TOKEN_ACTIVE] = true;
+        } else {
+            data[2][TOKEN_ARIA][TOKEN_DISABLED] = true;
+            tags[TOKEN_NOT + '-' + TOKEN_ACTIVE] = true;
+        }
+        if (isCurrent) {
+            data[2][TOKEN_ARIA][TOKEN_CURRENT] = true;
+            tags[TOKEN_IS + '-' + TOKEN_CURRENT] = true;
+            if (isString(isCurrent)) {
+                tags[TOKEN_IS + '-' + TOKEN_CURRENT + '-' + isCurrent] = true;
+            }
+        }
+        if (isFix) {
+            data[2][TOKEN_ARIA][TOKEN_READONLY] = true;
+            tags[TOKEN_IS + '-' + TOKEN_FIX] = true;
+        }
+        if (isFlex) {
+            data[2][TOKEN_ARIA][TOKEN_ORIENTATION] = TOKEN_HORIZONTAL;
+            tags[TOKEN_IS + '-' + TOKEN_FLEX] = true;
+        } else {
+            data[2][TOKEN_ARIA][TOKEN_ORIENTATION] = TOKEN_VERTICAL;
+        }
+        if (isVital) {
+            data[2][TOKEN_ARIA][TOKEN_REQUIRED] = true;
+            tags[TOKEN_IS + '-' + TOKEN_VITAL] = true;
+        }
+        data[2][TOKEN_DATA][TOKEN_KEY] = (_data$TOKEN_KEY = data[TOKEN_KEY]) != null ? _data$TOKEN_KEY : null;
+        data[2][TOKEN_DATA][TOKEN_STACK] = (_data$TOKEN_STACK = data[TOKEN_STACK]) != null ? _data$TOKEN_STACK : null;
+        if (data.description) {
+            data[2][TOKEN_ARIA][TOKEN_DESCRIPTION] = data[TOKEN_DESCRIPTION];
+            tags[TOKEN_HAS + '-' + TOKEN_DESCRIPTION] = true;
+        }
+        if (data.hint) {
+            data[2][TOKEN_ARIA][TOKEN_PLACEHOLDER] = data[TOKEN_HINT];
+            tags[TOKEN_HAS + '-' + TOKEN_HINT] = true;
+        }
+        if (data.id) {
+            data[2].id = data.id;
+        }
+        if (data[TOKEN_LEVEL] && isInteger(data[TOKEN_LEVEL])) {
+            data[2][TOKEN_ARIA][TOKEN_LEVEL] = data[TOKEN_LEVEL];
+        }
+        if (data[TOKEN_TITLE]) {
+            tags[TOKEN_HAS + '-' + TOKEN_TITLE] = true;
+            data[2][TOKEN_ARIA][TOKEN_LABEL] = data[TOKEN_TITLE];
+        }
+        forEachArray(['chunk', 'count', 'deep', 'part', 'sort'], function (key) {
+            if (data[key] && hasState(data[2][TOKEN_DATA], key)) {
+                data[2][TOKEN_DATA][key] = toJSON(data[key]);
+            }
+        });
+        forEachArray([TOKEN_ARE, TOKEN_AS, TOKEN_CAN, TOKEN_HAS, TOKEN_IS, TOKEN_NOT, TOKEN_OF, TOKEN_WITH], function (key) {
+            if (isArray(data[key])) {
+                forEachArray(data[key], function (k) {
+                    tags[key + '-' + k] = true;
+                });
+            } else if (isObject(data[key])) {
+                forEachObject(data[key], function (v, k) {
+                    k && v && (tags[key + '-' + k] = v);
+                });
+            }
+        });
+        data.tags = tags;
+        data.tones = tones;
+        if (hasState(data, TOKEN_CONTENT)) {
+            data[1] = toJSON(data[TOKEN_CONTENT]);
+        } else if (hasState(data, [TOKEN_LOT]) && isArray(data[TOKEN_LOT]));
+        info(data);
+        return setElement((_data$ = data[0]) != null ? _data$ : 'div', (_data$2 = data[1]) != null ? _data$2 : "", data[2] || {}, state);
+    }
+    // test
+    dataToNode({
+        content: ""
+    });
     var observed$5 = new WeakMap();
     var observer$5 = new MutationObserver(function (list, self) {
         forEachArray(list, function (v) {
@@ -880,7 +1197,7 @@ var application = (function () {
             !hasAria(link, 'haspopup') && setAria(link, 'haspopup', 'menu');
         }, true);
     }
-    var application = {};
+    var panel = {};
     Button();
     ButtonSet();
     Buttons();
@@ -888,5 +1205,5 @@ var application = (function () {
     LinkSet();
     Links();
     Menu();
-    return application;
+    return panel;
 })();

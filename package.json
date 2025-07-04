@@ -4,7 +4,7 @@
   },
   "private": true,
   "scripts": {
-    "pack": "pack --clean=false --from=.factory --js-name=application --to=."
+    "pack": "pack --clean=false --from=.factory --js-name=panel --to=."
   },
   "type": "module",
   "version": "1.0.0",
