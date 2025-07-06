@@ -433,6 +433,7 @@ var panel = (function () {
     var TOKEN_MAX = 'max';
     var TOKEN_MIN = 'min';
     var TOKEN_PLACEHOLDER = 'placeholder';
+    var TOKEN_PRESSED = 'pressed';
     var TOKEN_READONLY = 'readonly';
     var TOKEN_REQUIRED = 'required';
     var TOKEN_SELECTED = 'selected';
@@ -521,17 +522,18 @@ var panel = (function () {
         } else if (!isObject(tones)) {
             data.tones = {};
         }
-        tags = data.tags;
-        tones = data.tones;
+        tags = data.tags || {};
+        tones = data.tones || {};
         var hasGap = (_data$TOKEN_GAP = data[TOKEN_GAP]) != null ? _data$TOKEN_GAP : false,
             hasHeight = (_ref3 = (_data$TOKEN_HEIGHT$2 = data[TOKEN_HEIGHT[0]]) != null ? _data$TOKEN_HEIGHT$2 : data[TOKEN_HEIGHT]) != null ? _ref3 : 0,
             hasMark = (_data$TOKEN_MARK = data[TOKEN_MARK]) != null ? _data$TOKEN_MARK : false,
             hasWidth = (_ref4 = (_data$TOKEN_WIDTH$2 = data[TOKEN_WIDTH[0]]) != null ? _data$TOKEN_WIDTH$2 : data[TOKEN_WIDTH]) != null ? _ref4 : 0,
-            isActive = !hasState(data, TOKEN_ACTIVE) || data[TOKEN_ACTIVE],
+            isActive = data[TOKEN_ACTIVE],
             isCurrent = (_data$TOKEN_CURRENT = data[TOKEN_CURRENT]) != null ? _data$TOKEN_CURRENT : false,
             isFix = (_data$TOKEN_FIX = data[TOKEN_FIX]) != null ? _data$TOKEN_FIX : false,
             isFlex = (_data$TOKEN_FLEX = data[TOKEN_FLEX]) != null ? _data$TOKEN_FLEX : false,
-            isVital = (_data$TOKEN_VITAL = data[TOKEN_VITAL]) != null ? _data$TOKEN_VITAL : false;
+            isVital = (_data$TOKEN_VITAL = data[TOKEN_VITAL]) != null ? _data$TOKEN_VITAL : false,
+            notActive = hasState(data, TOKEN_ACTIVE) && !data[TOKEN_ACTIVE];
         hasGap && (tags[TOKEN_HAS + '-' + TOKEN_GAP] = hasGap);
         if (hasHeight) {
             tags[TOKEN_HAS + '-' + TOKEN_HEIGHT] = true;
@@ -569,8 +571,9 @@ var panel = (function () {
             }
         }
         if (isActive) {
+            data[2][TOKEN_ARIA][TOKEN_PRESSED] = true;
             tags[TOKEN_IS + '-' + TOKEN_ACTIVE] = true;
-        } else {
+        } else if (notActive) {
             data[2][TOKEN_ARIA][TOKEN_DISABLED] = true;
             tags[TOKEN_NOT + '-' + TOKEN_ACTIVE] = true;
         }
@@ -617,7 +620,7 @@ var panel = (function () {
         }
         forEachArray(['chunk', 'count', 'deep', 'part', 'sort'], function (key) {
             if (data[key] && hasState(data[2][TOKEN_DATA], key)) {
-                data[2][TOKEN_DATA][key] = toJSON(data[key]);
+                data[2][TOKEN_DATA][key] = isString(data[key]) ? data[key] : toJSON(data[key]);
             }
         });
         forEachArray([TOKEN_ARE, TOKEN_AS, TOKEN_CAN, TOKEN_HAS, TOKEN_IS, TOKEN_NOT, TOKEN_OF, TOKEN_WITH], function (key) {
@@ -634,7 +637,7 @@ var panel = (function () {
         data.tags = tags;
         data.tones = tones;
         if (hasState(data, TOKEN_CONTENT)) {
-            data[1] = toJSON(data[TOKEN_CONTENT]);
+            data[1] = isString(data[TOKEN_CONTENT]) ? data[TOKEN_CONTENT] : toJSON(data[TOKEN_CONTENT]);
         } else if (hasState(data, [TOKEN_LOT]) && isArray(data[TOKEN_LOT]));
         info(data);
         return setElement((_data$ = data[0]) != null ? _data$ : 'div', (_data$2 = data[1]) != null ? _data$2 : "", data[2] || {}, state);
@@ -645,61 +648,6 @@ var panel = (function () {
     });
     var observed$5 = new WeakMap();
     var observer$5 = new MutationObserver(function (list, self) {
-        forEachArray(list, function (v) {
-            var attributeName = v.attributeName,
-                target = v.target,
-                type = v.type;
-            if (TOKEN_ATTRIBUTES === type) {
-                if (TOKEN_CLASS === attributeName) {
-                    target[TOKEN_DISABLED] = hasClass(target, TOKEN_CLASS_NOT_ACTIVE);
-                } else if (TOKEN_DISABLED === attributeName) {
-                    toggleClass(target, TOKEN_CLASS_NOT_ACTIVE, target.disabled);
-                }
-                return 1;
-            }
-            if (TOKEN_CHILD_LIST === type) {
-                var arrow = getElement(TOKEN_SELECTOR_SCOPE + '.' + TOKEN_CLASS_BUTTON_ARROW, target),
-                    icon = getElement(TOKEN_SELECTOR_SCOPE + '.' + TOKEN_CLASS_BUTTON_ICON, target),
-                    title = getElement(TOKEN_SELECTOR_SCOPE + '.' + TOKEN_CLASS_BUTTON_TITLE, target);
-                arrow && setClass(arrow, TOKEN_CLASS_ARROW);
-                icon && setClass(icon, TOKEN_CLASS_ICON);
-                title && setClass(title, TOKEN_CLASS_TITLE);
-                toggleClass(target, TOKEN_CLASS_HAS_ARROW, !!arrow);
-                toggleClass(target, TOKEN_CLASS_HAS_ICON, !!icon);
-                toggleClass(target, TOKEN_CLASS_HAS_TITLE, !!title);
-                return 1;
-            }
-        });
-        // console.log(list);
-    });
-
-    function Button(watch, nodes) {
-        nodes = nodes || getElements('.' + TOKEN_CLASS_BUTTON);
-        if (!toCount(nodes)) {
-            return;
-        }
-        forEachArray(nodes, function (node) {
-            if (TOKEN_BUTTON === getName(node) || TOKEN_INPUT === getName(node) && hasValue(node.type, [TOKEN_BUTTON, 'image', 'reset', 'submit'])) {
-                if (node.disabled && !hasClass(node, TOKEN_CLASS_NOT_ACTIVE)) {
-                    warn('Missing `' + TOKEN_CLASS_NOT_ACTIVE + '` class at ', node);
-                } else if (hasClass(node, TOKEN_CLASS_NOT_ACTIVE) && !node.disabled) {
-                    warn('Missing `' + TOKEN_DISABLED + '` attribute at ', node);
-                }
-            } else {
-                warn('Missing `role="' + TOKEN_BUTTON + '"` attribute at ', node);
-            }
-            if (!getValueInMap(node, observed$5)) {
-                observer$5.observe(node, {
-                    attributes: true,
-                    childList: true
-                });
-                setValueInMap(node, 1, observed$5);
-            }
-        });
-        return nodes;
-    }
-    var observed$4 = new WeakMap();
-    var observer$4 = new MutationObserver(function (list, self) {
         forEachArray(list, function (v) {
             var addedNodes = v.addedNodes,
                 attributeName = v.attributeName,
@@ -753,7 +701,7 @@ var panel = (function () {
         // console.log(list);
     });
 
-    function ButtonSet(watch, nodes) {
+    function watchButtonSet(nodes) {
         nodes = nodes || getElements('.' + TOKEN_CLASS_BUTTON_SET);
         if (!toCount(nodes)) {
             return;
@@ -762,17 +710,17 @@ var panel = (function () {
             if (TOKEN_ROLE_GROUP !== getRole(node)) {
                 warn('Missing `role="' + TOKEN_ROLE_GROUP + '"` attribute at ', node);
             }
-            if (!getValueInMap(node, observed$4)) {
-                observer$4.observe(node, {
+            if (!getValueInMap(node, observed$5)) {
+                observer$5.observe(node, {
                     attributes: true,
                     childList: true
                 });
-                setValueInMap(node, 1, observed$4);
+                setValueInMap(node, 1, observed$5);
             }
         });
     }
-    var observed$3 = new WeakMap();
-    var observer$3 = new MutationObserver(function (list, self) {
+    var observed$4 = new WeakMap();
+    var observer$4 = new MutationObserver(function (list, self) {
         forEachArray(list, function (v) {
             var addedNodes = v.addedNodes,
                 attributeName = v.attributeName,
@@ -826,7 +774,7 @@ var panel = (function () {
         // console.log(list);
     });
 
-    function Buttons(watch, nodes) {
+    function watchButtons(nodes) {
         nodes = nodes || getElements('.' + TOKEN_CLASS_BUTTONS);
         if (!toCount(nodes)) {
             return;
@@ -835,37 +783,33 @@ var panel = (function () {
             if (TOKEN_ROLE_GROUP !== getRole(node)) {
                 warn('Missing `role="' + TOKEN_ROLE_GROUP + '"` attribute at ', node);
             }
-            if (!getValueInMap(node, observed$3)) {
-                observer$3.observe(node, {
+            if (!getValueInMap(node, observed$4)) {
+                observer$4.observe(node, {
                     attributes: true,
                     childList: true
                 });
-                setValueInMap(node, 1, observed$3);
+                setValueInMap(node, 1, observed$4);
             }
         });
     }
-    var observed$2 = new WeakMap();
-    var observer$2 = new MutationObserver(function (list, self) {
+    var observed$3 = new WeakMap();
+    var observer$3 = new MutationObserver(function (list, self) {
         forEachArray(list, function (v) {
             var attributeName = v.attributeName,
                 target = v.target,
                 type = v.type;
             if (TOKEN_ATTRIBUTES === type) {
                 if (TOKEN_CLASS === attributeName) {
-                    if (hasClass(target, TOKEN_CLASS_NOT_ACTIVE)) {
-                        setAria(target, TOKEN_DISABLED, true);
-                    } else {
-                        letAria(target, TOKEN_DISABLED);
-                    }
-                } else if (TOKEN_ARIA_DISABLED === attributeName) {
-                    toggleClass(target, TOKEN_CLASS_NOT_ACTIVE, getAria(target, TOKEN_DISABLED));
+                    target[TOKEN_DISABLED] = hasClass(target, TOKEN_CLASS_NOT_ACTIVE);
+                } else if (TOKEN_DISABLED === attributeName) {
+                    toggleClass(target, TOKEN_CLASS_NOT_ACTIVE, target.disabled);
                 }
                 return 1;
             }
             if (TOKEN_CHILD_LIST === type) {
-                var arrow = getElement(TOKEN_SELECTOR_SCOPE + '.' + TOKEN_CLASS_LINK_ARROW, target),
-                    icon = getElement(TOKEN_SELECTOR_SCOPE + '.' + TOKEN_CLASS_LINK_ICON, target),
-                    title = getElement(TOKEN_SELECTOR_SCOPE + '.' + TOKEN_CLASS_LINK_TITLE, target);
+                var arrow = getElement(TOKEN_SELECTOR_SCOPE + '.' + TOKEN_CLASS_BUTTON_ARROW, target),
+                    icon = getElement(TOKEN_SELECTOR_SCOPE + '.' + TOKEN_CLASS_BUTTON_ICON, target),
+                    title = getElement(TOKEN_SELECTOR_SCOPE + '.' + TOKEN_CLASS_BUTTON_TITLE, target);
                 arrow && setClass(arrow, TOKEN_CLASS_ARROW);
                 icon && setClass(icon, TOKEN_CLASS_ICON);
                 title && setClass(title, TOKEN_CLASS_TITLE);
@@ -878,33 +822,33 @@ var panel = (function () {
         // console.log(list);
     });
 
-    function Link(watch, nodes) {
-        nodes = nodes || getElements('.' + TOKEN_CLASS_LINK);
+    function watchButton(nodes) {
+        nodes = nodes || getElements('.' + TOKEN_CLASS_BUTTON);
         if (!toCount(nodes)) {
             return;
         }
         forEachArray(nodes, function (node) {
-            if ('a' === getName(node)) {
-                if (getAria(node, TOKEN_DISABLED) && !hasClass(node, TOKEN_CLASS_NOT_ACTIVE)) {
+            if (TOKEN_BUTTON === getName(node) || TOKEN_INPUT === getName(node) && hasValue(node.type, [TOKEN_BUTTON, 'image', 'reset', 'submit'])) {
+                if (node.disabled && !hasClass(node, TOKEN_CLASS_NOT_ACTIVE)) {
                     warn('Missing `' + TOKEN_CLASS_NOT_ACTIVE + '` class at ', node);
-                } else if (hasClass(node, TOKEN_CLASS_NOT_ACTIVE) && !getAria(node, TOKEN_DISABLED)) {
-                    warn('Missing `' + TOKEN_ARIA_DISABLED + '` attribute at ', node);
+                } else if (hasClass(node, TOKEN_CLASS_NOT_ACTIVE) && !node.disabled) {
+                    warn('Missing `' + TOKEN_DISABLED + '` attribute at ', node);
                 }
             } else {
-                warn('Missing `role="' + TOKEN_ROLE_LINK + '"` attribute at ', node);
+                warn('Missing `role="' + TOKEN_BUTTON + '"` attribute at ', node);
             }
-            if (!getValueInMap(node, observed$2)) {
-                observer$2.observe(node, {
+            if (!getValueInMap(node, observed$3)) {
+                observer$3.observe(node, {
                     attributes: true,
                     childList: true
                 });
-                setValueInMap(node, 1, observed$2);
+                setValueInMap(node, 1, observed$3);
             }
         });
         return nodes;
     }
-    var observed$1 = new WeakMap();
-    var observer$1 = new MutationObserver(function (list, self) {
+    var observed$2 = new WeakMap();
+    var observer$2 = new MutationObserver(function (list, self) {
         forEachArray(list, function (v) {
             var addedNodes = v.addedNodes,
                 attributeName = v.attributeName,
@@ -958,7 +902,7 @@ var panel = (function () {
         // console.log(list);
     });
 
-    function LinkSet(watch, nodes) {
+    function watchLinkSet(nodes) {
         nodes = nodes || getElements('.' + TOKEN_CLASS_LINK_SET);
         if (!toCount(nodes)) {
             return;
@@ -967,17 +911,17 @@ var panel = (function () {
             if (TOKEN_ROLE_GROUP !== getRole(node)) {
                 warn('Missing `role="' + TOKEN_ROLE_GROUP + '"` attribute at ', node);
             }
-            if (!getValueInMap(node, observed$1)) {
-                observer$1.observe(node, {
+            if (!getValueInMap(node, observed$2)) {
+                observer$2.observe(node, {
                     attributes: true,
                     childList: true
                 });
-                setValueInMap(node, 1, observed$1);
+                setValueInMap(node, 1, observed$2);
             }
         });
     }
-    var observed = new WeakMap();
-    var observer = new MutationObserver(function (list, self) {
+    var observed$1 = new WeakMap();
+    var observer$1 = new MutationObserver(function (list, self) {
         forEachArray(list, function (v) {
             var addedNodes = v.addedNodes,
                 attributeName = v.attributeName,
@@ -1031,7 +975,7 @@ var panel = (function () {
         // console.log(list);
     });
 
-    function Links(watch, nodes) {
+    function watchLinks(nodes) {
         nodes = nodes || getElements('.' + TOKEN_CLASS_LINKS);
         if (!toCount(nodes)) {
             return;
@@ -1039,6 +983,64 @@ var panel = (function () {
         forEachArray(nodes, function (node) {
             if (TOKEN_ROLE_GROUP !== getRole(node)) {
                 warn('Missing `role="' + TOKEN_ROLE_GROUP + '"` attribute at ', node);
+            }
+            if (!getValueInMap(node, observed$1)) {
+                observer$1.observe(node, {
+                    attributes: true,
+                    childList: true
+                });
+                setValueInMap(node, 1, observed$1);
+            }
+        });
+    }
+    var observed = new WeakMap();
+    var observer = new MutationObserver(function (list, self) {
+        forEachArray(list, function (v) {
+            var attributeName = v.attributeName,
+                target = v.target,
+                type = v.type;
+            if (TOKEN_ATTRIBUTES === type) {
+                if (TOKEN_CLASS === attributeName) {
+                    if (hasClass(target, TOKEN_CLASS_NOT_ACTIVE)) {
+                        setAria(target, TOKEN_DISABLED, true);
+                    } else {
+                        letAria(target, TOKEN_DISABLED);
+                    }
+                } else if (TOKEN_ARIA_DISABLED === attributeName) {
+                    toggleClass(target, TOKEN_CLASS_NOT_ACTIVE, getAria(target, TOKEN_DISABLED));
+                }
+                return 1;
+            }
+            if (TOKEN_CHILD_LIST === type) {
+                var arrow = getElement(TOKEN_SELECTOR_SCOPE + '.' + TOKEN_CLASS_LINK_ARROW, target),
+                    icon = getElement(TOKEN_SELECTOR_SCOPE + '.' + TOKEN_CLASS_LINK_ICON, target),
+                    title = getElement(TOKEN_SELECTOR_SCOPE + '.' + TOKEN_CLASS_LINK_TITLE, target);
+                arrow && setClass(arrow, TOKEN_CLASS_ARROW);
+                icon && setClass(icon, TOKEN_CLASS_ICON);
+                title && setClass(title, TOKEN_CLASS_TITLE);
+                toggleClass(target, TOKEN_CLASS_HAS_ARROW, !!arrow);
+                toggleClass(target, TOKEN_CLASS_HAS_ICON, !!icon);
+                toggleClass(target, TOKEN_CLASS_HAS_TITLE, !!title);
+                return 1;
+            }
+        });
+        // console.log(list);
+    });
+
+    function watchLink(nodes) {
+        nodes = nodes || getElements('.' + TOKEN_CLASS_LINK);
+        if (!toCount(nodes)) {
+            return;
+        }
+        forEachArray(nodes, function (node) {
+            if ('a' === getName(node)) {
+                if (getAria(node, TOKEN_DISABLED) && !hasClass(node, TOKEN_CLASS_NOT_ACTIVE)) {
+                    warn('Missing `' + TOKEN_CLASS_NOT_ACTIVE + '` class at ', node);
+                } else if (hasClass(node, TOKEN_CLASS_NOT_ACTIVE) && !getAria(node, TOKEN_DISABLED)) {
+                    warn('Missing `' + TOKEN_ARIA_DISABLED + '` attribute at ', node);
+                }
+            } else {
+                warn('Missing `role="' + TOKEN_ROLE_LINK + '"` attribute at ', node);
             }
             if (!getValueInMap(node, observed)) {
                 observer.observe(node, {
@@ -1048,6 +1050,7 @@ var panel = (function () {
                 setValueInMap(node, 1, observed);
             }
         });
+        return nodes;
     }
 
     function _toArray(iterable) {
@@ -1159,7 +1162,7 @@ var panel = (function () {
         offEvent('mouseleave', this, onMouseLeaveMenuItemToCancel);
     }
 
-    function Menu() {
+    function watchMenu(nodes) {
         onEvent('click', D, function (e) {
             var target = e.target,
                 arrow = getParent(target, '.menu-arrow');
@@ -1198,12 +1201,12 @@ var panel = (function () {
         }, true);
     }
     var panel = {};
-    Button();
-    ButtonSet();
-    Buttons();
-    Link();
-    LinkSet();
-    Links();
-    Menu();
+    watchButton();
+    watchButtonSet();
+    watchButtons();
+    watchLink();
+    watchLinkSet();
+    watchLinks();
+    watchMenu();
     return panel;
 })();

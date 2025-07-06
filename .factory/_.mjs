@@ -151,17 +151,18 @@ export function dataToNode(data, state) {
     } else if (!isObject(tones)) {
         data.tones = {};
     }
-    tags = data.tags;
-    tones = data.tones;
+    tags = data.tags || {};
+    tones = data.tones || {};
     let hasGap = data[TOKEN_GAP] ?? false,
         hasHeight = data[TOKEN_HEIGHT[0]] ?? data[TOKEN_HEIGHT] ?? 0,
         hasMark = data[TOKEN_MARK] ?? false,
         hasWidth = data[TOKEN_WIDTH[0]] ?? data[TOKEN_WIDTH] ?? 0,
-        isActive = !hasState(data, TOKEN_ACTIVE) || data[TOKEN_ACTIVE],
+        isActive = data[TOKEN_ACTIVE],
         isCurrent = data[TOKEN_CURRENT] ?? false,
         isFix = data[TOKEN_FIX] ?? false,
         isFlex = data[TOKEN_FLEX] ?? false,
-        isVital = data[TOKEN_VITAL] ?? false;
+        isVital = data[TOKEN_VITAL] ?? false,
+        notActive = hasState(data, TOKEN_ACTIVE) && !data[TOKEN_ACTIVE];
     hasGap && (tags[TOKEN_HAS + '-' + TOKEN_GAP] = hasGap);
     if (hasHeight) {
         tags[TOKEN_HAS + '-' + TOKEN_HEIGHT] = true;
@@ -197,8 +198,9 @@ export function dataToNode(data, state) {
         }
     }
     if (isActive) {
+        data[2][TOKEN_ARIA][TOKEN_PRESSED] = true;
         tags[TOKEN_IS + '-' + TOKEN_ACTIVE] = true;
-    } else {
+    } else if (notActive) {
         data[2][TOKEN_ARIA][TOKEN_DISABLED] = true;
         tags[TOKEN_NOT + '-' + TOKEN_ACTIVE] = true;
     }
@@ -245,7 +247,7 @@ export function dataToNode(data, state) {
     }
     forEachArray(['chunk', 'count', 'deep', 'part', 'sort'], key => {
         if (data[key] && hasState(data[2][TOKEN_DATA], key)) {
-            data[2][TOKEN_DATA][key] = toJSON(data[key]);
+            data[2][TOKEN_DATA][key] = isString(data[key]) ? data[key] : toJSON(data[key]);
         }
     });
     forEachArray([TOKEN_ARE, TOKEN_AS, TOKEN_CAN, TOKEN_HAS, TOKEN_IS, TOKEN_NOT, TOKEN_OF, TOKEN_WITH], key => {
@@ -262,7 +264,7 @@ export function dataToNode(data, state) {
     data.tags = tags;
     data.tones = tones;
     if (hasState(data, TOKEN_CONTENT)) {
-        data[1] = toJSON(data[TOKEN_CONTENT]);
+        data[1] = isString(data[TOKEN_CONTENT]) ? data[TOKEN_CONTENT] : toJSON(data[TOKEN_CONTENT]);
     } else if (hasState(data, [TOKEN_LOT]) && isArray(data[TOKEN_LOT])) {
         // TODO
     }

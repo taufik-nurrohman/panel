@@ -65,7 +65,7 @@ const observer = new MutationObserver(function (list, self) {
     // console.log(list);
 });
 
-export default function (watch, nodes) {
+export function watchButtonSet(nodes) {
     nodes = nodes || getElements('.' + TOKEN_CLASS_BUTTON_SET);
     if (!toCount(nodes)) {
         return;
@@ -74,7 +74,7 @@ export default function (watch, nodes) {
         if (TOKEN_ROLE_GROUP !== getRole(node)) {
             warn('Missing `role="' + TOKEN_ROLE_GROUP + '"` attribute at ', node);
         }
-        if (watch && !getValueInMap(node, observed)) {
+        if (!getValueInMap(node, observed)) {
             observer.observe(node, {
                 attributes: true,
                 childList: true
@@ -82,4 +82,4 @@ export default function (watch, nodes) {
             setValueInMap(node, 1, observed);
         }
     });
-};
+}

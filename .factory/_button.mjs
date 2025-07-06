@@ -53,7 +53,7 @@ const observer = new MutationObserver(function (list, self) {
     // console.log(list);
 });
 
-export default function (watch, nodes) {
+export function watchButton(nodes) {
     nodes = nodes || getElements('.' + TOKEN_CLASS_BUTTON);
     if (!toCount(nodes)) {
         return;
@@ -68,7 +68,7 @@ export default function (watch, nodes) {
         } else {
             warn('Missing `role="' + TOKEN_BUTTON + '"` attribute at ', node);
         }
-        if (watch && !getValueInMap(node, observed)) {
+        if (!getValueInMap(node, observed)) {
             observer.observe(node, {
                 attributes: true,
                 childList: true
@@ -77,4 +77,4 @@ export default function (watch, nodes) {
         }
     });
     return nodes;
-};
+}

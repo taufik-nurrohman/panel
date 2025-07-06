@@ -133,6 +133,10 @@ a:not([href]) {
   cursor: not-allowed;
 }
 
+:focus {
+  outline: 1px solid #000;
+}
+
 :where(address,
   article,
   aside,

@@ -73,7 +73,7 @@ function onMouseLeaveMenuItemToCancel() {
     offEvent('mouseleave', this, onMouseLeaveMenuItemToCancel);
 }
 
-export default function () {
+export function watchMenu(nodes) {
     onEvent('click', D, e => {
         let {target} = e,
             arrow = getParent(target, '.menu-arrow');
@@ -110,4 +110,4 @@ export default function () {
         !hasAria(link, 'expanded') && setAria(link, 'expanded', false);
         !hasAria(link, 'haspopup') && setAria(link, 'haspopup', 'menu');
     }, true);
-};
+}
