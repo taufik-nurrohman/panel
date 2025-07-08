@@ -1,0 +1,13 @@
+extends ../_test.pug
+
+block style
+  title List
+
+block content
+  div.list.has-items
+    ul.list-items
+      li.list-item List Item 1
+      li.list-item List Item 2
+      li.list-item List Item 3
+      li.list-item List Item 4
+      li.list-item.not-active(aria-disabled='true') List Item 5

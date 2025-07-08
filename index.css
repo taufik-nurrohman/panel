@@ -26,6 +26,8 @@
 .title,
 .bar,
 .columns,
+.list,
+.list-items,
 .row,
 .block__icon,
 .fields,
@@ -58,6 +60,8 @@
 
 .bar,
 .columns,
+.list,
+.list-items,
 .row,
 .block__icon,
 .fields,
@@ -135,6 +139,7 @@ a:not([href]) {
 
 :focus {
   outline: 1px solid #000;
+  outline-offset: -2px;
 }
 
 :where(address,
@@ -330,6 +335,37 @@ button {
 
 .has-gap {
   padding: 24px;
+}
+
+.list {
+  align-items: stretch;
+  flex-direction: column;
+  gap: 6px;
+  position: relative;
+}
+.list-item {
+  background: #fff;
+  border: 1px solid #000;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  padding: 2px 8px;
+  position: relative;
+}
+.list-item.not-active {
+  background: rgb(229.5, 229.5, 229.5);
+  border-color: rgb(127.5, 127.5, 127.5);
+  box-shadow: none;
+  color: rgb(76.5, 76.5, 76.5);
+}
+.list-items {
+  align-items: stretch;
+  flex-direction: column;
+  gap: 6px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .row {
