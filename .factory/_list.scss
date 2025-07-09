@@ -10,10 +10,25 @@
   position: relative;
 }
 
+@mixin list-bar {
+  border: 1px solid transparent;
+  padding: 0 0 0 8px;
+  > .list-description {
+    display: none;
+  }
+  > .list-title {
+    display: flex;
+    flex: 1;
+    font-weight: bold;
+  }
+  > .list-tools {
+    margin: 0;
+  }
+}
+
 @mixin list-item {
   background: #fff;
   border: 1px solid #000;
-  box-shadow: 0 1px 2px rgb(0 0 0 / 0.5);
   list-style: none;
   margin: 0;
   padding: 0;
@@ -21,8 +36,6 @@
   position: relative;
   &.not-active {
     background: color.mix(#000, #fff, 10%);
-    border-color: color.mix(#000, #fff, 50%);
-    box-shadow: none;
     color: color.mix(#000, #fff, 70%);
   }
 }
@@ -30,9 +43,28 @@
 @mixin list-items {
   @extend %flex-block;
   align-items: stretch;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.5);
   flex-direction: column;
-  gap: 6px;
   list-style: none;
   margin: 0;
   padding: 0;
+  &.has-gap {
+    box-shadow: none;
+    gap: 6px;
+    > .list-item {
+      box-shadow: 0 1px 2px rgb(0 0 0 / 0.5);
+      &:not(:first-child) {
+        margin-top: 0;
+      }
+      &.not-active {
+        border-color: color.mix(#000, #fff, 50%);
+        box-shadow: none;
+      }
+    }
+  }
+  > .list-item {
+    &:not(:first-child) {
+      margin-top: -1px;
+    }
+  }
 }

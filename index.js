@@ -108,6 +108,38 @@ var panel = (function () {
     var hasValue = function hasValue(x, data) {
         return -1 !== data.indexOf(x);
     };
+    var _fromStates = function fromStates() {
+        for (var _len = arguments.length, lot = new Array(_len), _key = 0; _key < _len; _key++) {
+            lot[_key] = arguments[_key];
+        }
+        var out = lot.shift();
+        for (var i = 0, j = toCount(lot); i < j; ++i) {
+            for (var k in lot[i]) {
+                // Assign value
+                if (!isSet(out[k])) {
+                    out[k] = lot[i][k];
+                    continue;
+                }
+                // Merge array
+                if (isArray(out[k]) && isArray(lot[i][k])) {
+                    out[k] = [ /* Clone! */ ].concat(out[k]);
+                    for (var ii = 0, jj = toCount(lot[i][k]); ii < jj; ++ii) {
+                        if (!hasValue(lot[i][k][ii], out[k])) {
+                            out[k].push(lot[i][k][ii]);
+                        }
+                    }
+                    // Merge object recursive
+                } else if (isObject(out[k]) && isObject(lot[i][k])) {
+                    out[k] = _fromStates({
+                        /* Clone! */ }, out[k], lot[i][k]);
+                    // Replace value
+                } else {
+                    out[k] = lot[i][k];
+                }
+            }
+        }
+        return out;
+    };
     var _fromValue = function fromValue(x) {
         if (isArray(x)) {
             return x.map(function (v) {
@@ -216,12 +248,38 @@ var panel = (function () {
         }
         return object;
     };
+    var getPrototype = function getPrototype(of) {
+        return of.prototype;
+    };
+    var getReference = function getReference(key) {
+        return getValueInMap(key, references) || null;
+    };
     var getValueInMap = function getValueInMap(k, map) {
         return map.get(k);
+    };
+    var setObjectAttributes = function setObjectAttributes(of, attributes, asStaticAttributes) {
+        if (!asStaticAttributes) {
+            of = getPrototype(of);
+        }
+        return forEachObject(attributes, function (v, k) {
+            Object.defineProperty(of, k, v);
+        }), of;
+    };
+    var setObjectMethods = function setObjectMethods(of, methods, asStaticMethods) {
+        {
+            of = getPrototype(of);
+        }
+        return forEachObject(methods, function (v, k) {
+            of [k] = v;
+        }), of;
+    };
+    var setReference = function setReference(key, value) {
+        return setValueInMap(key, value, references);
     };
     var setValueInMap = function setValueInMap(k, v, map) {
         return map.set(k, v);
     };
+    var references = new WeakMap();
 
     function _toArray$1(iterable) {
         return Array.from(iterable);
@@ -419,6 +477,58 @@ var panel = (function () {
     var toggleClass = function toggleClass(node, name, force) {
         return node.classList.toggle(name, force), node;
     };
+
+    function hook($, $$) {
+        $$ = $$ || $;
+        $$.fire = function (event, data, that) {
+            var $ = this,
+                hooks = $.hooks;
+            if (!isSet(hooks[event])) {
+                return $;
+            }
+            return forEachArray(hooks[event], function (v) {
+                v.apply(that || $, data);
+            }), $;
+        };
+        $$.off = function (event, task) {
+            var $ = this,
+                hooks = $.hooks;
+            if (!isSet(event)) {
+                return hooks = {}, $;
+            }
+            if (isSet(hooks[event])) {
+                if (isSet(task)) {
+                    var j = toCount(hooks[event]);
+                    // Clean-up empty hook(s)
+                    if (0 === j) {
+                        delete hooks[event];
+                    } else {
+                        for (var i = 0; i < j; ++i) {
+                            if (task === hooks[event][i]) {
+                                hooks[event].splice(i, 1);
+                                break;
+                            }
+                        }
+                    }
+                } else {
+                    delete hooks[event];
+                }
+            }
+            return $;
+        };
+        $$.on = function (event, task) {
+            var $ = this,
+                hooks = $.hooks;
+            if (!isSet(hooks[event])) {
+                hooks[event] = [];
+            }
+            if (isSet(task)) {
+                hooks[event].push(task);
+            }
+            return $;
+        };
+        return $.hooks = {}, $;
+    }
     var _console = console,
         info = _console.info,
         warn = _console.warn;
@@ -1200,7 +1310,148 @@ var panel = (function () {
             !hasAria(link, 'haspopup') && setAria(link, 'haspopup', 'menu');
         }, true);
     }
-    var panel = {};
+
+    function Panel(self, state) {
+        var $ = this;
+        if (!self) {
+            return $;
+        }
+        // Return new instance if `Panel` was called without the `new` operator
+        if (!isInstance($, Panel)) {
+            return new Panel(self, state);
+        }
+        setReference(self, hook($, Panel._));
+        return $.attach(self, _fromStates({}, Panel.state, state || {}));
+    }
+
+    function PanelAlert(of) {
+        var $ = this;
+        // Return new instance if `PanelAlert` was called without the `new` operator
+        if (!isInstance($, PanelAlert)) {
+            return new PanelAlert(of);
+        }
+        $.of = of;
+        return $;
+    }
+
+    function PanelAsset(of) {
+        var $ = this;
+        // Return new instance if `PanelAsset` was called without the `new` operator
+        if (!isInstance($, PanelAsset)) {
+            return new PanelAsset(of);
+        }
+        $.of = of;
+        return $;
+    }
+
+    function PanelIcon(of) {
+        var $ = this;
+        // Return new instance if `PanelIcon` was called without the `new` operator
+        if (!isInstance($, PanelIcon)) {
+            return new PanelIcon(of);
+        }
+        $.of = of;
+        return $;
+    }
+
+    function PanelLayout(of) {
+        var $ = this;
+        // Return new instance if `PanelLayout` was called without the `new` operator
+        if (!isInstance($, PanelLayout)) {
+            return new PanelLayout(of);
+        }
+        $.of = of;
+        return $;
+    }
+
+    function PanelType(panel) {
+        var $ = this;
+        // Return new instance if `PanelType` was called without the `new` operator
+        if (!isInstance($, PanelType)) {
+            return new PanelType(of);
+        }
+        $.of = of;
+        return $;
+    }
+    Panel.from = function (self, state) {
+        return new Panel(self, state);
+    };
+    Panel.of = getReference;
+    Panel.state = {
+        0: null,
+        1: "",
+        2: {},
+        are: {},
+        as: {},
+        author: null,
+        base: null,
+        can: {},
+        chunk: 20,
+        content: null,
+        count: 0,
+        deep: 0,
+        description: null,
+        has: {},
+        hash: null,
+        is: {},
+        kick: null,
+        lot: {},
+        not: {},
+        of: {},
+        part: 0,
+        path: null,
+        query: null,
+        sort: [1, 'path'],
+        status: 404,
+        task: null,
+        title: null,
+        token: null,
+        with: {},
+        x: null
+    };
+    Panel.version = '1.0.0';
+    setObjectAttributes(Panel, {
+        name: {
+            value: 'Panel'
+        }
+    }, 1);
+    setObjectAttributes(Panel, {
+        alert: {
+            get: function get() {
+                return new PanelAlert(this);
+            },
+            set: function set() {}
+        },
+        asset: {
+            get: function get() {
+                return new PanelAsset(this);
+            },
+            set: function set() {}
+        },
+        icon: {
+            get: function get() {
+                return new PanelIcon(this);
+            },
+            set: function set() {}
+        },
+        layout: {
+            get: function get() {
+                return new PanelLayout(this);
+            },
+            set: function set() {}
+        },
+        type: {
+            get: function get() {
+                return new PanelType();
+            },
+            set: function set() {}
+        }
+    });
+    Panel._ = setObjectMethods(Panel, {
+        attach: function attach() {},
+        detach: function detach() {}
+    });
+    var panel = new Panel(D.body);
     watchButton();
     watchButtonSet();
     watchButtons();

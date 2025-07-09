@@ -1,0 +1,36 @@
+extends ../_test.pug
+
+block style
+  title List with Description, Items, Title, and Tools
+
+block content
+  div.has-items.has-title.has-tools.list
+    header.bar.list-bar
+      h3.list-title.title List Title
+      p.has-items.list-tools.tools
+        a.has-icon.list-tool.tool(href='#link')
+          svg.icon.list-icon(height='24' viewBox='0 0 24 24' width='24')
+            path(d='M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z')
+        a.has-icon.list-tool.tool(href='#link')
+          svg.icon.list-icon(height='24' viewBox='0 0 24 24' width='24')
+            path(d='m18 21l-4-4h3V7h-3l4-4l4 4h-3v10h3M2 19v-2h10v2M2 13v-2h7v2M2 7V5h4v2z')
+      p.list-description.description List description.
+    ul.list-items
+      li.list-item List Item 1
+      li.list-item List Item 2
+      li.list-item List Item 3
+  div.has-items.has-title.has-tools.list
+    header.bar.list-bar
+      h3.list-title.title List Title
+      p.has-items.list-tools.tools
+        a.has-icon.list-tool.tool(href='#link')
+          svg.icon.list-icon(height='24' viewBox='0 0 24 24' width='24')
+            path(d='M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z')
+        a.has-icon.list-tool.tool(href='#link')
+          svg.icon.list-icon(height='24' viewBox='0 0 24 24' width='24')
+            path(d='m18 21l-4-4h3V7h-3l4-4l4 4h-3v10h3M2 19v-2h10v2M2 13v-2h7v2M2 7V5h4v2z')
+      p.list-description.description List description.
+    ul.list-items
+      li.list-item List Item 1
+      li.list-item List Item 2
+      li.list-item List Item 3

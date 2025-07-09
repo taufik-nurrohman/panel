@@ -1,9 +1,10 @@
 extends ../_test.pug
 
 block style
-  title List
+  title List with Items
 
 block content
+  p: button(onclick='this.parentNode.nextElementSibling.firstElementChild.classList.toggle(\'has-gap\');') Toggle Gap
   div.list.has-items
     ul.list-items
       li.list-item List Item 1

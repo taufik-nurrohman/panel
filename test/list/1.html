@@ -4,9 +4,10 @@
     <meta charset="utf-8">
     <meta content="width=device-width" name="viewport">
     <link href="../../index.min.css?v=1.0.0" rel="stylesheet">
-    <title>List</title>
+    <title>List with Items</title>
   </head>
   <body class="has-gap" role="application">
+    <p><button onclick="this.parentNode.nextElementSibling.firstElementChild.classList.toggle('has-gap');">Toggle Gap</button></p>
     <div class="list has-items">
       <ul class="list-items">
         <li class="list-item">List Item 1</li>

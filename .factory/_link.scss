@@ -26,6 +26,7 @@
   &:focus,
   &:hover {
     color: color.mix(#00f, #fff, 85%);
+    outline: 0;
     z-index: 10;
     > .arrow {
       opacity: 0.45;

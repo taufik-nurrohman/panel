@@ -208,10 +208,16 @@ button {
   &-gap {
     padding: 24px;
   }
+  &-stroke {
+    border: 1px solid;
+  }
 }
 
 .list {
   @include list;
+  &-bar {
+    @include list-bar;
+  }
   &-item {
     @include list-item;
   }
@@ -238,12 +244,6 @@ button {
         margin-top: 12px;
       }
     }
-  }
-}
-
-.has {
-  &-stroke {
-    border: 1px solid;
   }
 }
 
@@ -585,6 +585,12 @@ button {
   &-hint {
     color: color.mix(#000, #fff, 50%);
   }
+}
+
+.tools {
+  @extend %flex-block;
+  align-items: center;
+  gap: 4px;
 }
 
 .zone {
