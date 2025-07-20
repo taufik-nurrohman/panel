@@ -8,25 +8,9 @@
   cursor: pointer;
   gap: 4px;
   position: relative;
-  vertical-align: middle;
-  &-arrow {
-    @extend %flex-block;
-    margin: 0 4px;
-    &:first-child {
-      margin-left: 0;
-    }
-    &:last-child {
-      margin-right: 0;
-    }
-  }
-  &-title {
-    @extend %flex-block;
-    flex: 1;
-  }
   &:focus,
   &:hover {
-    color: color.mix(#00f, #fff, 85%);
-    outline: 0;
+    color: color.mix(#00f, #fff, 80%);
     z-index: 10;
     > .arrow {
       opacity: 0.45;
@@ -34,10 +18,25 @@
   }
   &.is-active,
   &:active {
-    color: color.mix(#00f, #000, 85%);
+    color: color.mix(#00f, #000, 90%);
     z-index: 10;
     > .arrow {
       opacity: 0.65;
     }
   }
+}
+
+@mixin link-arrow {
+  @extend %flex-block;
+  margin: 0 4px;
+  &:first-child {
+    margin-left: 0;
+  }
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+@mixin link-title {
+  @extend %flex-block;
 }

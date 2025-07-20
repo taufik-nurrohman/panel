@@ -1,0 +1,42 @@
+@use 'sass:color';
+
+@use './_.scss' as *;
+
+@mixin title {
+  @extend %flex;
+  color: inherit;
+  flex: 1;
+  font: inherit;
+  gap: 4px;
+}
+
+@mixin title-arrow {
+  @extend %flex-block;
+  margin: 0 4px;
+  &::after {
+    border: 0 solid transparent;
+    border: {
+      top-color: inherit;
+      width: 5px 4px 0;
+    }
+    content: "";
+  }
+  &:first-child {
+    margin-left: 0;
+  }
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+@mixin title-content {
+  flex: 1;
+  margin: {
+    bottom: 0;
+    top: 0;
+  }
+}
+
+@mixin title-hint {
+  color: color.mix(#000, #fff, 50%);
+}

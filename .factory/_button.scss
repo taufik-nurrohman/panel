@@ -4,17 +4,14 @@
 
 @mixin button {
   @extend %flex;
-  align-items: stretch;
   background: color.mix(#00f, #fff, 75%);
   border: 1px solid #000;
-  box-shadow: 0 1px 2px rgb(0 0 0 / 0.5);
   color: #fff;
   cursor: pointer;
   gap: 4px;
   min-height: 30px;
   padding: 2px 8px;
   position: relative;
-  vertical-align: middle;
   &-arrow {
     @extend %flex-block;
     margin: 0 4px;
@@ -44,13 +41,12 @@
   }
   &.is-active,
   &:active {
-    background: color.mix(#00f, #fff, 95%);
+    background: color.mix(#00f, #fff, 85%);
     z-index: 10;
   }
   &.not-active {
     background: color.mix(#00f, #fff, 50%);
     border-color: color.mix(#000, #fff, 80%);
-    box-shadow: none;
   }
   &:disabled {
     @extend :disabled;

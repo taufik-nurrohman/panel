@@ -4,11 +4,12 @@ block style
   title List with Items
 
 block content
-  p: button(onclick='this.parentNode.nextElementSibling.firstElementChild.classList.toggle(\'has-gap\');') Toggle Gap
-  div.list.has-items
-    ul.list-items
-      li.list-item List Item 1
-      li.list-item List Item 2
-      li.list-item List Item 3
-      li.list-item List Item 4
-      li.list-item.not-active(aria-disabled='true') List Item 5
+  p
+    button.button.is-active(aria-pressed='true' onclick='this.classList.toggle(\'is-active\');this.parentNode.nextElementSibling.firstElementChild.classList.toggle(\'has-gap\');this.setAttribute(\'aria-pressed\',this.classList.contains(\'is-active\'));' type='button') Gap
+  .list.has-items
+    ul.items.list-items(tabindex='-1')
+      li.item.list-item(tabindex='0') List Item 1
+      li.item.list-item(tabindex='-1') List Item 2
+      li.item.list-item(tabindex='-1') List Item 3
+      li.item.list-item(tabindex='-1') List Item 4
+      li.item.list-item.not-active(aria-disabled='true') List Item 5

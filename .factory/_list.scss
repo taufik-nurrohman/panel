@@ -4,67 +4,82 @@
 
 @mixin list {
   @extend %flex-block;
-  align-items: stretch;
-  flex-direction: column;
   gap: 6px;
   position: relative;
 }
 
 @mixin list-bar {
   border: 1px solid transparent;
-  padding: 0 0 0 8px;
-  > .list-description {
-    display: none;
-  }
-  > .list-title {
-    display: flex;
-    flex: 1;
-    font-weight: bold;
-  }
-  > .list-tools {
-    margin: 0;
-  }
+}
+
+@mixin list-description {
+  display: none;
 }
 
 @mixin list-item {
   background: #fff;
   border: 1px solid #000;
-  list-style: none;
-  margin: 0;
-  padding: 0;
   padding: 2px 8px;
-  position: relative;
+  &:hover {
+    background: color.mix(#00f, #fff, 5%);
+  }
+  &:focus,
+  &:focus-within {
+    background: color.mix(#00f, #fff, 10%);
+  }
+  &:active {
+    background: color.mix(#00f, #fff, 15%);
+  }
+  &.has-mark {
+    // TODO
+  }
   &.not-active {
-    background: color.mix(#000, #fff, 10%);
-    color: color.mix(#000, #fff, 70%);
+    background: #fff;
+    color: color.mix(#000, #fff, 60%);
   }
 }
 
 @mixin list-items {
-  @extend %flex-block;
-  align-items: stretch;
-  box-shadow: 0 1px 2px rgb(0 0 0 / 0.5);
-  flex-direction: column;
-  list-style: none;
-  margin: 0;
-  padding: 0;
   &.has-gap {
-    box-shadow: none;
     gap: 6px;
     > .list-item {
-      box-shadow: 0 1px 2px rgb(0 0 0 / 0.5);
+      &.not-active {
+        border-color: color.mix(#000, #fff, 50%);
+      }
       &:not(:first-child) {
         margin-top: 0;
       }
-      &.not-active {
-        border-color: color.mix(#000, #fff, 50%);
-        box-shadow: none;
+    }
+  }
+  &:where(:not(.has-gap)) {
+    &:focus,
+    &:focus-within {
+      @extend %focus;
+      > .list-item {
+        &:focus {
+          outline: 0;
+        }
       }
     }
   }
   > .list-item {
-    &:not(:first-child) {
+    &:focus {
+      @extend %focus;
+    }
+    &:where(:not(:first-child)) {
       margin-top: -1px;
     }
+    > .item-icon {
+      margin-left: -4px;
+    }
   }
+}
+
+@mixin list-title {
+  @extend %flex-block;
+  font-weight: bold;
+}
+
+@mixin list-tools {
+  margin: 0;
 }

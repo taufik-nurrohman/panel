@@ -2,6 +2,7 @@
 
 @use './_.scss' as *;
 @use './_arrow.scss' as *;
+@use './_bar.scss' as *;
 @use './_button-set.scss' as *;
 @use './_button.scss' as *;
 @use './_buttons.scss' as *;
@@ -11,11 +12,15 @@
 @use './_entry-set.scss' as *;
 @use './_entry.scss' as *;
 @use './_icon.scss' as *;
+@use './_item.scss' as *;
+@use './_items.scss' as *;
 @use './_link-set.scss' as *;
 @use './_link.scss' as *;
 @use './_links.scss' as *;
 @use './_list.scss' as *;
 @use './_title.scss' as *;
+@use './_tool.scss' as *;
+@use './_tools.scss' as *;
 
 *,
 ::after,
@@ -58,9 +63,8 @@
   cursor: not-allowed;
 }
 
-:focus {
-  outline: 1px solid #000;
-  outline-offset: -2px;
+:focus-visible {
+  @extend %focus;
 }
 
 :where(
@@ -144,10 +148,10 @@ a {
   cursor: pointer;
   &:focus,
   &:hover {
-    color: color.mix(#00f, #fff, 85%);
+    color: color.mix(#00f, #fff, 80%);
   }
   &:active {
-    color: color.mix(#00f, #000, 85%);
+    color: color.mix(#00f, #000, 90%);
   }
   &:not([href]) {
     @extend :disabled;
@@ -173,13 +177,10 @@ button {
 }
 
 .bar {
-  @extend %flex-block;
-  border: 0 solid;
-  border: {
-    color: inherit;
+  @include bar;
+  &-icon {
+    @include bar-icon;
   }
-  gap: 4px;
-  padding: 4px 10px;
 }
 
 .column {
@@ -213,16 +214,32 @@ button {
   }
 }
 
+.item {
+  @include item;
+  &s {
+    @include items;
+  }
+}
+
 .list {
   @include list;
   &-bar {
     @include list-bar;
   }
+  &-description {
+    @include list-description;
+  }
   &-item {
     @include list-item;
+    &s {
+      @include list-items;
+    }
   }
-  &-items {
-    @include list-items;
+  &-title {
+    @include list-title;
+  }
+  &-tools {
+    @include list-tools;
   }
 }
 
@@ -272,7 +289,6 @@ button {
     @extend %flex-block;
   }
   &__title {
-    @extend %title;
     cursor: move;
     flex: 1;
     padding: 0 6px;
@@ -312,7 +328,6 @@ button {
 .field__bar {}
 
 .field__title {
-  @extend %entry;
   border: 1px solid transparent;
   padding: {
     left: 0;
@@ -334,7 +349,6 @@ button {
 }
 
 .form__entry {
-  @extend %entry;
   flex: 1;
   padding: {
     left: 8px;
@@ -343,7 +357,6 @@ button {
 }
 
 .field__icon {
-  @extend %entry;
   border-right: 1px solid;
   .icon {
     display: block;
@@ -354,7 +367,6 @@ button {
   @extend %flex-block;
 }
 .field__task {
-  @extend %entry, %flex-block;
   border-left: 1px solid;
   cursor: pointer;
   user-select: none;
@@ -373,10 +385,9 @@ button {
   &-set {
     @include button-set;
   }
-}
-
-.buttons {
-  @include buttons;
+  &s {
+    @include buttons;
+  }
 }
 
 .description {
@@ -400,20 +411,24 @@ button {
 
 .link {
   @include link;
+  &-arrow {
+    @include link-arrow;
+  }
   &-set {
     @include link-set;
   }
-}
-
-.links {
-  @include links;
+  &-title {
+    @include link-title;
+  }
+  &s {
+    @include links;
+  }
 }
 
 .menu {
   @extend %flex;
   background: #fff;
   border: 1px solid #000;
-  box-shadow: 0 1px 2px rgb(0 0 0 / 0.25);
   color: #000;
   cursor: default;
   &-arrow {
@@ -551,52 +566,31 @@ button {
 }
 
 .title {
-  @extend %flex;
-  color: inherit;
-  flex-wrap: nowrap;
-  font: inherit;
-  gap: 4px;
-  vertical-align: middle;
+  @include title;
   &-arrow {
-    @extend %flex-block;
-    margin: 0 4px;
-    &::after {
-      border: 0 solid transparent;
-      border: {
-        top-color: inherit;
-        width: 5px 4px 0;
-      }
-      content: "";
-    }
-    &:first-child {
-      margin-left: 0;
-    }
-    &:last-child {
-      margin-right: 0;
-    }
+    @include title-arrow;
   }
   &-content {
-    flex: 1;
-    margin: {
-      bottom: 0;
-      top: 0;
-    }
-  }
-  &-hint {
-    color: color.mix(#000, #fff, 50%);
+    @include title-content;
   }
 }
 
-.tools {
-  @extend %flex-block;
-  align-items: center;
-  gap: 4px;
+.tool {
+  @include tool;
+  &-set {
+    @include tool-set;
+  }
+  &s {
+    @include tools;
+    &-set {
+      @include tools-set;
+    }
+  }
 }
 
 .zone {
   background: #fff;
   border: 1px solid #000;
-  box-shadow: 0 1px 2px rgb(0 0 0 / 0.25);
   &-bar {
     background: color.mix(#00f, #fff, 12.5%);
   }

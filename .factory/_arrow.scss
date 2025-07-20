@@ -2,6 +2,8 @@
 
 @mixin arrow {
   @extend %flex-block;
+  align-items: center;
+  flex-direction: row;
   &::after {
     border: 0 solid transparent;
     border: {

@@ -2,6 +2,10 @@
 
 @mixin links {
   @extend %flex-block;
+  flex: {
+    direction: row;
+    wrap: wrap;
+  }
   gap: 12px;
   justify-content: inherit;
   &.to-center {

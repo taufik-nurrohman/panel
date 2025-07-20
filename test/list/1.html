@@ -7,14 +7,14 @@
     <title>List with Items</title>
   </head>
   <body class="has-gap" role="application">
-    <p><button onclick="this.parentNode.nextElementSibling.firstElementChild.classList.toggle('has-gap');">Toggle Gap</button></p>
+    <p><button class="button is-active" aria-pressed="true" onclick="this.classList.toggle('is-active');this.parentNode.nextElementSibling.firstElementChild.classList.toggle('has-gap');this.setAttribute('aria-pressed',this.classList.contains('is-active'));" type="button">Gap</button></p>
     <div class="list has-items">
-      <ul class="list-items">
-        <li class="list-item">List Item 1</li>
-        <li class="list-item">List Item 2</li>
-        <li class="list-item">List Item 3</li>
-        <li class="list-item">List Item 4</li>
-        <li class="list-item not-active" aria-disabled="true">List Item 5</li>
+      <ul class="items list-items" tabindex="-1">
+        <li class="item list-item" tabindex="0">List Item 1</li>
+        <li class="item list-item" tabindex="-1">List Item 2</li>
+        <li class="item list-item" tabindex="-1">List Item 3</li>
+        <li class="item list-item" tabindex="-1">List Item 4</li>
+        <li class="item list-item not-active" aria-disabled="true">List Item 5</li>
       </ul>
     </div>
     <script src="../../index.min.js?v=1.0.0"></script>

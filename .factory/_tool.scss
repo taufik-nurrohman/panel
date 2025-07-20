@@ -1,0 +1,8 @@
+@use './_.scss' as *;
+@use './_item.scss' as *;
+
+@mixin tool {
+  @include item;
+}
+
+@mixin tool-set {}

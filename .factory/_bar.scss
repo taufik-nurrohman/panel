@@ -1,0 +1,14 @@
+@use './_item.scss' as *;
+
+@mixin bar {
+  @include item;
+  border: 0 solid;
+  border: {
+    color: inherit;
+  }
+  padding: 2px 8px;
+}
+
+@mixin bar-icon {
+  margin-left: -4px;
+}

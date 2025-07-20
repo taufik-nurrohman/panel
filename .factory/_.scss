@@ -4,23 +4,25 @@
   flex: 1;
 }
 
-%entry {
-  padding: 3px;
-}
-
 %flex {
-  align-items: center;
+  align-items: stretch;
   display: inline-flex;
   flex: {
     direction: row;
     wrap: wrap;
   }
+  vertical-align: middle;
 }
 
 %flex-block {
   @extend %flex;
   display: flex;
+  flex: {
+    direction: column;
+    wrap: nowrap;
+  }
 }
 
-%title {
+%focus {
+  outline: 1px solid #000;
 }
