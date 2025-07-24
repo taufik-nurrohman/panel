@@ -1,0 +1,29 @@
+html(dir='ltr')
+  head
+    meta(charset='utf-8')
+    meta(content='width=device-width' name='viewport')
+    link(href='../'.repeat(file.to.split('/').length - 2) + 'index.min.css?v=%(version)' rel='stylesheet')
+    title Panel
+  body.has-gap(role='application')
+    .has-gap.rows
+      .row
+        .columns
+          .column.fill-2
+            .has-list.has-title.zone
+              .bar.zone-bar
+                h3.title.zone-title Links
+              .has-items.list
+                ul.items.list-items
+                  li.has-link.item.list-item
+                    a.link.list-link(href='#') Component 1
+                  li.has-link.item.list-item
+                    a.link.list-link(href='#') Component 2
+                  li.has-link.item.list-item
+                    a.link.list-link(href='#') Component 3
+          .column.fill-10
+            .has-content.has-title.zone
+              .bar.zone-bar
+                h1.title.zone-title Component
+              .content.zone-content
+                p Lorem ipsum dolor sit amet.
+    script(src='../'.repeat(file.to.split('/').length - 2) + 'index.min.js?v=%(version)')

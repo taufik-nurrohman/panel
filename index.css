@@ -286,57 +286,59 @@ button {
 
 .column {
   flex: 1;
+  margin: 0;
 }
 .column.fill-1 {
-  flex-basis: calc(8.3333333333% * 1 - 24px);
-  max-width: calc(8.3333333333% * 1 - 24px);
+  flex-basis: calc(8.3333333333% * 1);
+  max-width: calc(8.3333333333% * 1);
 }
 .column.fill-2 {
-  flex-basis: calc(8.3333333333% * 2 - 24px);
-  max-width: calc(8.3333333333% * 2 - 24px);
+  flex-basis: calc(8.3333333333% * 2);
+  max-width: calc(8.3333333333% * 2);
 }
 .column.fill-3 {
-  flex-basis: calc(8.3333333333% * 3 - 24px);
-  max-width: calc(8.3333333333% * 3 - 24px);
+  flex-basis: calc(8.3333333333% * 3);
+  max-width: calc(8.3333333333% * 3);
 }
 .column.fill-4 {
-  flex-basis: calc(8.3333333333% * 4 - 24px);
-  max-width: calc(8.3333333333% * 4 - 24px);
+  flex-basis: calc(8.3333333333% * 4);
+  max-width: calc(8.3333333333% * 4);
 }
 .column.fill-5 {
-  flex-basis: calc(8.3333333333% * 5 - 24px);
-  max-width: calc(8.3333333333% * 5 - 24px);
+  flex-basis: calc(8.3333333333% * 5);
+  max-width: calc(8.3333333333% * 5);
 }
 .column.fill-6 {
-  flex-basis: calc(8.3333333333% * 6 - 24px);
-  max-width: calc(8.3333333333% * 6 - 24px);
+  flex-basis: calc(8.3333333333% * 6);
+  max-width: calc(8.3333333333% * 6);
 }
 .column.fill-7 {
-  flex-basis: calc(8.3333333333% * 7 - 24px);
-  max-width: calc(8.3333333333% * 7 - 24px);
+  flex-basis: calc(8.3333333333% * 7);
+  max-width: calc(8.3333333333% * 7);
 }
 .column.fill-8 {
-  flex-basis: calc(8.3333333333% * 8 - 24px);
-  max-width: calc(8.3333333333% * 8 - 24px);
+  flex-basis: calc(8.3333333333% * 8);
+  max-width: calc(8.3333333333% * 8);
 }
 .column.fill-9 {
-  flex-basis: calc(8.3333333333% * 9 - 24px);
-  max-width: calc(8.3333333333% * 9 - 24px);
+  flex-basis: calc(8.3333333333% * 9);
+  max-width: calc(8.3333333333% * 9);
 }
 .column.fill-10 {
-  flex-basis: calc(8.3333333333% * 10 - 24px);
-  max-width: calc(8.3333333333% * 10 - 24px);
+  flex-basis: calc(8.3333333333% * 10);
+  max-width: calc(8.3333333333% * 10);
 }
 .column.fill-11 {
-  flex-basis: calc(8.3333333333% * 11 - 24px);
-  max-width: calc(8.3333333333% * 11 - 24px);
+  flex-basis: calc(8.3333333333% * 11);
+  max-width: calc(8.3333333333% * 11);
 }
 .column.fill-12 {
-  flex-basis: calc(8.3333333333% * 12 - 24px);
-  max-width: calc(8.3333333333% * 12 - 24px);
+  flex-basis: calc(8.3333333333% * 12);
+  max-width: calc(8.3333333333% * 12);
 }
 
 .columns {
+  flex-direction: row;
   flex: 1;
 }
 
@@ -431,6 +433,54 @@ button {
 }
 .rows.has-gap > .row > .columns > .column {
   margin: 12px;
+}
+.rows.has-gap > .row > .columns > .column.fill-1 {
+  flex-basis: calc(8.3333333333% * 1 - 24px);
+  max-width: calc(8.3333333333% * 1 - 24px);
+}
+.rows.has-gap > .row > .columns > .column.fill-2 {
+  flex-basis: calc(8.3333333333% * 2 - 24px);
+  max-width: calc(8.3333333333% * 2 - 24px);
+}
+.rows.has-gap > .row > .columns > .column.fill-3 {
+  flex-basis: calc(8.3333333333% * 3 - 24px);
+  max-width: calc(8.3333333333% * 3 - 24px);
+}
+.rows.has-gap > .row > .columns > .column.fill-4 {
+  flex-basis: calc(8.3333333333% * 4 - 24px);
+  max-width: calc(8.3333333333% * 4 - 24px);
+}
+.rows.has-gap > .row > .columns > .column.fill-5 {
+  flex-basis: calc(8.3333333333% * 5 - 24px);
+  max-width: calc(8.3333333333% * 5 - 24px);
+}
+.rows.has-gap > .row > .columns > .column.fill-6 {
+  flex-basis: calc(8.3333333333% * 6 - 24px);
+  max-width: calc(8.3333333333% * 6 - 24px);
+}
+.rows.has-gap > .row > .columns > .column.fill-7 {
+  flex-basis: calc(8.3333333333% * 7 - 24px);
+  max-width: calc(8.3333333333% * 7 - 24px);
+}
+.rows.has-gap > .row > .columns > .column.fill-8 {
+  flex-basis: calc(8.3333333333% * 8 - 24px);
+  max-width: calc(8.3333333333% * 8 - 24px);
+}
+.rows.has-gap > .row > .columns > .column.fill-9 {
+  flex-basis: calc(8.3333333333% * 9 - 24px);
+  max-width: calc(8.3333333333% * 9 - 24px);
+}
+.rows.has-gap > .row > .columns > .column.fill-10 {
+  flex-basis: calc(8.3333333333% * 10 - 24px);
+  max-width: calc(8.3333333333% * 10 - 24px);
+}
+.rows.has-gap > .row > .columns > .column.fill-11 {
+  flex-basis: calc(8.3333333333% * 11 - 24px);
+  max-width: calc(8.3333333333% * 11 - 24px);
+}
+.rows.has-gap > .row > .columns > .column.fill-12 {
+  flex-basis: calc(8.3333333333% * 12 - 24px);
+  max-width: calc(8.3333333333% * 12 - 24px);
 }
 .rows.has-gap > .row + .row {
   margin-top: 12px;
@@ -541,7 +591,7 @@ button {
 }
 
 .button {
-  background: rgb(63.75, 63.75, 255);
+  background: rgb(63.75, 63.75, 63.75);
   border: 1px solid #000;
   color: #fff;
   cursor: pointer;
@@ -570,16 +620,16 @@ button {
 }
 .button:focus,
 .button:hover {
-  background: #3333ff;
+  background: #333333;
   z-index: 10;
 }
 .button.is-active,
 .button:active {
-  background: rgb(38.25, 38.25, 255);
+  background: rgb(25.5, 25.5, 25.5);
   z-index: 10;
 }
 .button.not-active {
-  background: rgb(127.5, 127.5, 255);
+  background: rgb(127.5, 127.5, 127.5);
   border-color: #333333;
 }
 .button-set {
@@ -891,15 +941,21 @@ button {
   gap: 4px;
 }
 .zone {
-  background: #fff;
-  border: 1px solid #000;
+  position: relative;
+}
+.zone > :where(:not(:first-child)) {
+  margin-top: -1px;
 }
 .zone-bar {
-  background: rgb(223.125, 223.125, 255);
+  background: rgb(229.5, 229.5, 255);
+  border: 1px solid #000;
+  margin: 0;
 }
 .zone-content {
+  background: #fff;
+  border: 1px solid #000;
   margin: 0;
-  padding: 20px 24px;
+  padding: 24px;
 }
 .zone-description {
   flex: 0 0 100%;
@@ -908,26 +964,12 @@ button {
 .zone-icon {
   margin-left: -6px;
 }
-.zone-title {
-  flex: 1;
-}
-.zone.has-content .zone-bar {
-  border-bottom-width: 1px;
-}
-.zone + .zone {
-  margin-top: 24px;
-}
-
-.zones {
-  flex-direction: column;
-}
 .zones.has-gap {
   gap: 24px;
-  padding: 0;
 }
-.zones.has-gap > .zone:not(:first-child) {
+.zones.has-gap > :where(:not(:first-child)) {
   margin-top: 0;
 }
-.zones > .zone:not(:first-child) {
+.zones > :where(:not(:first-child)) {
   margin-top: -1px;
 }

@@ -21,6 +21,8 @@
 @use './_title.scss' as *;
 @use './_tool.scss' as *;
 @use './_tools.scss' as *;
+@use './_zone.scss' as *;
+@use './_zones.scss' as *;
 
 *,
 ::after,
@@ -185,16 +187,18 @@ button {
 
 .column {
   flex: 1;
+  margin: 0;
   @for $i from 1 through 12 {
     &.fill-#{$i} {
-      flex-basis: calc(100% / 12 * #{$i} - 24px);
-      max-width: calc(100% / 12 * #{$i} - 24px);
+      flex-basis: calc(100% / 12 * #{$i});
+      max-width: calc(100% / 12 * #{$i});
     }
   }
 }
 
 .columns {
   @extend %flex-block;
+  flex-direction: row;
   flex: 1;
 }
 
@@ -255,6 +259,12 @@ button {
       > .columns {
         > .column {
           margin: 12px;
+          @for $i from 1 through 12 {
+            &.fill-#{$i} {
+              flex-basis: calc(100% / 12 * #{$i} - 24px);
+              max-width: calc(100% / 12 * #{$i} - 24px);
+            }
+          }
         }
       }
       + .row {
@@ -589,53 +599,23 @@ button {
 }
 
 .zone {
-  background: #fff;
-  border: 1px solid #000;
+  @include zone;
   &-bar {
-    background: color.mix(#00f, #fff, 12.5%);
+    @include zone-bar;
   }
   &-content {
-    margin: 0;
-    padding: 20px 24px;
+    @include zone-content;
   }
   &-description {
-    flex: 0 0 100%;
-    font-size: 14px;
+    @include zone-description;
   }
   &-icon {
-    margin-left: -6px;
+    @include zone-icon;
   }
   &-title {
-    @extend %flex-block;
-    flex: 1;
+    @include zone-title;
   }
-  &.has-content {
-    .zone-bar {
-      border: {
-        bottom-width: 1px;
-      }
-    }
-  }
-  + .zone {
-    margin-top: 24px;
-  }
-}
-
-.zones {
-  @extend %flex-block;
-  flex-direction: column;
-  &.has-gap {
-    gap: 24px;
-    padding: 0;
-    > .zone {
-      &:not(:first-child) {
-        margin-top: 0;
-      }
-    }
-  }
-  > .zone {
-    &:not(:first-child) {
-      margin-top: -1px;
-    }
+  &s {
+    @include zones;
   }
 }

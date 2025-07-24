@@ -1,0 +1,36 @@
+@use 'sass:color';
+
+@use './_.scss' as *;
+
+@mixin zone {
+  position: relative;
+  > :where(:not(:first-child)) {
+    margin-top: -1px;
+  }
+}
+
+@mixin zone-bar {
+  background: color.mix(#00f, #fff, 10%);
+  border: 1px solid #000;
+  margin: 0;
+}
+
+@mixin zone-content {
+  background: #fff;
+  border: 1px solid #000;
+  margin: 0;
+  padding: 24px;
+}
+
+@mixin zone-description {
+  flex: 0 0 100%;
+  font-size: 14px;
+}
+
+@mixin zone-icon {
+  margin-left: -6px;
+}
+
+@mixin zone-title {
+  @extend %flex-block;
+}

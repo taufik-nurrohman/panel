@@ -4,7 +4,7 @@
 
 @mixin button {
   @extend %flex;
-  background: color.mix(#00f, #fff, 75%);
+  background: color.mix(#000, #fff, 75%);
   border: 1px solid #000;
   color: #fff;
   cursor: pointer;
@@ -36,16 +36,16 @@
   }
   &:focus,
   &:hover {
-    background: color.mix(#00f, #fff, 80%);
+    background: color.mix(#000, #fff, 80%);
     z-index: 10;
   }
   &.is-active,
   &:active {
-    background: color.mix(#00f, #fff, 85%);
+    background: color.mix(#000, #fff, 90%);
     z-index: 10;
   }
   &.not-active {
-    background: color.mix(#00f, #fff, 50%);
+    background: color.mix(#000, #fff, 50%);
     border-color: color.mix(#000, #fff, 80%);
   }
   &:disabled {
