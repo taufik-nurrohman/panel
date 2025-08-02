@@ -4,6 +4,7 @@
   @extend %flex-block;
   &.has-gap {
     gap: 24px;
+    padding: 0;
     > :where(:not(:first-child)) {
       margin-top: 0;
     }
