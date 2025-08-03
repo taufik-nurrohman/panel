@@ -4,7 +4,7 @@
 
 @mixin list {
   @extend %flex-block;
-  gap: 6px;
+  gap: 0.375rem;
   position: relative;
 }
 
@@ -19,7 +19,7 @@
 @mixin list-item {
   background: #fff;
   border: 1px solid #000;
-  padding: 2px 8px;
+  padding: 0.125rem 0.5rem;
   &:hover {
     background: color.mix(#00f, #fff, 5%);
   }
@@ -41,7 +41,7 @@
 
 @mixin list-items {
   &.has-gap {
-    gap: 6px;
+    gap: 0.375rem;
     > .list-item {
       &.not-active {
         border-color: color.mix(#000, #fff, 50%);
@@ -70,7 +70,7 @@
       margin-top: -1px;
     }
     > .item-icon {
-      margin-left: -4px;
+      margin-left: -0.25rem;
     }
   }
 }

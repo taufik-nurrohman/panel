@@ -28,7 +28,7 @@
 
 @mixin link-arrow {
   @extend %flex-block;
-  margin: 0 4px;
+  margin: 0 0.25rem;
   &:first-child {
     margin-left: 0;
   }

@@ -3,9 +3,13 @@
 @mixin item {
   @extend %flex-block;
   flex-direction: row;
-  gap: 4px;
+  gap: 0.25rem;
   list-style: none;
   margin: 0;
   padding: 0;
   position: relative;
+}
+
+@mixin item-link {
+  font: inherit;
 }

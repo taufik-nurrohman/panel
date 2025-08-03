@@ -18,7 +18,7 @@
     cursor: pointer;
   }
   &:where(textarea) {
-    min-height: 78px;
+    min-height: 4.875rem;
     resize: vertical;
   }
   &:focus,

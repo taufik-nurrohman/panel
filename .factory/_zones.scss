@@ -3,7 +3,7 @@
 @mixin zones {
   @extend %flex-block;
   &.has-gap {
-    gap: 24px;
+    gap: 1.5rem;
     padding: 0;
     > :where(:not(:first-child)) {
       margin-top: 0;
