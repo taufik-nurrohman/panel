@@ -31,7 +31,9 @@
                   <h1 class="title zone-title">Component</h1>
                 </div>
                 <div class="content zone-content">
-                  <p>Lorem ipsum dolor sit amet.</p>
+                  <h3 id="motivation"><a href="#motivation">#</a> Motivation</h3>
+                  <p><a href="https://mecha-cms.com" target="_blank">Mecha</a> has long used a panel feature with a very minimalist appearance. At the time, the goal was simply to simplify data entry for users and, of course, to simplify maintenance of the existing panel features. Over time, the need for new features arose, such as the ability to sort the list. This would enable me to create extensions for managing navigation links. Another example is to have a file picker button next to a text input to browse files. However, the minimalist design of the current panel prevented me from enhancing its features without breaking the existing ones.</p>
+                  <p>I want to create a CSS library with a class system similar to <a href="https://getbootstrap.com" rel="nofollow" target="_blank">Bootstrap</a>&rsquo;s, but with as few class helpers as possible to avoid resembling <a href="https://tailwindcss.com" rel="nofollow" target="_blank">Tailwind CSS</a>. It has to have all the features of Bootstrap and other features so that it can be compared to the <a href="https://developer.gnome.org/hig" rel="nofollow" target="_blank">GNOME</a> or <a href="https://develop.kde.org/hig" rel="nofollow" target="_blank">KDE</a> desktop environment, but for the web.</p>
                 </div>
               </div>
               <div class="has-content has-title zone">
@@ -76,9 +78,9 @@
                   <hr>
                   <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
                   <blockquote>
-                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh <a rel="nofollow" target="_blank" href="https://example.com" title="Example Link">euismod</a> tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh<a rel="nofollow" target="_blank" href="https://example.com" title="Example Link">euismod</a> tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>
                   </blockquote>
-                  <p>Lorem <strong>bold</strong> ipsum dolor <em>italic</em> sit amet, consectetuer <code>code</code> adipiscing <a href="#">link</a> elit, sed diam nonummy nibh euismod <mark>mark</mark> tincidunt ut laoreet <kbd>kbd</kbd> dolore magna aliquam erat volutpat. Ut wisi <del>del</del> enim <ins>ins</ins> ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>
+                  <p>Lorem<strong>bold</strong> ipsum dolor<em>italic</em> sit amet, consectetuer<code>code</code> adipiscing<a href="#">link</a> elit, sed diam nonummy nibh euismod<mark>mark</mark> tincidunt ut laoreet<kbd>kbd</kbd> dolore magna aliquam erat volutpat. Ut wisi<del>del</del> enim<ins>ins</ins> ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</p>
                   <pre><code>function dog() {
     return 'bark!';
 }</code></pre>
@@ -93,7 +95,7 @@
                     <li>List Item 3</li>
                     <li>List Item 4</li>
                   </ul>
-                  <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat <sup id="from:1.1"><a href="#to:1" role="doc-noteref">1</a></sup></p>
+                  <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat<sup id="from:1.1"><a href="#to:1" role="doc-noteref">1</a></sup></p>
                   <p><video controls>
                       <source src="/lot/asset/video.mp4" type="video/mp4">
                       <source src="/lot/asset/video.webm" type="video/webm">Sorry, your browser does not support embedded videos.
@@ -139,16 +141,16 @@
                     <p role="alert">An alert message.</p>
                     <fieldset>
                       <legend>Test Legend</legend>
-                      <p>text <button>Button</button> <input type="button" value="Input Button"> <span role="button">Span</span> <a href="" role="button">Anchor</a> text</p>
-                      <p>text <input type="text"><input type="color"><label><input type="checkbox"><span>Check Box</span></label><label><input type="radio"><span>Radio</span></label> text</p>
-                      <p>text <select>
+                      <p>text<button>Button</button><input type="button" value="Input Button"><span role="button">Span</span><a href="" role="button">Anchor</a> text</p>
+                      <p>text<input type="text"><input type="color"><label><input type="checkbox"><span>Check Box</span></label><label><input type="radio"><span>Radio</span></label> text</p>
+                      <p>text<select>
                           <option>Red</option>
                           <option>Green</option>
                           <option>Blue</option>
                         </select> text</p>
-                      <p>text <input type="range"> text</p>
-                      <p>text <textarea> </textarea> text</p>
-                      <p>text <input type="file"> text</p>
+                      <p>text<input type="range"> text</p>
+                      <p>text<textarea></textarea> text</p>
+                      <p>text<input type="file"> text</p>
                     </fieldset>
                   </form>
                   <details>
@@ -167,7 +169,7 @@
                     <hr>
                     <ol>
                       <li id="to:1" role="doc-endnote">
-                        <p>Example <em>footnote</em> value. <a href="#from:1.1" role="doc-backlink">↩</a></p>
+                        <p>Example<em>footnote</em> value.<a href="#from:1.1" role="doc-backlink">↩</a></p>
                       </li>
                     </ol>
                   </div>
