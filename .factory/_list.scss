@@ -21,22 +21,15 @@
   border: 1px solid #000;
   padding: 0.125rem 0.5rem;
   &.has-link {
-    > .link {
-      &:only-child {
-        flex: 1;
-        margin: -0.125rem -0.5rem;
-        padding: inherit;
-        &:hover {
-          background: color.mix(#00f, #fff, 5%);
-        }
-        &:focus,
-        &:focus-within {
-          background: color.mix(#00f, #fff, 10%);
-        }
-        &:active {
-          background: color.mix(#00f, #fff, 15%);
-        }
-      }
+    &:hover {
+      background: color.mix(#00f, #fff, 5%);
+    }
+    &:focus,
+    &:focus-within {
+      background: color.mix(#00f, #fff, 10%);
+    }
+    &:active {
+      background: color.mix(#00f, #fff, 15%);
     }
   }
   &.has-mark {

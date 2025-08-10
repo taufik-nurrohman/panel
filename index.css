@@ -513,19 +513,14 @@ ul {
   border: 1px solid #000;
   padding: 0.125rem 0.5rem;
 }
-.list-item.has-link > .link:only-child {
-  flex: 1;
-  margin: -0.125rem -0.5rem;
-  padding: inherit;
-}
-.list-item.has-link > .link:only-child:hover {
+.list-item.has-link:hover {
   background: rgb(242.25, 242.25, 255);
 }
-.list-item.has-link > .link:only-child:focus,
-.list-item.has-link > .link:only-child:focus-within {
+.list-item.has-link:focus,
+.list-item.has-link:focus-within {
   background: rgb(229.5, 229.5, 255);
 }
-.list-item.has-link > .link:only-child:active {
+.list-item.has-link:active {
   background: rgb(216.75, 216.75, 255);
 }
 .list-item.not-active {
