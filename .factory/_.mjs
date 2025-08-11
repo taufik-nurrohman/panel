@@ -5,6 +5,38 @@ import {toCount, toJSON, toSetCount} from '@taufik-nurrohman/to';
 
 export const {info, log, warn} = console;
 
+export const EVENT_CLICK = 'click';
+export const EVENT_DOWN = 'down';
+export const EVENT_END = 'end';
+export const EVENT_KEY = 'key';
+export const EVENT_MOUSE = 'mouse';
+export const EVENT_RESIZE = 'resize';
+export const EVENT_SCROLL = 'scroll';
+export const EVENT_START = 'start';
+export const EVENT_TOUCH = 'touch';
+export const EVENT_UP = 'up';
+
+export const EVENT_KEY_DOWN = EVENT_KEY + EVENT_DOWN;
+export const EVENT_KEY_UP = EVENT_KEY + EVENT_UP;
+export const EVENT_MOUSE_DOWN = EVENT_MOUSE + EVENT_DOWN;
+export const EVENT_MOUSE_UP = EVENT_MOUSE + EVENT_UP;
+export const EVENT_TOUCH_END = EVENT_TOUCH + EVENT_END;
+export const EVENT_TOUCH_START = EVENT_TOUCH + EVENT_START;
+
+export const KEY_ARROW = 'Arrow';
+export const KEY_DOWN = 'Down';
+export const KEY_ENTER = 'Enter';
+export const KEY_ESCAPE = 'Escape';
+export const KEY_LEFT = 'Left';
+export const KEY_RIGHT = 'Right';
+export const KEY_SPACE = ' ';
+export const KEY_UP = 'Up';
+
+export const KEY_ARROW_DOWN = KEY_ARROW + KEY_DOWN;
+export const KEY_ARROW_LEFT = KEY_ARROW + KEY_LEFT;
+export const KEY_ARROW_RIGHT = KEY_ARROW + KEY_RIGHT;
+export const KEY_ARROW_UP = KEY_ARROW + KEY_UP;
+
 export const TOKEN_ATTRIBUTES = 'attributes';
 export const TOKEN_BUTTON = 'button';
 export const TOKEN_CHILD_LIST = 'childList';
@@ -81,19 +113,26 @@ export const TOKEN_CLASS_ITEMS = TOKEN_CLASS_ITEM + 's';
 export const TOKEN_CLASS_LINK = TOKEN_LINK;
 export const TOKEN_CLASS_LINKS = TOKEN_CLASS_LINK + 's';
 export const TOKEN_CLASS_LOT = TOKEN_LOT;
+export const TOKEN_CLASS_MARK = TOKEN_MARK;
 export const TOKEN_CLASS_SET = 'set';
 export const TOKEN_CLASS_TITLE = TOKEN_TITLE;
+
+export const TOKEN_CLASS_LIST = 'list';
+export const TOKEN_CLASS_LIST_ITEM = TOKEN_CLASS_LIST + '-' + TOKEN_CLASS_ITEM;
+export const TOKEN_CLASS_LIST_ITEMS = TOKEN_CLASS_LIST_ITEM + 's';
 
 export const TOKEN_CLASS_BUTTON_ARROW = TOKEN_CLASS_BUTTON + '-' + TOKEN_CLASS_ARROW;
 export const TOKEN_CLASS_BUTTON_ICON = TOKEN_CLASS_BUTTON + '-' + TOKEN_CLASS_ICON;
 export const TOKEN_CLASS_BUTTON_SET = TOKEN_CLASS_BUTTON + '-' + TOKEN_CLASS_SET;
 export const TOKEN_CLASS_BUTTON_TITLE = TOKEN_CLASS_BUTTON + '-' + TOKEN_CLASS_TITLE;
+export const TOKEN_CLASS_CAN_MARK = TOKEN_CAN + '-' + TOKEN_CLASS_MARK;
 export const TOKEN_CLASS_ENTRY = 'entry';
 export const TOKEN_CLASS_ENTRY_SET = TOKEN_CLASS_ENTRY + '-' + TOKEN_CLASS_SET;
 export const TOKEN_CLASS_HAS_ARROW = TOKEN_HAS + '-' + TOKEN_CLASS_ARROW;
 export const TOKEN_CLASS_HAS_ICON = TOKEN_HAS + '-' + TOKEN_CLASS_ICON;
 export const TOKEN_CLASS_HAS_ITEMS = TOKEN_HAS + '-' + TOKEN_CLASS_ITEMS;
 export const TOKEN_CLASS_HAS_LINK = TOKEN_HAS + '-' + TOKEN_CLASS_LINK;
+export const TOKEN_CLASS_HAS_MARK = TOKEN_HAS + '-' + TOKEN_CLASS_MARK;
 export const TOKEN_CLASS_HAS_TITLE = TOKEN_HAS + '-' + TOKEN_CLASS_TITLE;
 export const TOKEN_CLASS_IS_ACTIVE = TOKEN_IS + '-' + TOKEN_CLASS_ACTIVE;
 export const TOKEN_CLASS_LINK_ARROW = TOKEN_CLASS_LINK + '-' + TOKEN_CLASS_ARROW;

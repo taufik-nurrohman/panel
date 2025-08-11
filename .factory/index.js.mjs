@@ -10,6 +10,7 @@ import {watchButton} from './_button.mjs';
 import {watchLinkSet} from './_link-set.mjs';
 import {watchLinks} from './_links.mjs';
 import {watchLink} from './_link.mjs';
+import {watchList} from './_list.mjs';
 import {watchMenu} from './_menu.mjs';
 
 function Panel(self, state) {
@@ -168,6 +169,7 @@ watchButtons();
 watchLink();
 watchLinkSet();
 watchLinks();
+watchList();
 watchMenu();
 
 export default panel;

@@ -30,11 +30,10 @@
 }
 
 @mixin title-content {
+  background: none;
+  border: 0;
   flex: 1;
-  margin: {
-    bottom: 0;
-    top: 0;
-  }
+  padding: 0;
 }
 
 @mixin title-hint {

@@ -4,10 +4,10 @@ html(dir='ltr')
     meta(content='width=device-width' name='viewport')
     link(href='../'.repeat(file.to.split('/').length - 2) + 'index.min.css?v=%(version)' rel='stylesheet')
     title Panel
-  body.has-gap(role='application')
+  body.has-pad(role='application')
     .has-gap.rows
       .row
-        .columns
+        .columns.has-gap
           .column.fill-2
             .has-list.has-title.zone
               .bar.zone-bar

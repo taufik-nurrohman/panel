@@ -4,33 +4,19 @@
 
 @mixin zone {
   position: relative;
-  > :where(:not(:first-child)) {
+  &:focus {
+    z-index: 10;
+  }
+  > :not(:first-child) {
     margin-top: -1px;
   }
 }
 
 @mixin zone-bar {
   background: color.mix(#00f, #fff, 10%);
-  border: 1px solid #000;
-  margin: 0;
-}
-
-@mixin zone-content {
-  background: #fff;
-  border: 1px solid #000;
-  margin: 0;
-  padding: 1.5rem;
 }
 
 @mixin zone-description {
   flex: 0 0 100%;
   font-size: 0.875rem;
-}
-
-@mixin zone-icon {
-  margin-left: -0.375rem;
-}
-
-@mixin zone-title {
-  @extend %flex-block;
 }

@@ -319,11 +319,17 @@ var panel = (function () {
     var getName = function getName(node) {
         return toCaseLower(node && node.nodeName || "") || null;
     };
+    var getNext = function getNext(node, anyNode) {
+        return node['next' + (anyNode ? "" : 'Element') + 'Sibling'] || null;
+    };
     var getParent = function getParent(node, query) {
         if (query) {
             return node.closest(query) || null;
         }
         return node.parentNode || null;
+    };
+    var getPrev = function getPrev(node, anyNode) {
+        return node['previous' + (anyNode ? "" : 'Element') + 'Sibling'] || null;
     };
     var getRole = function getRole(node) {
         return getAttribute(node, 'role');
@@ -531,7 +537,20 @@ var panel = (function () {
     }
     var _console = console,
         info = _console.info,
+        log = _console.log,
         warn = _console.warn;
+    var EVENT_CLICK = 'click';
+    var EVENT_DOWN = 'down';
+    var EVENT_KEY = 'key';
+    var EVENT_UP = 'up';
+    var EVENT_KEY_DOWN = EVENT_KEY + EVENT_DOWN;
+    var EVENT_KEY_UP = EVENT_KEY + EVENT_UP;
+    var KEY_ARROW = 'Arrow';
+    var KEY_DOWN = 'Down';
+    var KEY_SPACE = ' ';
+    var KEY_UP = 'Up';
+    var KEY_ARROW_DOWN = KEY_ARROW + KEY_DOWN;
+    var KEY_ARROW_UP = KEY_ARROW + KEY_UP;
     var TOKEN_ATTRIBUTES = 'attributes';
     var TOKEN_BUTTON = 'button';
     var TOKEN_CHILD_LIST = 'childList';
@@ -547,6 +566,7 @@ var panel = (function () {
     var TOKEN_READONLY = 'readonly';
     var TOKEN_REQUIRED = 'required';
     var TOKEN_SELECTED = 'selected';
+    var TOKEN_TABINDEX = 'tabindex';
     var TOKEN_WIDTH = 'width';
     var TOKEN_ARIA = 'aria';
     var TOKEN_CLASS = 'class';
@@ -589,17 +609,23 @@ var panel = (function () {
     var TOKEN_CLASS_ITEMS = TOKEN_CLASS_ITEM + 's';
     var TOKEN_CLASS_LINK = TOKEN_LINK;
     var TOKEN_CLASS_LINKS = TOKEN_CLASS_LINK + 's';
+    var TOKEN_CLASS_MARK = TOKEN_MARK;
     var TOKEN_CLASS_SET = 'set';
     var TOKEN_CLASS_TITLE = TOKEN_TITLE;
+    var TOKEN_CLASS_LIST = 'list';
+    var TOKEN_CLASS_LIST_ITEM = TOKEN_CLASS_LIST + '-' + TOKEN_CLASS_ITEM;
+    var TOKEN_CLASS_LIST_ITEMS = TOKEN_CLASS_LIST_ITEM + 's';
     var TOKEN_CLASS_BUTTON_ARROW = TOKEN_CLASS_BUTTON + '-' + TOKEN_CLASS_ARROW;
     var TOKEN_CLASS_BUTTON_ICON = TOKEN_CLASS_BUTTON + '-' + TOKEN_CLASS_ICON;
     var TOKEN_CLASS_BUTTON_SET = TOKEN_CLASS_BUTTON + '-' + TOKEN_CLASS_SET;
     var TOKEN_CLASS_BUTTON_TITLE = TOKEN_CLASS_BUTTON + '-' + TOKEN_CLASS_TITLE;
+    var TOKEN_CLASS_CAN_MARK = TOKEN_CAN + '-' + TOKEN_CLASS_MARK;
     var TOKEN_CLASS_ENTRY = 'entry';
     var TOKEN_CLASS_ENTRY_SET = TOKEN_CLASS_ENTRY + '-' + TOKEN_CLASS_SET;
     var TOKEN_CLASS_HAS_ARROW = TOKEN_HAS + '-' + TOKEN_CLASS_ARROW;
     var TOKEN_CLASS_HAS_ICON = TOKEN_HAS + '-' + TOKEN_CLASS_ICON;
     var TOKEN_CLASS_HAS_ITEMS = TOKEN_HAS + '-' + TOKEN_CLASS_ITEMS;
+    var TOKEN_CLASS_HAS_MARK = TOKEN_HAS + '-' + TOKEN_CLASS_MARK;
     var TOKEN_CLASS_HAS_TITLE = TOKEN_HAS + '-' + TOKEN_CLASS_TITLE;
     var TOKEN_CLASS_LINK_ARROW = TOKEN_CLASS_LINK + '-' + TOKEN_CLASS_ARROW;
     var TOKEN_CLASS_LINK_ICON = TOKEN_CLASS_LINK + '-' + TOKEN_CLASS_ICON;
@@ -1162,6 +1188,115 @@ var panel = (function () {
         });
         return nodes;
     }
+    var event = function event(name, options, cache) {
+        return new Event(name, options);
+    };
+    var fireEvent = function fireEvent(name, node, options, cache) {
+        node.dispatchEvent(event(name, options));
+    };
+    var offEvent = function offEvent(name, node, then) {
+        node.removeEventListener(name, then);
+    };
+    var offEventDefault = function offEventDefault(e) {
+        return e && e.preventDefault();
+    };
+    var onEvent = function onEvent(name, node, then, options) {
+        if (options === void 0) {
+            options = false;
+        }
+        node.addEventListener(name, then, options);
+    };
+    var keyIsCtrl;
+
+    function clearListItemMarks(item) {
+        var items = getElements('.' + TOKEN_CLASS_HAS_MARK + '.' + TOKEN_CLASS_LIST_ITEM);
+        toCount(items) && forEachArray(items, function (v) {
+            if (v !== item) {
+                letAria(v, TOKEN_SELECTED);
+                letClass(v, TOKEN_CLASS_HAS_MARK);
+            }
+        });
+    }
+
+    function getNextValid(current) {
+        while (current = getNext(current)) {
+            if (!current[TOKEN_HIDDEN] && !getAria(current, TOKEN_DISABLED)) {
+                return current;
+            }
+        }
+    }
+
+    function getPrevValid(current) {
+        while (current = getPrev(current)) {
+            if (!current[TOKEN_HIDDEN] && !getAria(current, TOKEN_DISABLED)) {
+                return current;
+            }
+        }
+    }
+
+    function onClickDocumentFindListItem(e) {
+        var target = e.target,
+            item = getParent(target, '.' + TOKEN_CLASS_CAN_MARK + '.' + TOKEN_CLASS_LIST_ITEM);
+        if (!item) {
+            return clearListItemMarks();
+        }
+        var itemParent = getParent(item, '.' + TOKEN_CLASS_LIST_ITEMS);
+        if (!itemParent) {
+            return clearListItemMarks();
+        }
+        if (hasClass(item, TOKEN_CLASS_HAS_MARK)) {
+            letAria(item, TOKEN_SELECTED);
+            letClass(item, TOKEN_CLASS_HAS_MARK);
+        } else {
+            setAria(item, TOKEN_SELECTED, true);
+            setClass(item, TOKEN_CLASS_HAS_MARK);
+        }
+        if (!keyIsCtrl) {
+            clearListItemMarks(item);
+        }
+        offEventDefault(e);
+    }
+
+    function onKeyDownDocument(e) {
+        keyIsCtrl = e.ctrlKey;
+    }
+
+    function onKeyDownDocumentFindListItem(e) {
+        var key = e.key,
+            target = e.target,
+            item = getParent(target, '.' + TOKEN_CLASS_LIST_ITEM + '[' + TOKEN_TABINDEX + ']');
+        if (!item) {
+            return;
+        }
+        var itemNext, itemPrev;
+        if (KEY_ARROW_DOWN === key) {
+            if (itemNext = getNextValid(item)) {
+                itemNext.focus(), offEventDefault(e);
+            } else {
+                log('Rewind?');
+            }
+        } else if (KEY_ARROW_UP === key) {
+            if (itemPrev = getPrevValid(item)) {
+                itemPrev.focus(), offEventDefault(e);
+            } else {
+                log('Rewind?');
+            }
+        } else if (KEY_SPACE === key) {
+            fireEvent(EVENT_CLICK, item);
+            offEventDefault(e);
+        }
+    }
+
+    function onKeyUpDocument(e) {
+        keyIsCtrl = e.ctrlKey;
+    }
+
+    function watchList(nodes) {
+        onEvent(EVENT_CLICK, D, onClickDocumentFindListItem, true);
+        onEvent(EVENT_KEY_DOWN, D, onKeyDownDocument, true);
+        onEvent(EVENT_KEY_DOWN, D, onKeyDownDocumentFindListItem, true);
+        onEvent(EVENT_KEY_UP, D, onKeyUpDocument, true);
+    }
 
     function _toArray(iterable) {
         return Array.from(iterable);
@@ -1184,18 +1319,6 @@ var panel = (function () {
         }, function () {
             timer = clearTimeout(timer);
         }];
-    };
-    var offEvent = function offEvent(name, node, then) {
-        node.removeEventListener(name, then);
-    };
-    var offEventDefault = function offEventDefault(e) {
-        return e && e.preventDefault();
-    };
-    var onEvent = function onEvent(name, node, then, options) {
-        if (options === void 0) {
-            options = false;
-        }
-        node.addEventListener(name, then, options);
     };
     var _debounce = debounce(function (link, item) {
             closeMenuChildren(link);
@@ -1458,6 +1581,7 @@ var panel = (function () {
     watchLink();
     watchLinkSet();
     watchLinks();
+    watchList();
     watchMenu();
     return panel;
 })();

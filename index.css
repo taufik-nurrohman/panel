@@ -18,12 +18,14 @@
 .menu-link,
 .title,
 .bar,
+.column,
 .columns,
 .item,
 .items,
 .list,
 .list-title,
 .row,
+.rows,
 .block__icon,
 .fields,
 .field,
@@ -42,7 +44,6 @@
 .title-arrow,
 .tool,
 .tools,
-.zone-title,
 .zones,
 .block,
 .blocks,
@@ -56,12 +57,14 @@
 }
 
 .bar,
+.column,
 .columns,
 .item,
 .items,
 .list,
 .list-title,
 .row,
+.rows,
 .block__icon,
 .fields,
 .field,
@@ -80,7 +83,6 @@
 .title-arrow,
 .tool,
 .tools,
-.zone-title,
 .zones,
 .block,
 .blocks,
@@ -92,9 +94,8 @@
 }
 
 :focus-visible,
-.list-items:where(:not(.has-gap)):focus,
-.list-items:where(:not(.has-gap)):focus-within,
-.list-items > .list-item:focus {
+.list-item[tabindex]:focus,
+.list-item[tabindex]:focus-within {
   outline: 1px solid #000;
 }
 
@@ -402,78 +403,95 @@ ul {
   margin: 0;
   padding: 0;
   position: relative;
-  border: 0 solid;
-  border-color: inherit;
+  background: #fff;
+  border: 1px solid #000;
   padding: 0.125rem 0.5rem;
 }
 .bar-icon {
-  margin-left: -0.25rem;
+  margin-left: -0.375rem;
+}
+.bar-title {
+  flex: 1;
+}
+.bar-tools {
+  gap: 0.125rem;
+}
+.bar-tools:first-child {
+  margin-left: -0.375rem;
+}
+.bar-tools:last-child {
+  margin-right: -0.375rem;
 }
 
-.column {
+.column,
+.columns {
   flex: 1;
   margin: 0;
-}
-.column.fill-1 {
-  flex-basis: calc(8.3333333333% * 1);
-  max-width: calc(8.3333333333% * 1);
-}
-.column.fill-2 {
-  flex-basis: calc(8.3333333333% * 2);
-  max-width: calc(8.3333333333% * 2);
-}
-.column.fill-3 {
-  flex-basis: calc(8.3333333333% * 3);
-  max-width: calc(8.3333333333% * 3);
-}
-.column.fill-4 {
-  flex-basis: calc(8.3333333333% * 4);
-  max-width: calc(8.3333333333% * 4);
-}
-.column.fill-5 {
-  flex-basis: calc(8.3333333333% * 5);
-  max-width: calc(8.3333333333% * 5);
-}
-.column.fill-6 {
-  flex-basis: calc(8.3333333333% * 6);
-  max-width: calc(8.3333333333% * 6);
-}
-.column.fill-7 {
-  flex-basis: calc(8.3333333333% * 7);
-  max-width: calc(8.3333333333% * 7);
-}
-.column.fill-8 {
-  flex-basis: calc(8.3333333333% * 8);
-  max-width: calc(8.3333333333% * 8);
-}
-.column.fill-9 {
-  flex-basis: calc(8.3333333333% * 9);
-  max-width: calc(8.3333333333% * 9);
-}
-.column.fill-10 {
-  flex-basis: calc(8.3333333333% * 10);
-  max-width: calc(8.3333333333% * 10);
-}
-.column.fill-11 {
-  flex-basis: calc(8.3333333333% * 11);
-  max-width: calc(8.3333333333% * 11);
-}
-.column.fill-12 {
-  flex-basis: calc(8.3333333333% * 12);
-  max-width: calc(8.3333333333% * 12);
 }
 
 .columns {
   flex-direction: row;
-  flex: 1;
+}
+.columns.has-gap > .column {
+  margin: 0.75rem;
+}
+.columns.has-gap > .column.fill-1 {
+  flex-basis: calc(8.3333333333% * 1 - 1.5rem);
+  max-width: calc(8.3333333333% * 1 - 1.5rem);
+}
+.columns.has-gap > .column.fill-2 {
+  flex-basis: calc(8.3333333333% * 2 - 1.5rem);
+  max-width: calc(8.3333333333% * 2 - 1.5rem);
+}
+.columns.has-gap > .column.fill-3 {
+  flex-basis: calc(8.3333333333% * 3 - 1.5rem);
+  max-width: calc(8.3333333333% * 3 - 1.5rem);
+}
+.columns.has-gap > .column.fill-4 {
+  flex-basis: calc(8.3333333333% * 4 - 1.5rem);
+  max-width: calc(8.3333333333% * 4 - 1.5rem);
+}
+.columns.has-gap > .column.fill-5 {
+  flex-basis: calc(8.3333333333% * 5 - 1.5rem);
+  max-width: calc(8.3333333333% * 5 - 1.5rem);
+}
+.columns.has-gap > .column.fill-6 {
+  flex-basis: calc(8.3333333333% * 6 - 1.5rem);
+  max-width: calc(8.3333333333% * 6 - 1.5rem);
+}
+.columns.has-gap > .column.fill-7 {
+  flex-basis: calc(8.3333333333% * 7 - 1.5rem);
+  max-width: calc(8.3333333333% * 7 - 1.5rem);
+}
+.columns.has-gap > .column.fill-8 {
+  flex-basis: calc(8.3333333333% * 8 - 1.5rem);
+  max-width: calc(8.3333333333% * 8 - 1.5rem);
+}
+.columns.has-gap > .column.fill-9 {
+  flex-basis: calc(8.3333333333% * 9 - 1.5rem);
+  max-width: calc(8.3333333333% * 9 - 1.5rem);
+}
+.columns.has-gap > .column.fill-10 {
+  flex-basis: calc(8.3333333333% * 10 - 1.5rem);
+  max-width: calc(8.3333333333% * 10 - 1.5rem);
+}
+.columns.has-gap > .column.fill-11 {
+  flex-basis: calc(8.3333333333% * 11 - 1.5rem);
+  max-width: calc(8.3333333333% * 11 - 1.5rem);
+}
+.columns.has-gap > .column.fill-12 {
+  flex-basis: calc(8.3333333333% * 12 - 1.5rem);
+  max-width: calc(8.3333333333% * 12 - 1.5rem);
 }
 
 .content {
-  margin-bottom: -0.25rem;
-  margin-top: -0.25rem;
+  background: #fff;
+  border: 1px solid #000;
+  margin: 0;
+  padding: 1.5rem;
 }
 
-.has-gap {
+.has-pad {
   padding: 1.5rem;
 }
 .has-stroke {
@@ -499,11 +517,13 @@ ul {
 }
 
 .list {
-  gap: 0.375rem;
   position: relative;
 }
+.list > :not(:first-child) {
+  margin-top: -1px;
+}
 .list-bar {
-  border: 1px solid transparent;
+  background: rgb(229.5, 229.5, 255);
 }
 .list-description {
   display: none;
@@ -513,19 +533,28 @@ ul {
   border: 1px solid #000;
   padding: 0.125rem 0.5rem;
 }
-.list-item.has-link:hover {
+.list-item.can-mark:hover {
   background: rgb(242.25, 242.25, 255);
 }
-.list-item.has-link:focus,
-.list-item.has-link:focus-within {
-  background: rgb(229.5, 229.5, 255);
+.list-item.has-mark {
+  background: rgb(255, 255, 229.5);
 }
-.list-item.has-link:active {
-  background: rgb(216.75, 216.75, 255);
+.list-item.has-mark:hover {
+  background: rgb(255, 255, 216.75);
 }
 .list-item.not-active {
   background: #fff;
   color: #666666;
+}
+.list-item:not(:first-child) {
+  margin-top: -1px;
+}
+.list-item[tabindex]:focus,
+.list-item[tabindex]:focus-within {
+  z-index: 10;
+}
+.list-item > .item-icon {
+  margin-left: -0.25rem;
 }
 .list-items.has-gap {
   gap: 0.375rem;
@@ -536,16 +565,6 @@ ul {
 .list-items.has-gap > .list-item:not(:first-child) {
   margin-top: 0;
 }
-.list-items:where(:not(.has-gap)):focus > .list-item:focus,
-.list-items:where(:not(.has-gap)):focus-within > .list-item:focus {
-  outline: 0;
-}
-.list-items > .list-item:where(:not(:first-child)) {
-  margin-top: -1px;
-}
-.list-items > .list-item > .item-icon {
-  margin-left: -0.25rem;
-}
 .list-title {
   font-weight: bold;
 }
@@ -553,66 +572,16 @@ ul {
   margin: 0;
 }
 
-.row {
-  flex-direction: column;
+.row,
+.rows {
+  margin: 0;
 }
 
+.rows.has-gap {
+  gap: 1.5rem;
+}
 .rows.has-gap > .row {
   margin: -0.75rem;
-}
-.rows.has-gap > .row > .columns > .column {
-  margin: 0.75rem;
-}
-.rows.has-gap > .row > .columns > .column.fill-1 {
-  flex-basis: calc(8.3333333333% * 1 - 1.5rem);
-  max-width: calc(8.3333333333% * 1 - 1.5rem);
-}
-.rows.has-gap > .row > .columns > .column.fill-2 {
-  flex-basis: calc(8.3333333333% * 2 - 1.5rem);
-  max-width: calc(8.3333333333% * 2 - 1.5rem);
-}
-.rows.has-gap > .row > .columns > .column.fill-3 {
-  flex-basis: calc(8.3333333333% * 3 - 1.5rem);
-  max-width: calc(8.3333333333% * 3 - 1.5rem);
-}
-.rows.has-gap > .row > .columns > .column.fill-4 {
-  flex-basis: calc(8.3333333333% * 4 - 1.5rem);
-  max-width: calc(8.3333333333% * 4 - 1.5rem);
-}
-.rows.has-gap > .row > .columns > .column.fill-5 {
-  flex-basis: calc(8.3333333333% * 5 - 1.5rem);
-  max-width: calc(8.3333333333% * 5 - 1.5rem);
-}
-.rows.has-gap > .row > .columns > .column.fill-6 {
-  flex-basis: calc(8.3333333333% * 6 - 1.5rem);
-  max-width: calc(8.3333333333% * 6 - 1.5rem);
-}
-.rows.has-gap > .row > .columns > .column.fill-7 {
-  flex-basis: calc(8.3333333333% * 7 - 1.5rem);
-  max-width: calc(8.3333333333% * 7 - 1.5rem);
-}
-.rows.has-gap > .row > .columns > .column.fill-8 {
-  flex-basis: calc(8.3333333333% * 8 - 1.5rem);
-  max-width: calc(8.3333333333% * 8 - 1.5rem);
-}
-.rows.has-gap > .row > .columns > .column.fill-9 {
-  flex-basis: calc(8.3333333333% * 9 - 1.5rem);
-  max-width: calc(8.3333333333% * 9 - 1.5rem);
-}
-.rows.has-gap > .row > .columns > .column.fill-10 {
-  flex-basis: calc(8.3333333333% * 10 - 1.5rem);
-  max-width: calc(8.3333333333% * 10 - 1.5rem);
-}
-.rows.has-gap > .row > .columns > .column.fill-11 {
-  flex-basis: calc(8.3333333333% * 11 - 1.5rem);
-  max-width: calc(8.3333333333% * 11 - 1.5rem);
-}
-.rows.has-gap > .row > .columns > .column.fill-12 {
-  flex-basis: calc(8.3333333333% * 12 - 1.5rem);
-  max-width: calc(8.3333333333% * 12 - 1.5rem);
-}
-.rows.has-gap > .row + .row {
-  margin-top: 0.75rem;
 }
 
 .block,
@@ -720,7 +689,7 @@ ul {
 }
 
 .button {
-  background: rgb(63.75, 63.75, 63.75);
+  background: #333333;
   border: 1px solid #000;
   color: #fff;
   cursor: pointer;
@@ -730,7 +699,9 @@ ul {
   position: relative;
 }
 .button-arrow {
+  border-color: #fff;
   margin: 0 0.25rem;
+  opacity: 1;
 }
 .button-arrow:first-child {
   margin-left: 0;
@@ -749,12 +720,12 @@ ul {
 }
 .button:focus,
 .button:hover {
-  background: #333333;
+  background: rgb(63.75, 63.75, 63.75);
   z-index: 10;
 }
 .button.is-active,
 .button:active {
-  background: rgb(25.5, 25.5, 25.5);
+  background: rgb(38.25, 38.25, 38.25);
   z-index: 10;
 }
 .button.not-active {
@@ -1047,9 +1018,10 @@ ul {
   margin-right: 0;
 }
 .title-content {
+  background: none;
+  border: 0;
   flex: 1;
-  margin-bottom: 0;
-  margin-top: 0;
+  padding: 0;
 }
 
 .tool {
@@ -1072,26 +1044,18 @@ ul {
 .zone {
   position: relative;
 }
-.zone > :where(:not(:first-child)) {
+.zone:focus {
+  z-index: 10;
+}
+.zone > :not(:first-child) {
   margin-top: -1px;
 }
 .zone-bar {
   background: rgb(229.5, 229.5, 255);
-  border: 1px solid #000;
-  margin: 0;
-}
-.zone-content {
-  background: #fff;
-  border: 1px solid #000;
-  margin: 0;
-  padding: 1.5rem;
 }
 .zone-description {
   flex: 0 0 100%;
   font-size: 0.875rem;
-}
-.zone-icon {
-  margin-left: -0.375rem;
 }
 .zones.has-gap {
   gap: 1.5rem;

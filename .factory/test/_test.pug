@@ -4,6 +4,6 @@ html(dir='ltr')
     meta(content='width=device-width' name='viewport')
     link(href='../'.repeat(file.to.split('/').length - 2) + 'index.min.css?v=%(version)' rel='stylesheet')
     block style
-  body.has-gap(role='application')
+  body.has-pad(role='application')
     block content
     script(src='../'.repeat(file.to.split('/').length - 2) + 'index.min.js?v=%(version)')
