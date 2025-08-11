@@ -11,15 +11,13 @@ html(dir='ltr')
           .column.fill-2
             .has-list.has-title.zone
               .bar.zone-bar
-                h3.title.zone-title Links
+                h3.title.zone-title Core
               .has-items.list
                 ul.items.list-items
-                  li.has-link.item.list-item
-                    a.link.list-link(href='#') Component 1
-                  li.has-link.item.list-item
-                    a.link.list-link(href='#') Component 2
-                  li.has-link.item.list-item
-                    a.link.list-link(href='#') Component 3
+                  each name in ['Alert', 'Alerts', 'Bar', 'Bar Set', 'Button', 'Button Set', 'Buttons', 'Column', 'Columns', 'Content', 'Description', 'Entry', 'Entry Set', 'Entries', 'Field', 'Fields', 'Icon', 'Icons', 'Item', 'Items', 'Link', 'Link Set', 'Links', 'List', 'Menu', 'Row', 'Rows', 'Stack', 'Stacks', 'Tab', 'Tabs', 'Title', 'Toast', 'Toasts', 'Tool', 'Tools', 'Tree', 'Zone', 'Zones']
+                    li.has-link.item.list-item
+                      a.link.list-link(href='#' + name.toLowerCase().replace(/\s+/g, '-'))
+                        = name
           .column.fill-8
             .has-gap.has-items.zones
               .has-content.has-title.zone
