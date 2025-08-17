@@ -68,8 +68,18 @@
                 </div>
                 <div class="content zone-content">
                   <h3 id="motivation"><a href="#motivation">#</a> Motivation</h3>
-                  <p><a href="https://mecha-cms.com" target="_blank">Mecha</a> has long used a panel feature with a very minimalist appearance. At the time, the goal was simply to simplify data entry for users and, of course, to simplify maintenance of the existing panel features. Over time, the need for new features arose, such as the ability to sort the list. This would enable me to create extensions for managing navigation links. Another example is to have a file picker button next to a text input to browse files. However, the minimalist design of the current panel prevented me from enhancing its features without breaking the existing ones.</p>
-                  <p>I want to create a CSS library with a class system similar to <a href="https://getbootstrap.com" rel="nofollow" target="_blank">Bootstrap</a>&rsquo;s, but with as few class helpers as possible to avoid resembling <a href="https://tailwindcss.com" rel="nofollow" target="_blank">Tailwind CSS</a>. It has to have all the features of Bootstrap and other features so that it can be compared to the <a href="https://developer.gnome.org/hig" rel="nofollow" target="_blank">GNOME</a> or <a href="https://develop.kde.org/hig" rel="nofollow" target="_blank">KDE</a> desktop environment, but for the web.</p>
+                  <p>I built a custom layout system for <a href="https://mecha-cms.com" target="_blank">Mecha</a>’s control panel feature (which is optional) without relying on external libraries. The initial goal was to design a minimalist control panel interface with as few files as possible. Over time, though, certain features became unavoidable, as they were necessary to showcase Mecha’s potential for further development by others. The features I’m referring to include:</p>
+                  <ul>
+                    <li>A more modern source code editor</li>
+                    <li>Drag &amp; drop lists</li>
+                    <li>Drop-down select box with AJAX and search functionality</li>
+                    <li>Extra buttons next to text inputs (e.g., for file selection)</li>
+                    <li>Pop-up windows</li>
+                    <li>Toasts</li>
+                  </ul>
+                  <p>The process of developing the layout system directly through the <a href="https://mecha-cms.com/store/extension/panel">Panel</a> extension has turned out to be quite troublesome, since I’ve had to focus not only on HTML and CSS, but also on PHP code—which really shouldn’t have been involved in this part of the work. That’s why I came up with the idea of separating this layout system from the extension through this project, so I can focus more on defining the specifications.</p>
+                  <p>With this project, the goal is to make future control panel features more scalable. The current control panel layout system is indeed solid, but it isn’t scalable. You can add or remove input fields, but it’s not flexible enough to support additional features. For example, with the current layout system, adding a button next to a text input is very difficult. Why? Because when I first built it, I never imagined that Mecha would eventually require such complex features. Truly, it was completely unexpected.</p>
+                  <p>What inspired me to create the control panel layout system at that time was <a href="https://www.gnome.org" rel="nofollow" target="_blank">GNOME</a>, a desktop environment widely known in the Linux community, especially because it was used in the latest version of <a href="https://ubuntu.com/desktop" rel="nofollow" target="_blank">Ubuntu</a>. It’s very simple, and even has its own <a href="https://developer.gnome.org/hig" rel="nofollow" target="_blank">documentation page</a> that not only explains the structure but also the philosophy behind it—the reasons why certain design decisions had to be made.</p>
                 </div>
               </div>
               <div class="has-content has-title zone">
