@@ -1,0 +1,25 @@
+.has-gap.has-items.zones
+  .has-items.has-title.list.zone
+    header.bar.list-bar
+      h3.bar-title.title Core
+    ul.items.list-items(tabindex='-1')
+      each name, i in ['Content', 'Description', 'Icon', 'Icons', 'Item', 'Items', 'Title']
+        li.can-mark.has-link.item.list-item(tabindex=(0 === i ? '0' : '-1'))
+          a.item-link.link(href='core/' + name.toLowerCase().replace(/\s+/g, '-') + '.html')
+            = name
+  .has-items.has-title.list.zone
+    header.bar.list-bar
+      h3.bar-title.title Layout
+    ul.items.list-items(tabindex='-1')
+      each name, i in ['Column', 'Columns', 'Row', 'Rows']
+        li.can-mark.has-link.item.list-item(tabindex=(0 === i ? '0' : '-1'))
+          a.item-link.link(href='core/' + name.toLowerCase().replace(/\s+/g, '-') + '.html')
+            = name
+  .has-items.has-title.list.zone
+    header.bar.list-bar
+      h3.bar-title.title Components
+    ul.items.list-items(tabindex='-1')
+      each name, i in ['Alert', 'Alerts', 'Bar', 'Bar Set', 'Button', 'Button Set', 'Buttons', 'Entry', 'Entry Set', 'Entries', 'Field', 'Fields', 'Link', 'Link Set', 'Links', 'List', 'Menu', 'Stack', 'Stacks', 'Tab', 'Tabs', 'Toast', 'Toasts', 'Tool', 'Tools', 'Tree', 'Zone', 'Zones']
+        li.can-mark.has-link.item.list-item(tabindex=(0 === i ? '0' : '-1'))
+          a.item-link.link(href='core/' + name.toLowerCase().replace(/\s+/g, '-') + '.html')
+            = name
