@@ -1,0 +1,14 @@
+@use './_.scss' as *;
+
+@mixin rows {
+  .rows {
+    @extend %flex-block;
+    margin: 0;
+    &.has-gap {
+      gap: 1.5rem;
+      > .row {
+        margin: -0.75rem;
+      }
+    }
+  }
+}

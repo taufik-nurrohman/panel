@@ -1,28 +1,26 @@
 @use './_item.scss' as *;
 
 @mixin bar {
-  @include item;
-  background: #fff;
-  border: 1px solid #000;
-  padding: 0.125rem 0.5rem;
-}
-
-@mixin bar-icon {
-  margin-left: -0.375rem;
-}
-
-@mixin bar-title {
-  flex: 1;
-}
-
-@mixin bar-tool {}
-
-@mixin bar-tools {
-  gap: 0.125rem;
-  &:first-child {
-    margin-left: -0.375rem;
-  }
-  &:last-child {
-    margin-right: -0.375rem;
+  .bar {
+    @include item;
+    background: #fff;
+    border: 1px solid #000;
+    padding: 0.125rem 0.5rem;
+    &-icon {
+      margin-left: -0.375rem;
+    }
+    &-title {
+      flex: 1;
+    }
+    &-tool {}
+    &-tools {
+      gap: 0.125rem;
+      &:first-child {
+        margin-left: -0.375rem;
+      }
+      &:last-child {
+        margin-right: -0.375rem;
+      }
+    }
   }
 }

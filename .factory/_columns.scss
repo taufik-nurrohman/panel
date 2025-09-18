@@ -1,0 +1,21 @@
+@use './_.scss' as *;
+
+@mixin columns {
+  .columns {
+    @extend %flex-block;
+    flex-direction: row;
+    flex: 1;
+    margin: 0;
+    &.has-gap {
+      > .column {
+        margin: 0.75rem;
+        @for $i from 1 through 12 {
+          &.fill-#{$i} {
+            flex-basis: calc(100% / 12 * #{$i} - 1.5rem);
+            max-width: calc(100% / 12 * #{$i} - 1.5rem);
+          }
+        }
+      }
+    }
+  }
+}

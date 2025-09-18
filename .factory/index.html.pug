@@ -8,6 +8,19 @@ html(dir='ltr')
     .has-gap.rows
       .row
         .columns.has-gap
+          .column.fill-12
+            .bar.top-bar
+              .menus
+                .menu.has-items
+                  ul.items.menu-items
+                    li.item.menu-item
+                      a.link.menu-link(href='#') Menu 1
+                    li.item.menu-item
+                      a.link.menu-link(href='#') Menu 2
+                    li.item.menu-item
+                      a.link.menu-link(href='#') Menu 3
+      .row
+        .columns.has-gap
           .column.fill-2
             include _links.pug
           .column.fill-8

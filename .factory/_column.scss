@@ -1,0 +1,9 @@
+@use './_.scss' as *;
+
+@mixin column {
+  .column {
+    @extend %flex-block;
+    flex: 1;
+    margin: 0;
+  }
+}

@@ -6,6 +6,8 @@
 @use './_button-set.scss' as *;
 @use './_button.scss' as *;
 @use './_buttons.scss' as *;
+@use './_column.scss' as *;
+@use './_columns.scss' as *;
 @use './_content.scss' as *;
 @use './_description.scss' as *;
 @use './_entries.scss' as *;
@@ -18,6 +20,8 @@
 @use './_link.scss' as *;
 @use './_links.scss' as *;
 @use './_list.scss' as *;
+@use './_row.scss' as *;
+@use './_rows.scss' as *;
 @use './_title.scss' as *;
 @use './_tool.scss' as *;
 @use './_tools.scss' as *;
@@ -303,43 +307,11 @@ ul {
   @extend :disabled;
 }
 
-.bar {
-  @include bar;
-  &-icon {
-    @include bar-icon;
-  }
-  &-title {
-    @include bar-title;
-  }
-  &-tool {
-    @include bar-tool;
-  }
-  &-tools {
-    @include bar-tools;
-  }
-}
-
-.column,
-.columns {
-  @extend %flex-block;
-  flex: 1;
-  margin: 0;
-}
-
-.columns {
-  flex-direction: row;
-  &.has-gap {
-    > .column {
-      margin: 0.75rem;
-      @for $i from 1 through 12 {
-        &.fill-#{$i} {
-          flex-basis: calc(100% / 12 * #{$i} - 1.5rem);
-          max-width: calc(100% / 12 * #{$i} - 1.5rem);
-        }
-      }
-    }
-  }
-}
+@include bar;
+@include column;
+@include columns;
+@include row;
+@include rows;
 
 .content {
   @include content;
@@ -383,21 +355,6 @@ ul {
   }
   &-tools {
     @include list-tools;
-  }
-}
-
-.row,
-.rows {
-  @extend %flex-block;
-  margin: 0;
-}
-
-.rows {
-  &.has-gap {
-    gap: 1.5rem;
-    > .row {
-      margin: -0.75rem;
-    }
   }
 }
 
@@ -644,6 +601,7 @@ ul {
     @extend %flex;
     align-items: stretch;
     border-color: inherit;
+    flex-direction: row;
     line-height: 1.875rem;
     list-style: none;
     margin: 0;
