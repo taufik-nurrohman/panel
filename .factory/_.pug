@@ -1,0 +1,40 @@
+html(dir='ltr')
+  head
+    meta(charset='utf-8')
+    meta(content='width=device-width' name='viewport')
+    link(href='../'.repeat(file.to.split('/').length - 2) + 'index.min.css?v=%(version)' rel='stylesheet')
+    block style
+  body.has-pad(role='application')
+    .has-gap.rows
+      .row
+        .columns.has-gap
+          .column.fill-12
+            .bar.top-bar
+              .menus
+                .menu.has-items
+                  ul.items.menu-items
+                    li.item.menu-item
+                      a.link.menu-link(href='#') Menu 1
+                    li.item.menu-item
+                      a.link.menu-link(href='#') Menu 2
+                    li.item.menu-item
+                      a.link.menu-link(href='#') Menu 3
+      .row
+        .columns.has-gap
+          .column.fill-2
+            include _links.pug
+          .column.fill-8
+            .has-gap.has-items.zones
+              .has-content.has-title.zone
+                .bar.zone-bar
+                  h1.title.zone-title Content
+                .content.zone-content
+                  block content
+          .column.fill-2
+            .has-content.has-title.zone
+              .bar.zone-bar
+                h1.title.zone-title Sections
+              .content.zone-content
+                p Lorem ipsum dolor sit amet.
+    script(src='../'.repeat(file.to.split('/').length - 2) + 'index.min.js?v=%(version)')
+    block script

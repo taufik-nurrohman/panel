@@ -1,93 +1,76 @@
-html(dir='ltr')
-  head
-    meta(charset='utf-8')
-    meta(content='width=device-width' name='viewport')
-    link(href='../'.repeat(file.to.split('/').length - 2) + 'index.min.css?v=%(version)' rel='stylesheet')
-    title Panel
-  body.has-pad(role='application')
-    .has-gap.rows
-      .row
-        .columns.has-gap
-          .column.fill-2
-            include ../_links.pug
-          .column.fill-8
-            .has-gap.has-items.zones
-              .has-content.has-title.zone
-                .bar.zone-bar
-                  h1.title.zone-title Bar
-                .content.zone-content
-                  h1 Bar
-                  p A bar is a horizontal user interface component that is placed at the very top of an area (usually a zone). Its purpose is to provide quick access to important information and controls.
-                  h2 Examples
-                  h3 A Bar
-                  pre: code
-                    | &lt;header class="bar"&gt;
-                    |   A bar
-                    | &lt;/header&gt;
-                  h3 A Bar with Menus
-                  pre: code
-                    | &lt;header class="bar"&gt;
-                    |   &lt;nav class="menus"&gt;
-                    |     &lt;div class="menu"&gt;
-                    |       &lt;ul class="items menu-items"&gt;
-                    |         &lt;li class="item menu-item"&gt;
-                    |           &lt;a class="link menu-link" href="#"&gt;
-                    |             Menu 1
-                    |           &lt;/a&gt;
-                    |         &lt;/li&gt;
-                    |         &lt;li class="item menu-item"&gt;
-                    |           &lt;a class="link menu-link" href="#"&gt;
-                    |             Menu 2
-                    |           &lt;/a&gt;
-                    |         &lt;/li&gt;
-                    |         &lt;li class="item menu-item"&gt;
-                    |           &lt;a class="link menu-link" href="#"&gt;
-                    |             Menu 3
-                    |           &lt;/a&gt;
-                    |         &lt;/li&gt;
-                    |         &hellip;
-                    |       &lt;/ul&gt;
-                    |     &lt;/div&gt;
-                    |   &lt;/nav&gt;
-                    | &lt;/header&gt;
-                  h3 A Bar with Tabs
-                  h3 A Bar with Title and Icon
-                  pre: code
-                    | &lt;header class="bar"&gt;
-                    |   &lt;svg class="bar-icon icon" height="24" viewBox="0 0 24 24" width="24"&gt; &hellip; &lt;/svg&gt;
-                    |   &lt;h1 class="bar-title title"&gt;
-                    |     Bar Title
-                    |   &lt;/h1&gt;
-                    | &lt;/header&gt;
-                  h3 A Bar with Title and Tools
-                  pre: code
-                    | &lt;header class="bar"&gt;
-                    |   &lt;h1 class="bar-title title"&gt;
-                    |     Bar Title
-                    |   &lt;/h1&gt;
-                    |   &lt;ul class="bar-tools tools"&gt;
-                    |     &lt;li class="bar-tool tool"&gt;
-                    |       &lt;a class="link tool-link" href="#"&gt;
-                    |         &lt;svg class="icon link-icon" height="24" viewBox="0 0 24 24" width="24"&gt; &hellip; &lt;/svg&gt;
-                    |       &lt;/a&gt;
-                    |     &lt;/li&gt;
-                    |     &lt;li class="bar-tool tool"&gt;
-                    |       &lt;a class="link tool-link" href="#"&gt;
-                    |         &lt;svg class="icon link-icon" height="24" viewBox="0 0 24 24" width="24"&gt; &hellip; &lt;/svg&gt;
-                    |       &lt;/a&gt;
-                    |     &lt;/li&gt;
-                    |     &lt;li class="bar-tool tool"&gt;
-                    |       &lt;a class="link tool-link" href="#"&gt;
-                    |         &lt;svg class="icon link-icon" height="24" viewBox="0 0 24 24" width="24"&gt; &hellip; &lt;/svg&gt;
-                    |       &lt;/a&gt;
-                    |     &lt;/li&gt;
-                    |     &hellip;
-                    |   &lt;/ul&gt;
-                    | &lt;/header&gt;
-          .column.fill-2
-            .has-content.has-title.zone
-              .bar.zone-bar
-                h1.title.zone-title Contents
-              .content.zone-content
-                p Lorem ipsum dolor sit amet.
-    script(src='../'.repeat(file.to.split('/').length - 2) + 'index.min.js?v=%(version)')
+extends ../_.pug
+
+block content
+  h1 Bar
+  p A bar is a horizontal user interface component that is placed at the very top of an area (usually a zone). Its purpose is to provide quick access to important information and controls.
+  h2 Examples
+  h3 A Bar
+  pre: code
+    | &lt;header class="bar"&gt;
+    |   A bar
+    | &lt;/header&gt;
+  p: iframe(src='../test/bar/1.html')
+  h3 A Bar with Menus
+  pre: code
+    | &lt;header class="bar"&gt;
+    |   &lt;nav class="menus"&gt;
+    |     &lt;div class="menu"&gt;
+    |       &lt;ul class="items menu-items"&gt;
+    |         &lt;li class="item menu-item"&gt;
+    |           &lt;a class="link menu-link" href="#"&gt;
+    |             Menu 1
+    |           &lt;/a&gt;
+    |         &lt;/li&gt;
+    |         &lt;li class="item menu-item"&gt;
+    |           &lt;a class="link menu-link" href="#"&gt;
+    |             Menu 2
+    |           &lt;/a&gt;
+    |         &lt;/li&gt;
+    |         &lt;li class="item menu-item"&gt;
+    |           &lt;a class="link menu-link" href="#"&gt;
+    |             Menu 3
+    |           &lt;/a&gt;
+    |         &lt;/li&gt;
+    |         &hellip;
+    |       &lt;/ul&gt;
+    |     &lt;/div&gt;
+    |   &lt;/nav&gt;
+    | &lt;/header&gt;
+  h3 A Bar with Tabs
+  h3 A Bar with Title and Icon
+  pre: code
+    | &lt;header class="bar"&gt;
+    |   &lt;svg class="bar-icon icon" height="24" viewBox="0 0 24 24" width="24"&gt; &hellip; &lt;/svg&gt;
+    |   &lt;h1 class="bar-title title"&gt;
+    |     Bar Title
+    |   &lt;/h1&gt;
+    | &lt;/header&gt;
+  p: iframe(src='../test/bar/2.html')
+  h3 A Bar with Title and Tools
+  pre: code
+    | &lt;header class="bar"&gt;
+    |   &lt;h1 class="bar-title title"&gt;
+    |     Bar Title
+    |   &lt;/h1&gt;
+    |   &lt;ul class="bar-tools tools"&gt;
+    |     &lt;li class="bar-tool tool"&gt;
+    |       &lt;a class="link tool-link" href="#"&gt;
+    |         &lt;svg class="icon link-icon" height="24" viewBox="0 0 24 24" width="24"&gt; &hellip; &lt;/svg&gt;
+    |       &lt;/a&gt;
+    |     &lt;/li&gt;
+    |     &lt;li class="bar-tool tool"&gt;
+    |       &lt;a class="link tool-link" href="#"&gt;
+    |         &lt;svg class="icon link-icon" height="24" viewBox="0 0 24 24" width="24"&gt; &hellip; &lt;/svg&gt;
+    |       &lt;/a&gt;
+    |     &lt;/li&gt;
+    |     &lt;li class="bar-tool tool"&gt;
+    |       &lt;a class="link tool-link" href="#"&gt;
+    |         &lt;svg class="icon link-icon" height="24" viewBox="0 0 24 24" width="24"&gt; &hellip; &lt;/svg&gt;
+    |       &lt;/a&gt;
+    |     &lt;/li&gt;
+    |     &hellip;
+    |   &lt;/ul&gt;
+    | &lt;/header&gt;
+
+block style
+  title Bar &middot; Type &middot; Panel

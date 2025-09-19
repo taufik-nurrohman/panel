@@ -1,22 +1,7 @@
 extends ../_test.pug
 
+block content
+  header.bar A bar
+
 block style
   title Bar
-
-block content
-  div.has-gap.rows
-    div.row
-      div.columns.has-gap
-        div.column
-          div.bar.has-title(role='banner')
-            span.bar-title Bar
-        div.column
-          div.bar.has-icon.has-title(role='banner')
-            svg.bar-icon.icon(height='24' viewBox='0 0 24 24' width='24')
-              path(d='M4 5h16v2H4zm0 4h16v2H4zm0 4h16v2H4zm0 4h10v2H4z')
-            span.bar-title Bar
-    div.row
-      div.columns.has-gap
-        div.column
-          div.bar.has-title(role='banner')
-            span.bar-title Bar
