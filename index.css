@@ -1,11 +1,3 @@
-.block,
-.blocks,
-.block__bar,
-.block__tasks {
-  flex-direction: column;
-  flex: 1;
-}
-
 .button,
 .button-set,
 .entry,
@@ -26,7 +18,6 @@
 .items,
 .list,
 .list-title,
-.block__icon,
 .fields,
 .field,
 .field__entry,
@@ -45,10 +36,7 @@
 .tool,
 .tools,
 .zones,
-.block,
-.blocks,
-.block__bar,
-.block__tasks {
+.pages {
   align-items: stretch;
   display: inline-flex;
   flex-direction: row;
@@ -65,7 +53,6 @@
 .items,
 .list,
 .list-title,
-.block__icon,
 .fields,
 .field,
 .field__entry,
@@ -84,10 +71,7 @@
 .tool,
 .tools,
 .zones,
-.block,
-.blocks,
-.block__bar,
-.block__tasks {
+.pages {
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -587,48 +571,6 @@ ul {
   margin: 0;
 }
 
-.block,
-.blocks {
-  border: 1px solid;
-}
-
-.block__bar {
-  flex-direction: row;
-  flex: 0 auto;
-  gap: 3px;
-  padding: 3px;
-}
-.block__bar + .block__content {
-  border-top: 1px solid;
-}
-.block__content {
-  flex: 1;
-  padding: 1.5rem;
-}
-.block__title {
-  cursor: move;
-  flex: 1;
-  padding: 0 0.375rem;
-  user-select: none;
-}
-.block__task {
-  cursor: pointer;
-  user-select: none;
-}
-.block__tasks {
-  flex-direction: row;
-  flex: 0 auto;
-  gap: 3px;
-}
-
-.blocks {
-  gap: 1.5rem;
-  padding: 1.5rem;
-}
-.blocks[aria-orientation=horizontal] {
-  flex-direction: row;
-}
-
 .fields {
   flex-direction: column;
   gap: 1.5rem;
@@ -1070,4 +1012,30 @@ ul {
 }
 .zones > :where(:not(:first-child)) {
   margin-top: -1px;
+}
+
+/* Component(s) */
+.page {
+  background: #fff;
+  border: 1px solid #000;
+  margin: 0;
+  padding: 1.5rem;
+}
+.page + .page {
+  margin-top: -1px;
+}
+.page-title {
+  font-size: 150%;
+  line-height: 1;
+}
+.pages {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 48rem;
+}
+.pages.has-gap {
+  gap: 1.5rem;
+}
+.pages.has-gap .page + .page {
+  margin-top: 0;
 }

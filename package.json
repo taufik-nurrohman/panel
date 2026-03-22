@@ -1,6 +1,6 @@
 {
   "devDependencies": {
-    "@taufik-nurrohman/factory": "^2.3.0"
+    "@taufik-nurrohman/factory": "^2.3.1"
   },
   "private": true,
   "scripts": {

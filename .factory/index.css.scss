@@ -20,6 +20,8 @@
 @use './_link.scss' as *;
 @use './_links.scss' as *;
 @use './_list.scss' as *;
+@use './_page.scss' as *;
+@use './_pages.scss' as *;
 @use './_row.scss' as *;
 @use './_rows.scss' as *;
 @use './_title.scss' as *;
@@ -307,7 +309,22 @@ ul {
   @extend :disabled;
 }
 
-@include bar;
+.bar {
+  @include bar;
+  &-icon {
+    @include bar-icon;
+  }
+  &-title {
+    @include bar-title;
+  }
+  &-tool {
+    @include bar-tool;
+    &s {
+      @include bar-tools;
+    }
+  }
+}
+
 @include column;
 @include columns;
 @include row;
@@ -355,56 +372,6 @@ ul {
   }
   &-tools {
     @include list-tools;
-  }
-}
-
-.block,
-.blocks {
-  @extend %blocks;
-  border: 1px solid;
-}
-
-.block {
-  &__bar {
-    @extend %blocks;
-    flex-direction: row;
-    flex: 0 auto;
-    gap: 3px;
-    padding: 3px;
-    + .block__content {
-      border-top: 1px solid;
-    }
-  }
-  &__content {
-    flex: 1;
-    padding: 1.5rem;
-  }
-  &__icon {
-    @extend %flex-block;
-  }
-  &__title {
-    cursor: move;
-    flex: 1;
-    padding: 0 0.375rem;
-    user-select: none;
-  }
-  &__task {
-    cursor: pointer;
-    user-select: none;
-  }
-  &__tasks {
-    @extend %blocks;
-    flex-direction: row;
-    flex: 0 auto;
-    gap: 3px;
-  }
-}
-
-.blocks {
-  gap: 1.5rem;
-  padding: 1.5rem;
-  &[aria-orientation='horizontal'] {
-    flex-direction: row;
   }
 }
 
@@ -693,5 +660,16 @@ ul {
   }
   &s {
     @include zones;
+  }
+}
+
+/* Component(s) */
+.page {
+  @include page;
+  &-title {
+    @include page-title;
+  }
+  &s {
+    @include pages;
   }
 }

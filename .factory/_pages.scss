@@ -1,0 +1,18 @@
+@use './_.scss' as *;
+
+@mixin pages {
+  @extend %flex-block;
+  margin: {
+    left: auto;
+    right: auto;
+  }
+  max-width: 48rem;
+  &.has-gap {
+    gap: 1.5rem;
+    .page {
+      + .page {
+        margin-top: 0;
+      }
+    }
+  }
+}
