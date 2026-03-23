@@ -26,3 +26,21 @@
 %focus {
   outline: 1px solid #000;
 }
+
+%item {
+  @extend %flex-block;
+  flex-direction: row;
+  gap: 0 0.25rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+%items {
+  @extend %flex-block;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}

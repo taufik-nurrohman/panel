@@ -7,3 +7,4 @@ html(dir='ltr')
   body.has-pad(role='application')
     block content
     script(src='../'.repeat(file.to.split('/').length - 2) + 'index.min.js?v=%(version)')
+    block script

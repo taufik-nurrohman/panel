@@ -103,9 +103,11 @@
                   <h2>Examples</h2>
                   <h3>A Bar</h3>
                   <pre><code>&lt;header class="bar"&gt;
-  A bar
+  Lorem Ipsum
 &lt;/header&gt;</code></pre>
-                  <p><iframe src="../test/bar/1.html"></iframe></p>
+                  <div class="has-fill has-pad has-stroke" id="test-1">
+                    <header class="bar">Lorem Ipsum</header>
+                  </div>
                   <h3>A Bar with Menus</h3>
                   <pre><code>&lt;header class="bar"&gt;
   &lt;nav class="menus"&gt;
@@ -133,37 +135,49 @@
 &lt;/header&gt;</code></pre>
                   <h3>A Bar with Tabs</h3>
                   <h3>A Bar with Title and Icon</h3>
-                  <pre><code>&lt;header class="bar"&gt;
+                  <pre><code>&lt;header class="bar has-icon has-title"&gt;
   &lt;svg class="bar-icon icon" height="24" viewBox="0 0 24 24" width="24"&gt; &hellip; &lt;/svg&gt;
   &lt;h1 class="bar-title title"&gt;
-    Bar Title
+    Lorem Ipsum
   &lt;/h1&gt;
 &lt;/header&gt;</code></pre>
-                  <p><iframe src="../test/bar/2.html"></iframe></p>
+                  <div class="has-fill has-pad has-stroke" id="test-3">
+                    <header class="bar has-icon has-title"><svg class="bar-icon icon" height="24" viewBox="0 0 24 24" width="24">
+                        <path d="M4 5h16v2H4zm0 4h16v2H4zm0 4h16v2H4zm0 4h10v2H4z"></path>
+                      </svg>
+                      <h1 class="bar-title title">Lorem Ipsum</h1>
+                    </header>
+                  </div>
                   <h3>A Bar with Title and Tools</h3>
-                  <pre><code>&lt;header class="bar"&gt;
+                  <pre><code>&lt;header class="bar has-title has-tools"&gt;
   &lt;h1 class="bar-title title"&gt;
-    Bar Title
+    Lorem Ipsum
   &lt;/h1&gt;
   &lt;ul class="bar-tools tools"&gt;
-    &lt;li class="bar-tool tool"&gt;
-      &lt;a class="link tool-link" href="#"&gt;
-        &lt;svg class="icon link-icon" height="24" viewBox="0 0 24 24" width="24"&gt; &hellip; &lt;/svg&gt;
-      &lt;/a&gt;
-    &lt;/li&gt;
-    &lt;li class="bar-tool tool"&gt;
-      &lt;a class="link tool-link" href="#"&gt;
-        &lt;svg class="icon link-icon" height="24" viewBox="0 0 24 24" width="24"&gt; &hellip; &lt;/svg&gt;
-      &lt;/a&gt;
-    &lt;/li&gt;
-    &lt;li class="bar-tool tool"&gt;
-      &lt;a class="link tool-link" href="#"&gt;
+    &lt;li class="bar-tool has-link tool"&gt;
+      &lt;a class="has-icon link tool-link" href="#"&gt;
         &lt;svg class="icon link-icon" height="24" viewBox="0 0 24 24" width="24"&gt; &hellip; &lt;/svg&gt;
       &lt;/a&gt;
     &lt;/li&gt;
     &hellip;
   &lt;/ul&gt;
 &lt;/header&gt;</code></pre>
+                  <div class="has-fill has-pad has-stroke" id="test-4">
+                    <header class="bar has-title has-tools">
+                      <h1 class="bar-title title">Lorem Ipsum</h1>
+                      <ul class="bar-tools tools">
+                        <li class="bar-tool has-link tool"><a class="has-icon link tool-link" href="#" title="Minimize"><svg class="icon link-icon" height="24" viewBox="0 0 24 24" width="24">
+                              <path d="M20 14H4v-4h16"></path>
+                            </svg></a></li>
+                        <li class="bar-tool has-link tool"><a class="has-icon link tool-link" href="#" title="Maximize"><svg class="icon link-icon" height="24" viewBox="0 0 24 24" width="24">
+                              <path d="M4 4h16v16H4zm2 4v10h12V8z"></path>
+                            </svg></a></li>
+                        <li class="bar-tool has-link tool"><a class="has-icon link tool-link" href="#" title="Close"><svg class="icon link-icon" height="24" viewBox="0 0 24 24" width="24">
+                              <path d="M13.46 12L19 17.54V19h-1.46L12 13.46L6.46 19H5v-1.46L10.54 12L5 6.46V5h1.46L12 10.54L17.54 5H19v1.46z"></path>
+                            </svg></a></li>
+                      </ul>
+                    </header>
+                  </div>
                 </div>
               </div>
             </div>

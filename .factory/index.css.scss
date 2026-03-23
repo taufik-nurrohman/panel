@@ -1,34 +1,9 @@
 @use 'sass:color';
 
 @use './_.scss' as *;
-@use './_arrow.scss' as *;
-@use './_bar.scss' as *;
-@use './_button-set.scss' as *;
-@use './_button.scss' as *;
-@use './_buttons.scss' as *;
-@use './_column.scss' as *;
-@use './_columns.scss' as *;
-@use './_content.scss' as *;
-@use './_description.scss' as *;
-@use './_entries.scss' as *;
-@use './_entry-set.scss' as *;
-@use './_entry.scss' as *;
-@use './_icon.scss' as *;
-@use './_item.scss' as *;
-@use './_items.scss' as *;
-@use './_link-set.scss' as *;
-@use './_link.scss' as *;
-@use './_links.scss' as *;
-@use './_list.scss' as *;
-@use './_page.scss' as *;
-@use './_pages.scss' as *;
-@use './_row.scss' as *;
-@use './_rows.scss' as *;
-@use './_title.scss' as *;
-@use './_tool.scss' as *;
-@use './_tools.scss' as *;
-@use './_zone.scss' as *;
-@use './_zones.scss' as *;
+
+
+// Base
 
 *,
 ::after,
@@ -181,17 +156,20 @@ button {
 }
 
 code {
-  font-family: 'Courier New', monospace;
-  font-size: 95%;
+  font-family: monospace;
+  font-size: 85%;
 }
 
-details > summary {
-  cursor: pointer;
-  display: block;
-}
-
-details[open] > summary {
-  margin-bottom: 0.75rem;
+details {
+  &:open {
+    > summary {
+      margin-bottom: 0.75rem;
+    }
+  }
+  > summary {
+    cursor: pointer;
+    display: block;
+  }
 }
 
 fieldset {
@@ -204,12 +182,14 @@ legend {
   padding: 0 0.5rem;
 }
 
-pre code {
-  display: block;
-  overflow: auto;
-  background: #000;
-  color: #fff;
-  padding: 0.5rem 0.75rem;
+pre {
+  code {
+    background: #000;
+    color: #fff;
+    display: block;
+    overflow: auto;
+    padding: 0.5rem 0.75rem;
+  }
 }
 
 h1, h2, h3, h4, h5, h6 {}
@@ -255,10 +235,9 @@ figure {
   flex-direction: column;
   gap: 0.5rem;
   text-align: center;
-}
-
-figure img {
-  border: 1px solid #000;
+  img {
+    border: 1px solid #000;
+  }
 }
 
 audio,
@@ -268,8 +247,8 @@ video {
   border: 1px solid #000;
   color: #fff;
   display: block;
-  width: 100%;
   height: auto;
+  width: 100%;
 }
 
 ol {
@@ -279,12 +258,11 @@ ol {
 table {
   border-collapse: collapse;
   width: 100%;
-}
-
-table caption {
-  caption-side: bottom;
-  margin: 0.5rem 0 0;
-  text-align: center;
+  caption {
+    caption-side: bottom;
+    margin: 0.5rem 0 0;
+    text-align: center;
+  }
 }
 
 td, th {
@@ -309,32 +287,284 @@ ul {
   @extend :disabled;
 }
 
+
+// Core
+
+.arrow {
+  @extend %flex-block;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  min-width: 0.5rem;
+  opacity: 0.5;
+  &.to-bottom {
+    &::after {
+      border: {
+        top-color: inherit;
+        width: 0.3125rem 0.25rem 0;
+      }
+    }
+  }
+  &.to-left {
+    &::after {
+      border: {
+        right-color: inherit;
+        width: 0.25rem 0.3125rem 0.25rem 0;
+      }
+    }
+  }
+  &.to-right {
+    &::after {
+      border: {
+        left-color: inherit;
+        width: 0.25rem 0 0.25rem 0.3125rem;
+      }
+    }
+  }
+  &.to-top {
+    &::after {
+      border: {
+        bottom-color: inherit;
+        width: 0 0.25rem 0.3125rem 0.25rem;
+      }
+    }
+  }
+  &::after {
+    border: 0 solid transparent;
+    content: "";
+  }
+}
+
 .bar {
-  @include bar;
+  @extend %item;
+  background: #fff;
+  border: 1px solid #000;
+  padding: 0.125rem 0.5rem;
   &-icon {
-    @include bar-icon;
+    margin-left: -0.375rem;
   }
   &-title {
-    @include bar-title;
+    flex: 1;
   }
-  &-tool {
-    @include bar-tool;
-    &s {
-      @include bar-tools;
+  &-tool {}
+  &-tools {
+    gap: 0.125rem;
+    &:first-child {
+      margin-left: -0.375rem;
+    }
+    &:last-child {
+      margin-right: -0.375rem;
     }
   }
 }
 
-@include column;
-@include columns;
-@include row;
-@include rows;
+.button {
+  @extend %flex;
+  background: color.mix(#000, #fff, 80%);
+  border: 1px solid #000;
+  color: #fff;
+  cursor: pointer;
+  gap: 0.25rem;
+  min-height: 1.875rem;
+  padding: 0.125rem 0.5rem;
+  position: relative;
+  &-arrow {
+    @extend %flex-block;
+    border-color: #fff;
+    margin: 0 0.25rem;
+    opacity: 1;
+    &:first-child {
+      margin-left: 0;
+    }
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+  &-icon {
+    &:first-child {
+      margin-left: -0.375rem;
+    }
+    &:last-child {
+      margin-right: -0.375rem;
+    }
+  }
+  &-set {
+    @extend %flex;
+    position: relative;
+    > .button {
+      &:not(:first-child) {
+        margin-left: -1px;
+      }
+    }
+  }
+  &-title {
+    @extend %flex-block;
+    flex: 1;
+  }
+  &:focus,
+  &:hover {
+    background: color.mix(#000, #fff, 75%);
+    z-index: 10;
+  }
+  &.is-active,
+  &:active {
+    background: color.mix(#000, #fff, 85%);
+    z-index: 10;
+  }
+  &.not-active {
+    background: color.mix(#000, #fff, 50%);
+    border-color: color.mix(#000, #fff, 80%);
+  }
+  &:disabled {
+    @extend :disabled;
+  }
+  &[aria-disabled='true'] {
+    @extend [aria-disabled='true'];
+  }
+}
+
+.buttons {
+  @extend %flex-block;
+  flex: {
+    direction: row;
+    wrap: wrap;
+  }
+  gap: 0.75rem;
+  justify-content: inherit;
+  &.to-center {
+    justify-content: center;
+  }
+  &.to-fill {
+    justify-content: space-between;
+  }
+  &.to-start {
+    justify-content: start;
+  }
+  &.to-end {
+    justify-content: end;
+  }
+}
+
+.column {
+  @extend %flex-block;
+  flex: 1;
+  margin: 0;
+}
+
+.columns {
+  @extend %flex-block;
+  flex-direction: row;
+  flex: 1;
+  margin: 0;
+  > .column {
+    @for $i from 1 through 12 {
+      &.fill-#{$i} {
+        flex-basis: calc(100% / 12 * #{$i});
+        max-width: calc(100% / 12 * #{$i});
+      }
+    }
+  }
+  &.has-gap {
+    > .column {
+      margin: 0.75rem;
+      @for $i from 1 through 12 {
+        &.fill-#{$i} {
+          flex-basis: calc(100% / 12 * #{$i} - 1.5rem);
+          max-width: calc(100% / 12 * #{$i} - 1.5rem);
+        }
+      }
+    }
+  }
+}
 
 .content {
-  @include content;
+  background: #fff;
+  border: 1px solid #000;
+  margin: 0;
+  padding: 1.5rem;
+}
+
+.description,
+.excerpt {
+  color: color.mix(#000, #fff, 75%);
+  &-content {
+    margin: {
+      bottom: 0;
+      top: 0;
+    }
+  }
+}
+
+.entry {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  @extend %flex;
+  appearance: none;
+  background: color.mix(#000, #fff, 10%);
+  border: 1px solid #000;
+  color: #000;
+  min-height: 30px;
+  min-width: 144px;
+  padding: 2px 8px;
+  position: relative;
+  &-set {
+    @extend %flex;
+    position: relative;
+    > .entry {
+      &:not(:first-child) {
+        margin-left: -1px;
+      }
+    }
+  }
+  &:where(select) {
+    cursor: pointer;
+  }
+  &:where(textarea) {
+    min-height: 4.875rem;
+    resize: vertical;
+  }
+  &:focus,
+  &:hover {
+    z-index: 10;
+  }
+  &.not-active {
+    background: color.mix(#000, #fff, 15%);
+    border-color: color.mix(#000, #fff, 75%);
+  }
+  &:disabled {
+    @extend :disabled;
+  }
+  &[aria-disabled='true'] {
+    @extend [aria-disabled='true'];
+  }
+}
+
+.entries {
+  @extend %flex-block;
+  flex: {
+    direction: row;
+    wrap: wrap;
+  }
+  gap: 0.75rem;
+  justify-content: inherit;
+  &.to-center {
+    justify-content: center;
+  }
+  &.to-fill {
+    justify-content: space-between;
+  }
+  &.to-start {
+    justify-content: start;
+  }
+  &.to-end {
+    justify-content: end;
+  }
 }
 
 .has {
+  &-fill {
+    background: color.mix(#000, #fff, 20%);
+  }
   &-pad {
     padding: 1.5rem;
   }
@@ -343,148 +573,228 @@ ul {
   }
 }
 
+.icon {
+  display: inline-block;
+  fill: currentColor;
+  height: 1.5rem;
+  vertical-align: middle;
+  width: 1.5rem;
+}
+
 .item {
-  @include item;
+  @extend %item;
+  flex-wrap: wrap;
   &-link {
-    @include item-link;
+    font: inherit;
   }
-  &s {
-    @include items;
+  > .items {
+    flex: 0 0 100%;
+    padding-left: 1.75rem;
+    &[hidden] {
+      display: none;
+    }
+  }
+}
+
+.items {
+  @extend %items;
+}
+
+.link {
+  @extend %flex;
+  color: #00f;
+  cursor: pointer;
+  gap: 4px;
+  position: relative;
+  &-arrow {
+    @extend %flex-block;
+    margin: 0 0.25rem;
+    &:first-child {
+      margin-left: 0;
+    }
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+  &-title {
+    @extend %flex-block;
+  }
+  &:focus,
+  &:hover {
+    color: color.mix(#00f, #fff, 80%);
+    z-index: 10;
+    > .arrow {
+      opacity: 0.45;
+    }
+  }
+  &.is-active,
+  &:active {
+    color: color.mix(#00f, #000, 90%);
+    z-index: 10;
+    > .arrow {
+      opacity: 0.65;
+    }
+  }
+}
+
+.links {
+  @extend %flex-block;
+  flex: {
+    direction: row;
+    wrap: wrap;
+  }
+  gap: 0.75rem;
+  justify-content: inherit;
+  &.to-center {
+    justify-content: center;
+  }
+  &.to-fill {
+    justify-content: space-between;
+  }
+  &.to-start {
+    justify-content: start;
+  }
+  &.to-end {
+    justify-content: end;
   }
 }
 
 .list {
-  @include list;
+  @extend %flex-block;
+  position: relative;
   &-bar {
-    @include list-bar;
+    background: color.mix(#00f, #fff, 10%);
   }
-  &-description {
-    @include list-description;
+  &-description,
+  &-excerpt {
+    display: none;
   }
   &-item {
-    @include list-item;
-    &s {
-      @include list-items;
+    background: #fff;
+    border: 1px solid #000;
+    padding: 0.125rem 0.5rem;
+    &.can-mark {
+      &:hover {
+        background: color.mix(#00f, #fff, 5%);
+      }
+    }
+    &.has-mark {
+      background: color.mix(#ff0, #fff, 10%);
+      &:hover {
+        background: color.mix(#ff0, #fff, 15%);
+      }
+    }
+    &.not-active {
+      background: #fff;
+      color: color.mix(#000, #fff, 60%);
+    }
+    &:not(:first-child) {
+      margin-top: -1px;
+    }
+    &[tabindex] {
+      &:focus,
+      &:focus-within {
+        @extend %focus;
+        z-index: 10;
+      }
+    }
+    > .item-icon {
+      margin-left: -0.25rem;
+    }
+  }
+  &-items {
+    &.has-gap {
+      gap: 0.375rem;
+      > .list-item {
+        &.not-active {
+          border-color: color.mix(#000, #fff, 50%);
+        }
+        &:not(:first-child) {
+          margin-top: 0;
+        }
+      }
     }
   }
   &-title {
-    @include list-title;
+    @extend %flex-block;
+    font-weight: bold;
   }
   &-tools {
-    @include list-tools;
+    margin: 0;
+  }
+  > :not(:first-child) {
+    margin-top: -1px;
   }
 }
 
-.fields {
+.row {
   @extend %flex-block;
-  flex-direction: column;
-  gap: 1.5rem;
+  margin: 0;
 }
 
-.field {
+.rows {
   @extend %flex-block;
-  gap: 1.5rem;
-}
-
-.field__bar {}
-
-.field__title {
-  border: 1px solid transparent;
-  padding: {
-    left: 0;
-    right: 0;
+  margin: 0;
+  &.has-gap {
+    gap: 1.5rem;
+    > .row {
+      margin: -0.75rem;
+    }
   }
 }
 
-.field__content {
+.title {
+  @extend %flex;
+  color: inherit;
   flex: 1;
-}
-
-.field__entry {
-  @extend %flex-block;
-  border: 1px solid;
-}
-
-.field__entry:focus-within {
-  outline: 1px solid;
-}
-
-.form__entry {
-  flex: 1;
-  padding: {
-    left: 0.5rem;
-    right: 0.5rem;
-  }
-}
-
-.field__icon {
-  border-right: 1px solid;
-  .icon {
-    display: block;
-  }
-}
-
-.field__tasks {
-  @extend %flex-block;
-}
-.field__task {
-  border-left: 1px solid;
-  cursor: pointer;
-  user-select: none;
-  .task__title {
-    flex: 1;
-    padding: 0 0.375rem;
-  }
-}
-
-.arrow {
-  @include arrow;
-}
-
-.button {
-  @include button;
-  &-set {
-    @include button-set;
-  }
-  &s {
-    @include buttons;
-  }
-}
-
-.description {
-  @include description;
-}
-
-.entries {
-  @include entries;
-}
-
-.entry {
-  @include entry;
-  &-set {
-    @include entry-set;
-  }
-}
-
-.icon {
-  @include icon;
-}
-
-.link {
-  @include link;
+  font: inherit;
+  gap: 0.25rem;
   &-arrow {
-    @include link-arrow;
+    @extend %flex-block;
+    margin: 0 0.25rem;
+    &::after {
+      border: 0 solid transparent;
+      border: {
+        top-color: inherit;
+        width: 0.3125rem 0.25rem 0;
+      }
+      content: "";
+    }
+    &:first-child {
+      margin-left: 0;
+    }
+    &:last-child {
+      margin-right: 0;
+    }
   }
-  &-set {
-    @include link-set;
+  &-content {
+    background: none;
+    border: 0;
+    flex: 1;
+    padding: 0;
   }
-  &-title {
-    @include link-title;
-  }
-  &s {
-    @include links;
+  &-hint {
+    color: color.mix(#000, #fff, 50%);
   }
 }
+
+.tool {
+  @extend .item;
+  &-set {}
+}
+
+.tools {
+  @extend .items;
+  flex: {
+    direction: row;
+    wrap: wrap;
+  }
+  gap: 0.25rem;
+  &-set {}
+}
+
+
+// Component(s)
 
 .menu {
   @extend %flex;
@@ -627,49 +937,68 @@ ul {
   gap: 1.5rem;
 }
 
-.title {
-  @include title;
-  &-arrow {
-    @include title-arrow;
+.page {
+  background: #fff;
+  border: 1px solid #000;
+  margin: 0;
+  padding: 1.5rem;
+  &-bar {
+    background: color.mix(#00f, #fff, 10%);
   }
-  &-content {
-    @include title-content;
+  &-title {
+    font-size: 150%;
+    line-height: 1;
+  }
+  + .page {
+    margin-top: -1px;
   }
 }
 
-.tool {
-  @include tool;
-  &-set {
-    @include tool-set;
+.pages {
+  @extend %flex-block;
+  margin: {
+    left: auto;
+    right: auto;
   }
-  &s {
-    @include tools;
-    &-set {
-      @include tools-set;
+  max-width: 48rem;
+  &.has-gap {
+    gap: 1.5rem;
+    .page {
+      + .page {
+        margin-top: 0;
+      }
     }
   }
 }
 
 .zone {
-  @include zone;
+  position: relative;
   &-bar {
-    @include zone-bar;
+    background: color.mix(#00f, #fff, 10%);
   }
-  &-description {
-    @include zone-description;
+  &-description,
+  &-excerpt {
+    flex: 0 0 100%;
+    font-size: 0.875rem;
   }
-  &s {
-    @include zones;
+  &:focus {
+    z-index: 10;
+  }
+  > :not(:first-child) {
+    margin-top: -1px;
   }
 }
 
-/* Component(s) */
-.page {
-  @include page;
-  &-title {
-    @include page-title;
+.zones {
+  @extend %flex-block;
+  &.has-gap {
+    gap: 1.5rem;
+    padding: 0;
+    > :where(:not(:first-child)) {
+      margin-top: 0;
+    }
   }
-  &s {
-    @include pages;
+  > :where(:not(:first-child)) {
+    margin-top: -1px;
   }
 }

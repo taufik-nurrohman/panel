@@ -1,8 +1,0 @@
-@use './_.scss' as *;
-
-@mixin row {
-  .row {
-    @extend %flex-block;
-    margin: 0;
-  }
-}
