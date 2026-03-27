@@ -164,6 +164,44 @@
                         </svg><span class="title">Item 3</span></li>
                     </ul>
                   </div>
+                  <h3>With Checks</h3>
+                  <pre><code>&lt;ul class="items"&gt;
+  &lt;li class="has-title item"&gt;
+    &lt;label&gt;
+      &lt;input name="test-3" type="checkbox" value="1"&gt;
+      &lt;span class="title"&gt;
+        Item 1
+      &lt;/span&gt;
+    &lt;/label&gt;
+  &lt;/li&gt;
+  &hellip;
+&lt;/ul&gt;</code></pre>
+                  <form class="has-fill has-pad has-stroke" id="test-3">
+                    <ul class="items">
+                      <li class="has-title item"><label><input checked name="test-3" type="checkbox" value="1"><span class="title">Item 1</span></label></li>
+                      <li class="has-title item"><label><input name="test-3" type="checkbox" value="2"><span class="title">Item 2</span></label></li>
+                      <li class="has-title item"><label><input name="test-3" type="checkbox" value="3"><span class="title">Item 3</span></label></li>
+                    </ul>
+                  </form>
+                  <h3>With Radios</h3>
+                  <pre><code>&lt;ul class="items"&gt;
+  &lt;li class="has-title item"&gt;
+    &lt;label&gt;
+      &lt;input name="test-4" type="radio" value="1"&gt;
+      &lt;span class="title"&gt;
+        Item 1
+      &lt;/span&gt;
+    &lt;/label&gt;
+  &lt;/li&gt;
+  &hellip;
+&lt;/ul&gt;</code></pre>
+                  <form class="has-fill has-pad has-stroke" id="test-4">
+                    <ul class="items">
+                      <li class="has-title item"><label><input checked name="test-4" type="radio" value="1"><span class="title">Item 1</span></label></li>
+                      <li class="has-title item"><label><input name="test-4" type="radio" value="2"><span class="title">Item 2</span></label></li>
+                      <li class="has-title item"><label><input name="test-4" type="radio" value="3"><span class="title">Item 3</span></label></li>
+                    </ul>
+                  </form>
                   <h3>With Arrows, Icons, &amp; Links</h3>
                   <pre><code>&lt;ul class="items"&gt;
   &lt;li class="has-arrow has-icon has-link item"&gt;
@@ -193,7 +231,7 @@
       arrow.addEventListener('click', onClickArrow, false);
   });
 &lt;/script&gt;</code></pre>
-                  <div class="has-fill has-pad has-stroke" id="test-3">
+                  <div class="has-fill has-pad has-stroke" id="test-5">
                     <ul class="items">
                       <li class="has-arrow has-icon has-link item"><a class="arrow to-right" href="#"></a><svg class="icon" height="24" role="none" viewBox="0 0 24 24" width="24">
                           <path d="M10 4H4c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-8z"></path>
@@ -270,7 +308,7 @@
           this.classList.add('to-' + (itemsAreHidden ? 'bottom' : 'right'));
           this.parentNode.querySelector('.icon>path').setAttribute('d', itemsAreHidden ? 'M19 20H4a2 2 0 0 1-2-2V6c0-1.11.89-2 2-2h6l2 2h7a2 2 0 0 1 2 2H4v10l2.14-8h17.07l-2.28 8.5c-.23.87-1.01 1.5-1.93 1.5' : 'M10 4H4c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-8z');
       }
-      document.querySelectorAll('#test-3 .item>.arrow').forEach(arrow => {
+      document.querySelectorAll('#test-5 .item>.arrow').forEach(arrow => {
           arrow.addEventListener('click', onClickArrow, false);
       });
     </script>

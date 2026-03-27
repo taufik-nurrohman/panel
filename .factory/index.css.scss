@@ -169,12 +169,18 @@ details {
   > summary {
     cursor: pointer;
     display: block;
+    user-select: none;
   }
 }
 
 fieldset {
   border: 1px solid #000;
   padding: 1.5rem;
+}
+
+label {
+  cursor: pointer;
+  user-select: none;
 }
 
 legend {
@@ -671,6 +677,7 @@ ul {
 
 .item {
   @extend %item;
+  align-items: center;
   flex-wrap: wrap;
   &-link {
     font: inherit;
@@ -682,6 +689,11 @@ ul {
       display: none;
     }
   }
+  > label {
+    @extend %flex;
+    align-items: center;
+    gap: 0.375rem;
+  }
 }
 
 .items {
@@ -692,7 +704,7 @@ ul {
   @extend %flex;
   color: #00f;
   cursor: pointer;
-  gap: 4px;
+  gap: 0.5rem;
   position: relative;
   &-arrow {
     @extend %flex-block;

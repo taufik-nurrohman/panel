@@ -2,8 +2,10 @@
 .button-set,
 .entry,
 .entry-set,
+.item > label,
 .link,
 .title,
+.tool > label,
 .menu,
 .menu-item,
 .menu-items,
@@ -274,11 +276,17 @@ details:open > summary {
 details > summary {
   cursor: pointer;
   display: block;
+  user-select: none;
 }
 
 fieldset {
   border: 1px solid #000;
   padding: 1.5rem;
+}
+
+label {
+  cursor: pointer;
+  user-select: none;
 }
 
 legend {
@@ -795,6 +803,7 @@ a.button:not([href]),
 
 .item,
 .tool {
+  align-items: center;
   flex-wrap: wrap;
 }
 .item-link {
@@ -813,11 +822,16 @@ a.button:not([href]),
 .tool > [hidden].tools {
   display: none;
 }
+.item > label,
+.tool > label {
+  align-items: center;
+  gap: 0.375rem;
+}
 
 .link {
   color: #00f;
   cursor: pointer;
-  gap: 4px;
+  gap: 0.5rem;
   position: relative;
 }
 .link-arrow {
