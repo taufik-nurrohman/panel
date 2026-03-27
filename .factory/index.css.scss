@@ -287,6 +287,70 @@ ul {
   @extend :disabled;
 }
 
+[type='checkbox'] {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  background: color.mix(#000, #fff, 20%);
+  border: 2px solid #000;
+  cursor: pointer;
+  display: inline-block;
+  height: 1em;
+  position: relative;
+  vertical-align: middle;
+  width: 1em;
+  &::after {
+    border-bottom: 2px solid #00f;
+    border-right: 2px solid #00f;
+    bottom: 0;
+    content: "";
+    left: 6px;
+    position: absolute;
+    right: 0;
+    top: 2px;
+    transform: translate(-3.5px, -2px) rotate(45deg);
+    display: none;
+  }
+  &:checked {
+    background: #000;
+    &::after {
+      display: block;
+    }
+  }
+}
+
+[type='radio'] {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  background: color.mix(#000, #fff, 20%);
+  border-radius: 100%;
+  border: 2px solid #000;
+  cursor: pointer;
+  display: inline-block;
+  height: 1em;
+  position: relative;
+  vertical-align: middle;
+  width: 1em;
+  &::after {
+    border-radius: 100%;
+    border: 2px solid #00f;
+    bottom: 0;
+    content: "";
+    display: none;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  &:checked {
+    background: #000;
+    &::after {
+      display: block;
+    }
+  }
+}
+
 
 // Core
 
@@ -297,6 +361,7 @@ ul {
   justify-content: center;
   min-width: 0.5rem;
   opacity: 0.5;
+  &.from-top,
   &.to-bottom {
     &::after {
       border: {
@@ -305,6 +370,7 @@ ul {
       }
     }
   }
+  &.from-right,
   &.to-left {
     &::after {
       border: {
@@ -313,6 +379,7 @@ ul {
       }
     }
   }
+  &.from-left,
   &.to-right {
     &::after {
       border: {
@@ -321,6 +388,7 @@ ul {
       }
     }
   }
+  &.from-bottom,
   &.to-top {
     &::after {
       border: {
@@ -360,6 +428,7 @@ ul {
 
 .button {
   @extend %flex;
+  align-items: center;
   background: color.mix(#000, #fff, 80%);
   border: 1px solid #000;
   color: #fff;
@@ -401,25 +470,46 @@ ul {
     @extend %flex-block;
     flex: 1;
   }
-  &:focus,
+  &:focus-visible,
+  &:has(> :focus-visible),
   &:hover {
     background: color.mix(#000, #fff, 75%);
+    color: #fff;
     z-index: 10;
   }
+  &:has(> :focus-visible) {
+    @extend %focus;
+  }
   &.is-active,
-  &:active {
+  &:active,
+  &:has(> :checked) {
     background: color.mix(#000, #fff, 85%);
+    color: #fff;
     z-index: 10;
   }
   &.not-active {
     background: color.mix(#000, #fff, 50%);
     border-color: color.mix(#000, #fff, 80%);
+    color: #fff;
   }
-  &:disabled {
+  &:disabled,
+  &:is([aria-disabled='true']) {
     @extend :disabled;
+    color: #fff;
   }
-  &[aria-disabled='true'] {
-    @extend [aria-disabled='true'];
+  > input {
+    &[type='checkbox'],
+    &[type='radio'] {
+      &:first-child {
+        left: -0.125rem;
+      }
+      &:focus-visible {
+        outline-color: #fff;
+      }
+      &:last-child {
+        right: -0.125rem;
+      }
+    }
   }
 }
 
@@ -531,11 +621,9 @@ ul {
     background: color.mix(#000, #fff, 15%);
     border-color: color.mix(#000, #fff, 75%);
   }
-  &:disabled {
+  &:disabled,
+  &:is([aria-disabled='true']) {
     @extend :disabled;
-  }
-  &[aria-disabled='true'] {
-    @extend [aria-disabled='true'];
   }
 }
 

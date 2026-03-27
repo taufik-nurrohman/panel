@@ -1,0 +1,118 @@
+extends ../_.pug
+
+block content
+  h1 Button &amp; Buttons
+  p Buttons.
+  h2 Examples
+  h3 Basic
+  pre: code
+    | &lt;p class="buttons" role="group"&gt;
+    |   &lt;button class="button"&gt;
+    |     Button 1
+    |   &lt;/button&gt;
+    |   &lt;input class="button" type="button" value="Button 2"&gt;
+    |   &lt;a class="button" href="#" role="button"&gt;
+    |     Button 3
+    |   &lt;/a&gt;
+    | &lt;/p&gt;
+  #test-1.has-fill.has-pad.has-stroke
+    p.buttons(role='group')
+      button.button Button 1
+      input.button(type='button' value='Button 2')
+      a.button(href='#' role='button') Button 3
+  h3 Disabled
+  pre: code
+    | &lt;p class="buttons" role="group"&gt;
+    |   &lt;button class="button not-active" disabled&gt;
+    |     Button 1
+    |   &lt;/button&gt;
+    |   &lt;input class="button not-active" disabled type="button" value="Button 2"&gt;
+    |   &lt;a aria-disabled="true" class="button not-active" href="#" role="button"&gt;
+    |     Button 3
+    |   &lt;/a&gt;
+    | &lt;/p&gt;
+  #test-2.has-fill.has-pad.has-stroke
+    p.buttons(role='group')
+      button.button.not-active(disabled) Button 1
+      input.button.not-active(disabled type='button' value='Button 2')
+      a.button.not-active(aria-disabled='true' href='#' role='button') Button 3
+  h3 Pressed
+  pre: code
+    | &lt;p class="buttons" role="group"&gt;
+    |   &lt;button aria-pressed="true" class="button is-active"&gt;
+    |     Button 1
+    |   &lt;/button&gt;
+    |   &lt;input aria-pressed="true" class="button is-active" type="button" value="Button 2"&gt;
+    |   &lt;a aria-pressed="true" class="button is-active" href="#" role="button"&gt;
+    |     Button 3
+    |   &lt;/a&gt;
+    | &lt;/p&gt;
+  #test-3.has-fill.has-pad.has-stroke
+    p.buttons(role='group')
+      button.button.is-active(aria-pressed='true') Button 1
+      input.button.is-active(aria-pressed='true' type='button' value='Button 2')
+      a.button.is-active(aria-pressed='true' href='#' role='button') Button 3
+  h3 With Arrow
+  pre: code
+    | &lt;p class="buttons" role="group"&gt;
+    |   &lt;button class="button has-arrow has-title"&gt;
+    |     &lt;span class="button-title title"&gt;
+    |       Button
+    |     &lt;/span&gt;
+    |     &lt;span class="arrow button-arrow to-bottom"&gt;&lt;/span&gt;
+    |   &lt;/button&gt;
+    |   &lt;button class="button has-arrow" title="Options&amp;hellip;"&gt;
+    |     &lt;span class="arrow button-arrow to-bottom"&gt;&lt;/span&gt;
+    |   &lt;/button&gt;
+    |   &lt;button class="button has-arrow has-title"&gt;
+    |     &lt;span class="arrow button-arrow to-bottom"&gt;&lt;/span&gt;
+    |     &lt;span class="button-title title"&gt;
+    |       Button
+    |     &lt;/span&gt;
+    |   &lt;/button&gt;
+    | &lt;/p&gt;
+  #test-4.has-fill.has-pad.has-stroke
+    p.buttons(role='group')
+      button.button.has-arrow.has-title
+        span.button-title.title Button
+        span.arrow.button-arrow.to-bottom
+      button.button.has-arrow(title!='Options&hellip;')
+        span.arrow.button-arrow.to-bottom
+      button.button.has-arrow.has-title
+        span.arrow.button-arrow.to-bottom
+        span.button-title.title Button
+  h3 With Icon
+  pre: code
+    | &lt;p class="buttons" role="group"&gt;
+    |   &lt;button class="button has-icon has-title"&gt;
+    |     &lt;svg class="button-icon icon" height="24" viewBox="0 0 24 24" width="24"&gt; &hellip; &lt;/svg&gt;
+    |     &lt;span class="button-title title"&gt;
+    |       Button
+    |     &lt;/span&gt;
+    |   &lt;/button&gt;
+    |   &lt;button class="button has-icon" title="Add&amp;hellip;"&gt;
+    |     &lt;svg class="button-icon icon" height="24" viewBox="0 0 24 24" width="24"&gt; &hellip; &lt;/svg&gt;
+    |   &lt;/button&gt;
+    |   &lt;button class="button has-icon has-title"&gt;
+    |     &lt;span class="button-title title"&gt;
+    |       Button
+    |     &lt;/span&gt;
+    |     &lt;svg class="button-icon icon" height="24" viewBox="0 0 24 24" width="24"&gt; &hellip; &lt;/svg&gt;
+    |   &lt;/button&gt;
+    | &lt;/p&gt;
+  #test-5.has-fill.has-pad.has-stroke
+    p.buttons(role='group')
+      button.button.has-icon.has-title
+        svg.button-icon.icon(height='24' viewBox='0 0 24 24' width='24')
+          path(d='M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z')
+        span.button-title.title Button
+      button.button.has-icon(title!='Add&hellip;')
+        svg.button-icon.icon(height='24' viewBox='0 0 24 24' width='24')
+          path(d='M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z')
+      button.button.has-icon.has-title
+        span.button-title.title Button
+        svg.button-icon.icon(height='24' viewBox='0 0 24 24' width='24')
+          path(d='M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z')
+
+block style
+  title Button &amp; Buttons &middot; Type &middot; Panel

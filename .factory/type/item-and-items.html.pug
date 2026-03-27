@@ -2,14 +2,23 @@ extends ../_.pug
 
 block content
   h1 Item &amp; Items
-  p A list view.
+  p Items.
   h2 Examples
   h3 Basic
   pre: code
     | &lt;ul class="items"&gt;
-    |   &lt;li class="item"&gt;Item 1&lt;/li&gt;
-    |   &lt;li class="item"&gt;Item 2&lt;/li&gt;
-    |   &lt;li class="item"&gt;Item 3&lt;/li&gt;
+    |   &lt;li class="item"&gt;
+    |     Item 1
+    |   &lt;/li&gt;
+    |   &lt;li class="item"&gt;
+    |     Item 2
+    |     &lt;ul class="items"&gt;
+    |       &hellip;
+    |     &lt;/ul&gt;
+    |   &lt;/li&gt;
+    |   &lt;li class="item"&gt;
+    |     Item 3
+    |   &lt;/li&gt;
     | &lt;/ul&gt;
   #test-1.has-fill.has-pad.has-stroke
     ul.items
