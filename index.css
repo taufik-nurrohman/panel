@@ -398,8 +398,8 @@ ul {
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
-  background: #cccccc;
-  border: 2px solid #000;
+  background: rgba(128, 128, 128, 0.5) none no-repeat 50% 50%;
+  border: 1px solid #000;
   cursor: pointer;
   display: inline-block;
   height: 1em;
@@ -407,32 +407,17 @@ ul {
   vertical-align: middle;
   width: 1em;
 }
-[type=checkbox]::after {
-  border-bottom: 2px solid #00f;
-  border-right: 2px solid #00f;
-  bottom: 0;
-  content: "";
-  left: 6px;
-  position: absolute;
-  right: 0;
-  top: 2px;
-  transform: translate(-3.5px, -2px) rotate(45deg);
-  display: none;
-}
 [type=checkbox]:checked {
-  background: #000;
-}
-[type=checkbox]:checked::after {
-  display: block;
+  background-image: url("data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjkiIHZpZXdCb3g9IjAgMCAxMiA5IiB3aWR0aD0iMTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMTEuNzguMjJhLjc1Ljc1IDAgMCAxIDAgMS4wNjFMNC41MiA4LjU0MWEuNzUuNzUgMCAwIDEtMS4wNjIgMEwuMjAyIDUuMjg1YS43NS43NSAwIDAgMSAxLjA2MS0xLjA2MWwyLjcyNSAyLjcyM0wxMC43MTguMjJhLjc1Ljc1IDAgMCAxIDEuMDYyIDAiIGZpbGw9IiMwMDAiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPjwvc3ZnPg==");
 }
 
 [type=radio] {
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
-  background: #cccccc;
+  background: rgba(128, 128, 128, 0.5) none no-repeat 50% 50%;
   border-radius: 100%;
-  border: 2px solid #000;
+  border: 1px solid #000;
   cursor: pointer;
   display: inline-block;
   height: 1em;
@@ -440,22 +425,8 @@ ul {
   vertical-align: middle;
   width: 1em;
 }
-[type=radio]::after {
-  border-radius: 100%;
-  border: 2px solid #00f;
-  bottom: 0;
-  content: "";
-  display: none;
-  left: 0;
-  position: absolute;
-  right: 0;
-  top: 0;
-}
 [type=radio]:checked {
-  background: #000;
-}
-[type=radio]:checked::after {
-  display: block;
+  background-image: radial-gradient(circle, #000 0 40%, transparent 41% 100%);
 }
 
 .arrow {
@@ -547,6 +518,9 @@ ul {
 }
 .button-title {
   flex: 1;
+}
+.button:focus {
+  color: #fff;
 }
 .button:focus-visible,
 .button:has(> :focus-visible),
