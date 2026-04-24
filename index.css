@@ -2,33 +2,69 @@
 .button-set,
 .entry,
 .entry-set,
+.flex,
+.flex-x,
 .item > label,
 .link,
 .title,
 .tool > label,
 .menu,
-.menu-item,
 .menu-items,
 .menu-link,
 .arrow,
-.button-arrow,
 .button-title,
-.buttons,
-.column,
 .columns,
-.entries,
-.link-arrow,
+.flex-fill,
+.flex-x-fill,
 .link-title,
 .links,
 .list,
 .list-title,
 .row,
+.menu-item,
+.menus {
+  align-items: stretch;
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  vertical-align: middle;
+}
+
+.arrow,
+.button-title,
+.columns,
+.flex-fill,
+.flex-x-fill,
+.link-title,
+.links,
+.list,
+.list-title,
+.row,
+.menu-item,
+.menus {
+  display: flex;
+}
+
+.flex-y,
+.zone,
+.column,
+.flex-y-fill,
 .rows,
-.title-arrow,
-.menu-arrow,
-.menus,
 .pages,
-.zones,
+.zones {
+  align-items: stretch;
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.column,
+.flex-y-fill,
+.rows,
+.pages,
+.zones {
+  display: flex;
+}
+
 .items,
 .tools,
 .bar,
@@ -41,25 +77,6 @@
   vertical-align: middle;
 }
 
-.arrow,
-.button-arrow,
-.button-title,
-.buttons,
-.column,
-.columns,
-.entries,
-.link-arrow,
-.link-title,
-.links,
-.list,
-.list-title,
-.row,
-.rows,
-.title-arrow,
-.menu-arrow,
-.menus,
-.pages,
-.zones,
 .items,
 .tools,
 .bar,
@@ -258,11 +275,13 @@ a[aria-disabled=true] {
   color: inherit;
 }
 
-button {
+button,
+[role=button] {
   border-style: solid;
   border-width: 1px;
   cursor: pointer;
   padding: 0 0.375rem;
+  user-select: none;
 }
 
 code {
@@ -431,7 +450,6 @@ ul {
 
 .arrow {
   align-items: center;
-  flex-direction: row;
   justify-content: center;
   min-width: 0.5rem;
   opacity: 0.5;
@@ -484,9 +502,9 @@ ul {
 
 .button {
   align-items: center;
-  background: #333333;
+  background: rgb(216.75, 216.75, 216.75);
   border: 1px solid #000;
-  color: #fff;
+  color: #000;
   cursor: pointer;
   gap: 0.25rem;
   min-height: 1.875rem;
@@ -494,7 +512,7 @@ ul {
   position: relative;
 }
 .button-arrow {
-  border-color: #fff;
+  border-color: #000;
   margin: 0 0.25rem;
   opacity: 1;
 }
@@ -520,31 +538,34 @@ ul {
   flex: 1;
 }
 .button:focus {
-  color: #fff;
+  color: #000;
 }
 .button:focus-visible,
 .button:has(> :focus-visible),
 .button:hover {
-  background: rgb(63.75, 63.75, 63.75);
-  color: #fff;
+  background: rgb(229.5, 229.5, 229.5);
+  color: #000;
   z-index: 10;
 }
 .button.is-active,
 .button:active,
 .button:has(> :checked) {
-  background: rgb(38.25, 38.25, 38.25);
-  color: #fff;
-  z-index: 10;
+  background: rgb(191.25, 191.25, 191.25);
+  color: #000;
 }
 .button.not-active {
-  background: rgb(127.5, 127.5, 127.5);
-  border-color: #333333;
-  color: #fff;
+  background: rgb(242.25, 242.25, 242.25);
+  border-color: rgb(63.75, 63.75, 63.75);
+  color: rgb(63.75, 63.75, 63.75);
 }
 .button:disabled,
 a.button:not([href]),
 .button:is([aria-disabled=true]) {
-  color: #fff;
+  color: rgb(63.75, 63.75, 63.75);
+}
+.button > input[type=checkbox],
+.button > input[type=radio] {
+  background-color: #fff;
 }
 .button > input[type=checkbox]:first-child,
 .button > input[type=radio]:first-child {
@@ -552,30 +573,11 @@ a.button:not([href]),
 }
 .button > input[type=checkbox]:focus-visible,
 .button > input[type=radio]:focus-visible {
-  outline-color: #fff;
+  outline: 0;
 }
 .button > input[type=checkbox]:last-child,
 .button > input[type=radio]:last-child {
   right: -0.125rem;
-}
-
-.buttons {
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  justify-content: inherit;
-}
-.buttons.to-center {
-  justify-content: center;
-}
-.buttons.to-fill {
-  justify-content: space-between;
-}
-.buttons.to-start {
-  justify-content: start;
-}
-.buttons.to-end {
-  justify-content: end;
 }
 
 .column {
@@ -584,7 +586,6 @@ a.button:not([href]),
 }
 
 .columns {
-  flex-direction: row;
   flex: 1;
   margin: 0;
 }
@@ -635,6 +636,9 @@ a.button:not([href]),
 .columns > .column.fill-12 {
   flex-basis: calc(8.3333333333% * 12);
   max-width: calc(8.3333333333% * 12);
+}
+.columns.has-gap {
+  gap: 0;
 }
 .columns.has-gap > .column {
   margin: 0.75rem;
@@ -738,27 +742,11 @@ a.button:not([href]),
   background: rgb(216.75, 216.75, 216.75);
   border-color: rgb(63.75, 63.75, 63.75);
 }
-.entries {
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  justify-content: inherit;
-}
-.entries.to-center {
-  justify-content: center;
-}
-.entries.to-fill {
-  justify-content: space-between;
-}
-.entries.to-start {
-  justify-content: start;
-}
-.entries.to-end {
-  justify-content: end;
-}
-
 .has-fill {
   background: #cccccc;
+}
+.has-gap {
+  gap: 0.75rem;
 }
 .has-pad {
   padding: 1.5rem;
@@ -955,6 +943,31 @@ a.button:not([href]),
 }
 .title-hint {
   color: rgb(127.5, 127.5, 127.5);
+}
+
+.to-center {
+  justify-content: center;
+  text-align: center;
+}
+.to-end {
+  justify-content: end;
+  text-align: end;
+}
+.to-fill {
+  justify-content: space-between;
+  text-align: justify;
+}
+.to-left {
+  justify-content: left;
+  text-align: left;
+}
+.to-right {
+  justify-content: right;
+  text-align: right;
+}
+.to-start {
+  justify-content: start;
+  text-align: start;
 }
 
 .tools {

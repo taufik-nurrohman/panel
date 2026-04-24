@@ -153,6 +153,7 @@ button {
   }
   cursor: pointer;
   padding: 0 0.375rem;
+  user-select: none;
 }
 
 code {
@@ -289,6 +290,10 @@ ul {
   padding: 0.75rem 1.125rem;
 }
 
+[role='button'] {
+  @extend button;
+}
+
 [aria-disabled='true'] {
   @extend :disabled;
 }
@@ -332,9 +337,8 @@ ul {
 // Core
 
 .arrow {
-  @extend %flex-block;
+  @extend %flex-x-fill;
   align-items: center;
-  flex-direction: row;
   justify-content: center;
   min-width: 0.5rem;
   opacity: 0.5;
@@ -404,19 +408,18 @@ ul {
 }
 
 .button {
-  @extend %flex;
+  @extend %flex-x;
   align-items: center;
-  background: color.mix(#000, #fff, 80%);
+  background: color.mix(#000, #fff, 15%);
   border: 1px solid #000;
-  color: #fff;
+  color: #000;
   cursor: pointer;
   gap: 0.25rem;
   min-height: 1.875rem;
   padding: 0.125rem 0.5rem;
   position: relative;
   &-arrow {
-    @extend %flex-block;
-    border-color: #fff;
+    border-color: #000;
     margin: 0 0.25rem;
     opacity: 1;
     &:first-child {
@@ -435,7 +438,7 @@ ul {
     }
   }
   &-set {
-    @extend %flex;
+    @extend %flex-x;
     position: relative;
     > .button {
       &:not(:first-child) {
@@ -444,17 +447,17 @@ ul {
     }
   }
   &-title {
-    @extend %flex-block;
+    @extend %flex-x-fill;
     flex: 1;
   }
   &:focus {
-    color: #fff;
+    color: #000;
   }
   &:focus-visible,
   &:has(> :focus-visible),
   &:hover {
-    background: color.mix(#000, #fff, 75%);
-    color: #fff;
+    background: color.mix(#000, #fff, 10%);
+    color: #000;
     z-index: 10;
   }
   &:has(> :focus-visible) {
@@ -463,28 +466,28 @@ ul {
   &.is-active,
   &:active,
   &:has(> :checked) {
-    background: color.mix(#000, #fff, 85%);
-    color: #fff;
-    z-index: 10;
+    background: color.mix(#000, #fff, 25%);
+    color: #000;
   }
   &.not-active {
-    background: color.mix(#000, #fff, 50%);
-    border-color: color.mix(#000, #fff, 80%);
-    color: #fff;
+    background: color.mix(#000, #fff, 5%);
+    border-color: color.mix(#000, #fff, 75%);
+    color: color.mix(#000, #fff, 75%);
   }
   &:disabled,
   &:is([aria-disabled='true']) {
     @extend :disabled;
-    color: #fff;
+    color: color.mix(#000, #fff, 75%);
   }
   > input {
     &[type='checkbox'],
     &[type='radio'] {
+      background-color: #fff;
       &:first-child {
         left: -0.125rem;
       }
       &:focus-visible {
-        outline-color: #fff;
+        outline: 0;
       }
       &:last-child {
         right: -0.125rem;
@@ -493,37 +496,14 @@ ul {
   }
 }
 
-.buttons {
-  @extend %flex-block;
-  flex: {
-    direction: row;
-    wrap: wrap;
-  }
-  gap: 0.75rem;
-  justify-content: inherit;
-  &.to-center {
-    justify-content: center;
-  }
-  &.to-fill {
-    justify-content: space-between;
-  }
-  &.to-start {
-    justify-content: start;
-  }
-  &.to-end {
-    justify-content: end;
-  }
-}
-
 .column {
-  @extend %flex-block;
+  @extend %flex-y-fill;
   flex: 1;
   margin: 0;
 }
 
 .columns {
-  @extend %flex-block;
-  flex-direction: row;
+  @extend %flex-x-fill;
   flex: 1;
   margin: 0;
   > .column {
@@ -535,6 +515,7 @@ ul {
     }
   }
   &.has-gap {
+    gap: 0;
     > .column {
       margin: 0.75rem;
       @for $i from 1 through 12 {
@@ -568,7 +549,7 @@ ul {
 .entry {
   -moz-appearance: none;
   -webkit-appearance: none;
-  @extend %flex;
+  @extend %flex-x;
   appearance: none;
   background: color.mix(#000, #fff, 10%);
   border: 1px solid #000;
@@ -578,7 +559,7 @@ ul {
   padding: 2px 8px;
   position: relative;
   &-set {
-    @extend %flex;
+    @extend %flex-x;
     position: relative;
     > .entry {
       &:not(:first-child) {
@@ -607,31 +588,30 @@ ul {
   }
 }
 
-.entries {
-  @extend %flex-block;
-  flex: {
-    direction: row;
-    wrap: wrap;
-  }
-  gap: 0.75rem;
-  justify-content: inherit;
-  &.to-center {
-    justify-content: center;
-  }
-  &.to-fill {
-    justify-content: space-between;
-  }
-  &.to-start {
-    justify-content: start;
-  }
-  &.to-end {
-    justify-content: end;
-  }
+.flex,
+.flex-x {
+  @extend %flex-x;
+}
+
+.flex-fill,
+.flex-x-fill {
+  @extend %flex-x-fill;
+}
+
+.flex-y {
+  @extend %flex-y;
+}
+
+.flex-y-fill {
+  @extend %flex-y-fill;
 }
 
 .has {
   &-fill {
     background: color.mix(#000, #fff, 20%);
+  }
+  &-gap {
+    gap: 0.75rem;
   }
   &-pad {
     padding: 1.5rem;
@@ -664,7 +644,7 @@ ul {
     }
   }
   > label {
-    @extend %flex;
+    @extend %flex-x;
     align-items: center;
     gap: 0.375rem;
   }
@@ -675,13 +655,12 @@ ul {
 }
 
 .link {
-  @extend %flex;
+  @extend %flex-x;
   color: #00f;
   cursor: pointer;
   gap: 0.5rem;
   position: relative;
   &-arrow {
-    @extend %flex-block;
     margin: 0 0.25rem;
     &:first-child {
       margin-left: 0;
@@ -691,7 +670,7 @@ ul {
     }
   }
   &-title {
-    @extend %flex-block;
+    @extend %flex-x-fill;
   }
   &:focus,
   &:hover {
@@ -712,7 +691,7 @@ ul {
 }
 
 .links {
-  @extend %flex-block;
+  @extend %flex-x-fill;
   flex: {
     direction: row;
     wrap: wrap;
@@ -734,7 +713,7 @@ ul {
 }
 
 .list {
-  @extend %flex-block;
+  @extend %flex-x-fill;
   position: relative;
   &-bar {
     background: color.mix(#00f, #fff, 10%);
@@ -790,7 +769,7 @@ ul {
     }
   }
   &-title {
-    @extend %flex-block;
+    @extend %flex-x-fill;
     font-weight: bold;
   }
   &-tools {
@@ -802,12 +781,12 @@ ul {
 }
 
 .row {
-  @extend %flex-block;
+  @extend %flex-x-fill;
   margin: 0;
 }
 
 .rows {
-  @extend %flex-block;
+  @extend %flex-y-fill;
   margin: 0;
   &.has-gap {
     gap: 1.5rem;
@@ -818,13 +797,12 @@ ul {
 }
 
 .title {
-  @extend %flex;
+  @extend %flex-x;
   color: inherit;
   flex: 1;
   font: inherit;
   gap: 0.25rem;
   &-arrow {
-    @extend %flex-block;
     margin: 0 0.25rem;
     &::after {
       border: 0 solid transparent;
@@ -852,6 +830,33 @@ ul {
   }
 }
 
+.to {
+  &-center {
+    justify-content: center;
+    text-align: center;
+  }
+  &-end {
+    justify-content: end;
+    text-align: end;
+  }
+  &-fill {
+    justify-content: space-between;
+    text-align: justify;
+  }
+  &-left {
+    justify-content: left;
+    text-align: left;
+  }
+  &-right {
+    justify-content: right;
+    text-align: right;
+  }
+  &-start {
+    justify-content: start;
+    text-align: start;
+  }
+}
+
 .tool {
   @extend .item;
   &-set {}
@@ -871,13 +876,12 @@ ul {
 // Component(s)
 
 .menu {
-  @extend %flex;
+  @extend %flex-x;
   background: #fff;
   border: 1px solid #000;
   color: #000;
   cursor: default;
   &-arrow {
-    @extend %flex-block;
     border: {
       left: 1px solid;
       left-color: inherit;
@@ -901,7 +905,7 @@ ul {
     margin: 0 0.1875rem;
   }
   &-item {
-    @extend %flex;
+    @extend %flex-x-fill;
     border: 0 solid;
     border: {
       color: inherit;
@@ -949,7 +953,7 @@ ul {
     }
   }
   &-items {
-    @extend %flex;
+    @extend %flex-x;
     align-items: stretch;
     border-color: inherit;
     flex-direction: row;
@@ -959,7 +963,7 @@ ul {
     padding: 0;
   }
   &-link {
-    @extend %flex;
+    @extend %flex-x;
     flex-wrap: nowrap;
     flex: 1;
     overflow: hidden;
@@ -1007,7 +1011,7 @@ ul {
 }
 
 .menus {
-  @extend %flex-block;
+  @extend %flex-x-fill;
   gap: 1.5rem;
 }
 
@@ -1029,7 +1033,7 @@ ul {
 }
 
 .pages {
-  @extend %flex-block;
+  @extend %flex-y-fill;
   margin: {
     left: auto;
     right: auto;
@@ -1046,6 +1050,7 @@ ul {
 }
 
 .zone {
+  @extend %flex-y;
   position: relative;
   &-bar {
     background: color.mix(#00f, #fff, 10%);
@@ -1064,7 +1069,7 @@ ul {
 }
 
 .zones {
-  @extend %flex-block;
+  @extend %flex-y-fill;
   &.has-gap {
     gap: 1.5rem;
     padding: 0;

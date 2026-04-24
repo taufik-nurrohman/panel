@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width" name="viewport">
     <link href="../index.min.css?v=1.0.0" rel="stylesheet">
-    <title>Button &amp; Buttons &middot; Type &middot; Panel</title>
+    <title>Button &middot; Type &middot; Panel</title>
   </head>
   <body class="has-pad" role="application">
     <div class="has-gap rows">
@@ -98,11 +98,11 @@
                   <h1 class="title zone-title">Content</h1>
                 </div>
                 <div class="content zone-content">
-                  <h1>Button &amp; Buttons</h1>
+                  <h1>Button</h1>
                   <p>Buttons.</p>
                   <h2>Examples</h2>
                   <h3>Basic</h3>
-                  <pre><code>&lt;p class="buttons" role="group"&gt;
+                  <pre><code>&lt;p class="flex-fill has-gap to-center" role="group"&gt;
   &lt;button class="button"&gt;
     Button 1
   &lt;/button&gt;
@@ -112,23 +112,23 @@
   &lt;/a&gt;
 &lt;/p&gt;</code></pre>
                   <div class="has-fill has-pad has-stroke" id="test-1">
-                    <p class="buttons" role="group"><button class="button">Button 1</button><input class="button" type="button" value="Button 2"><a class="button" href="#" role="button">Button 3</a></p>
+                    <p class="flex-fill has-gap to-center" role="group"><button class="button">Button 1</button><input class="button" type="button" value="Button 2"><a class="button" href="#" role="button">Button 3</a></p>
                   </div>
                   <h3>Disabled</h3>
-                  <pre><code>&lt;p class="buttons" role="group"&gt;
+                  <pre><code>&lt;p class="flex-fill has-gap to-center" role="group"&gt;
   &lt;button class="button not-active" disabled&gt;
     Button 1
   &lt;/button&gt;
   &lt;input class="button not-active" disabled type="button" value="Button 2"&gt;
-  &lt;a aria-disabled="true" class="button not-active" href="#" role="button"&gt;
+  &lt;a aria-disabled="true" class="button not-active" role="button"&gt;
     Button 3
   &lt;/a&gt;
 &lt;/p&gt;</code></pre>
                   <div class="has-fill has-pad has-stroke" id="test-2">
-                    <p class="buttons" role="group"><button class="button not-active" disabled>Button 1</button><input class="button not-active" disabled type="button" value="Button 2"><a class="button not-active" aria-disabled="true" href="#" role="button">Button 3</a></p>
+                    <p class="flex-fill has-gap to-center" role="group"><button class="button not-active" disabled>Button 1</button><input class="button not-active" disabled type="button" value="Button 2"><a class="button not-active" aria-disabled="true" role="button">Button 3</a></p>
                   </div>
                   <h3>Pressed</h3>
-                  <pre><code>&lt;p class="buttons" role="group"&gt;
+                  <pre><code>&lt;p class="flex-fill has-gap to-center" role="group"&gt;
   &lt;button aria-pressed="true" class="button is-active"&gt;
     Button 1
   &lt;/button&gt;
@@ -138,10 +138,10 @@
   &lt;/a&gt;
 &lt;/p&gt;</code></pre>
                   <div class="has-fill has-pad has-stroke" id="test-3">
-                    <p class="buttons" role="group"><button class="button is-active" aria-pressed="true">Button 1</button><input class="button is-active" aria-pressed="true" type="button" value="Button 2"><a class="button is-active" aria-pressed="true" href="#" role="button">Button 3</a></p>
+                    <p class="flex-fill has-gap to-center" role="group"><button class="button is-active" aria-pressed="true">Button 1</button><input class="button is-active" aria-pressed="true" type="button" value="Button 2"><a class="button is-active" aria-pressed="true" href="#" role="button">Button 3</a></p>
                   </div>
                   <h3>With Arrow</h3>
-                  <pre><code>&lt;p class="buttons" role="group"&gt;
+                  <pre><code>&lt;p class="flex-fill has-gap to-center" role="group"&gt;
   &lt;button class="button has-arrow has-title"&gt;
     &lt;span class="button-title title"&gt;
       Button
@@ -159,10 +159,10 @@
   &lt;/button&gt;
 &lt;/p&gt;</code></pre>
                   <div class="has-fill has-pad has-stroke" id="test-4">
-                    <p class="buttons" role="group"><button class="button has-arrow has-title"><span class="button-title title">Button</span><span class="arrow button-arrow to-bottom"></span></button><button class="button has-arrow" title="Options&hellip;"><span class="arrow button-arrow to-bottom"></span></button><button class="button has-arrow has-title"><span class="arrow button-arrow to-bottom"></span><span class="button-title title">Button</span></button></p>
+                    <p class="flex-fill has-gap to-center" role="group"><button class="button has-arrow has-title"><span class="button-title title">Button</span><span class="arrow button-arrow to-bottom"></span></button><button class="button has-arrow" title="Options&hellip;"><span class="arrow button-arrow to-bottom"></span></button><button class="button has-arrow has-title"><span class="arrow button-arrow to-bottom"></span><span class="button-title title">Button</span></button></p>
                   </div>
                   <h3>With Icon</h3>
-                  <pre><code>&lt;p class="buttons" role="group"&gt;
+                  <pre><code>&lt;p class="flex-fill has-gap to-center" role="group"&gt;
   &lt;button class="button has-icon has-title"&gt;
     &lt;svg class="button-icon icon" height="24" viewBox="0 0 24 24" width="24"&gt; &hellip; &lt;/svg&gt;
     &lt;span class="button-title title"&gt;
@@ -180,7 +180,7 @@
   &lt;/button&gt;
 &lt;/p&gt;</code></pre>
                   <div class="has-fill has-pad has-stroke" id="test-5">
-                    <p class="buttons" role="group"><button class="button has-icon has-title"><svg class="button-icon icon" height="24" viewBox="0 0 24 24" width="24">
+                    <p class="flex-fill has-gap to-center" role="group"><button class="button has-icon has-title"><svg class="button-icon icon" height="24" viewBox="0 0 24 24" width="24">
                           <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"></path>
                         </svg><span class="button-title title">Button</span></button><button class="button has-icon" title="Add&hellip;"><svg class="button-icon icon" height="24" viewBox="0 0 24 24" width="24">
                           <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"></path>

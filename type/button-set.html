@@ -102,7 +102,7 @@
                   <p>Button set.</p>
                   <h2>Examples</h2>
                   <h3>Basic</h3>
-                  <pre><code>&lt;p class="buttons" role="group"&gt;
+                  <pre><code>&lt;p class="flex-fill has-gap to-center" role="group"&gt;
   &lt;span class="button-set" role="group"&gt;
     &lt;button class="button"&gt;
       Button 1
@@ -119,10 +119,10 @@
   &lt;/button&gt;
 &lt;/p&gt;</code></pre>
                   <div class="has-fill has-pad has-stroke" id="test-1">
-                    <p class="buttons" role="group"><span class="button-set" role="group"><button class="button">Button 1</button><button class="button">Button 2</button><button class="button">Button 3</button></span><button class="button">Button 4</button></p>
+                    <p class="flex-fill has-gap to-center" role="group"><span class="button-set" role="group"><button class="button">Button 1</button><button class="button">Button 2</button><button class="button">Button 3</button></span><button class="button">Button 4</button></p>
                   </div>
                   <h3>With Arrow</h3>
-                  <pre><code>&lt;p class="buttons" role="group"&gt;
+                  <pre><code>&lt;p class="flex-fill has-gap to-center" role="group"&gt;
   &lt;span class="button-set" role="group"&gt;
     &lt;button class="button has-title"&gt;
       &lt;span class="button-title title"&gt;
@@ -138,10 +138,10 @@
   &lt;/button&gt;
 &lt;/p&gt;</code></pre>
                   <div class="has-fill has-pad has-stroke" id="test-2">
-                    <p class="buttons" role="group"><span class="button-set" role="group"><button class="button has-title"><span class="button-title title">Button 1</span></button><button class="button has-arrow" title="More&hellip;"><span class="arrow button-arrow to-bottom"></span></button></span><button class="button">Button 2</button></p>
+                    <p class="flex-fill has-gap to-center" role="group"><span class="button-set" role="group"><button class="button has-title"><span class="button-title title">Button 1</span></button><button class="button has-arrow" title="More&hellip;"><span class="arrow button-arrow to-bottom"></span></button></span><button class="button">Button 2</button></p>
                   </div>
                   <h3>With Icon</h3>
-                  <pre><code>&lt;p class="buttons" role="group"&gt;
+                  <pre><code>&lt;p class="flex-fill has-gap to-center" role="group"&gt;
   &lt;span class="button-set" role="group"&gt;
     &lt;button class="button has-icon" title="Select&amp;hellip;"&gt;
       &lt;svg class="button-icon icon" height="24" viewBox="0 0 24 24" width="24"&gt; &hellip; &lt;/svg&gt;
@@ -157,13 +157,13 @@
   &lt;/button&gt;
 &lt;/p&gt;</code></pre>
                   <div class="has-fill has-pad has-stroke" id="test-3">
-                    <p class="buttons" role="group"><span class="button-set" role="group"><button class="button has-icon" title="Select&hellip;"><svg class="button-icon icon" height="24" viewBox="0 0 24 24" width="24">
+                    <p class="flex-fill has-gap to-center" role="group"><span class="button-set" role="group"><button class="button has-icon" title="Select&hellip;"><svg class="button-icon icon" height="24" viewBox="0 0 24 24" width="24">
                             <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"></path>
                           </svg></button><button class="button has-title"><span class="button-title title">Button 1</span></button></span><button class="button">Button 2</button></p>
                   </div>
                   <h3>With Radios</h3>
                   <pre><code>&lt;form&gt;
-  &lt;p class="buttons" role="group"&gt;
+  &lt;p class="flex-fill has-gap to-center" role="group"&gt;
     &lt;span class="button-set" role="group"&gt;
       &lt;label class="button"&gt;
         &lt;input name="test-2" type="radio" value="1"&gt; Button 1
@@ -181,11 +181,11 @@
   &lt;/p&gt;
 &lt;/form&gt;</code></pre>
                   <form class="has-fill has-pad has-stroke" id="test-4">
-                    <p class="buttons" role="group"><span class="button-set" role="group"><label class="button"><input name="test-4" type="radio" value="1"> Button 1</label><label class="button"><input name="test-4" type="radio" value="2"> Button 2</label><label class="button"><input name="test-4" type="radio" value="3"> Button 3</label></span><button class="button" type="button">Button 4</button></p>
+                    <p class="flex-fill has-gap to-center" role="group"><span class="button-set" role="group"><label class="button"><input name="test-4" type="radio" value="1"> Button 1</label><label class="button"><input name="test-4" type="radio" value="2"> Button 2</label><label class="button"><input name="test-4" type="radio" value="3"> Button 3</label></span><button class="button" type="button">Button 4</button></p>
                   </form>
                   <h3>With Checks</h3>
                   <pre><code>&lt;form&gt;
-  &lt;p class="buttons" role="group"&gt;
+  &lt;p class="flex-fill has-gap to-center" role="group"&gt;
     &lt;span class="button-set" role="group"&gt;
       &lt;label class="button"&gt;
         &lt;input name="test-3" type="checkbox" value="1"&gt; Button 1
@@ -203,7 +203,7 @@
   &lt;/p&gt;
 &lt;/form&gt;</code></pre>
                   <form class="has-fill has-pad has-stroke" id="test-5">
-                    <p class="buttons" role="group"><span class="button-set" role="group"><label class="button"><input name="test-5" type="checkbox" value="1"> Button 1</label><label class="button"><input name="test-5" type="checkbox" value="2"> Button 2</label><label class="button"><input name="test-5" type="checkbox" value="3"> Button 3</label></span><button class="button" type="button">Button 4</button></p>
+                    <p class="flex-fill has-gap to-center" role="group"><span class="button-set" role="group"><label class="button"><input name="test-5" type="checkbox" value="1"> Button 1</label><label class="button"><input name="test-5" type="checkbox" value="2"> Button 2</label><label class="button"><input name="test-5" type="checkbox" value="3"> Button 3</label></span><button class="button" type="button">Button 4</button></p>
                   </form>
                 </div>
               </div>

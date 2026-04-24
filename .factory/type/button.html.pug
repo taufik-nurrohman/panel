@@ -1,12 +1,12 @@
 extends ../_.pug
 
 block content
-  h1 Button &amp; Buttons
+  h1 Button
   p Buttons.
   h2 Examples
   h3 Basic
   pre: code
-    | &lt;p class="buttons" role="group"&gt;
+    | &lt;p class="flex-fill has-gap to-center" role="group"&gt;
     |   &lt;button class="button"&gt;
     |     Button 1
     |   &lt;/button&gt;
@@ -16,29 +16,29 @@ block content
     |   &lt;/a&gt;
     | &lt;/p&gt;
   #test-1.has-fill.has-pad.has-stroke
-    p.buttons(role='group')
+    p.flex-fill.has-gap.to-center(role='group')
       button.button Button 1
       input.button(type='button' value='Button 2')
       a.button(href='#' role='button') Button 3
   h3 Disabled
   pre: code
-    | &lt;p class="buttons" role="group"&gt;
+    | &lt;p class="flex-fill has-gap to-center" role="group"&gt;
     |   &lt;button class="button not-active" disabled&gt;
     |     Button 1
     |   &lt;/button&gt;
     |   &lt;input class="button not-active" disabled type="button" value="Button 2"&gt;
-    |   &lt;a aria-disabled="true" class="button not-active" href="#" role="button"&gt;
+    |   &lt;a aria-disabled="true" class="button not-active" role="button"&gt;
     |     Button 3
     |   &lt;/a&gt;
     | &lt;/p&gt;
   #test-2.has-fill.has-pad.has-stroke
-    p.buttons(role='group')
+    p.flex-fill.has-gap.to-center(role='group')
       button.button.not-active(disabled) Button 1
       input.button.not-active(disabled type='button' value='Button 2')
-      a.button.not-active(aria-disabled='true' href='#' role='button') Button 3
+      a.button.not-active(aria-disabled='true' role='button') Button 3
   h3 Pressed
   pre: code
-    | &lt;p class="buttons" role="group"&gt;
+    | &lt;p class="flex-fill has-gap to-center" role="group"&gt;
     |   &lt;button aria-pressed="true" class="button is-active"&gt;
     |     Button 1
     |   &lt;/button&gt;
@@ -48,13 +48,13 @@ block content
     |   &lt;/a&gt;
     | &lt;/p&gt;
   #test-3.has-fill.has-pad.has-stroke
-    p.buttons(role='group')
+    p.flex-fill.has-gap.to-center(role='group')
       button.button.is-active(aria-pressed='true') Button 1
       input.button.is-active(aria-pressed='true' type='button' value='Button 2')
       a.button.is-active(aria-pressed='true' href='#' role='button') Button 3
   h3 With Arrow
   pre: code
-    | &lt;p class="buttons" role="group"&gt;
+    | &lt;p class="flex-fill has-gap to-center" role="group"&gt;
     |   &lt;button class="button has-arrow has-title"&gt;
     |     &lt;span class="button-title title"&gt;
     |       Button
@@ -72,7 +72,7 @@ block content
     |   &lt;/button&gt;
     | &lt;/p&gt;
   #test-4.has-fill.has-pad.has-stroke
-    p.buttons(role='group')
+    p.flex-fill.has-gap.to-center(role='group')
       button.button.has-arrow.has-title
         span.button-title.title Button
         span.arrow.button-arrow.to-bottom
@@ -83,7 +83,7 @@ block content
         span.button-title.title Button
   h3 With Icon
   pre: code
-    | &lt;p class="buttons" role="group"&gt;
+    | &lt;p class="flex-fill has-gap to-center" role="group"&gt;
     |   &lt;button class="button has-icon has-title"&gt;
     |     &lt;svg class="button-icon icon" height="24" viewBox="0 0 24 24" width="24"&gt; &hellip; &lt;/svg&gt;
     |     &lt;span class="button-title title"&gt;
@@ -101,7 +101,7 @@ block content
     |   &lt;/button&gt;
     | &lt;/p&gt;
   #test-5.has-fill.has-pad.has-stroke
-    p.buttons(role='group')
+    p.flex-fill.has-gap.to-center(role='group')
       button.button.has-icon.has-title
         svg.button-icon.icon(height='24' viewBox='0 0 24 24' width='24')
           path(d='M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z')
@@ -115,4 +115,4 @@ block content
           path(d='M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z')
 
 block style
-  title Button &amp; Buttons &middot; Type &middot; Panel
+  title Button &middot; Type &middot; Panel

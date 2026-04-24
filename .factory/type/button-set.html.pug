@@ -6,7 +6,7 @@ block content
   h2 Examples
   h3 Basic
   pre: code
-    | &lt;p class="buttons" role="group"&gt;
+    | &lt;p class="flex-fill has-gap to-center" role="group"&gt;
     |   &lt;span class="button-set" role="group"&gt;
     |     &lt;button class="button"&gt;
     |       Button 1
@@ -23,7 +23,7 @@ block content
     |   &lt;/button&gt;
     | &lt;/p&gt;
   #test-1.has-fill.has-pad.has-stroke
-    p.buttons(role='group')
+    p.flex-fill.has-gap.to-center(role='group')
       span.button-set(role='group')
         button.button Button 1
         button.button Button 2
@@ -31,7 +31,7 @@ block content
       button.button Button 4
   h3 With Arrow
   pre: code
-    | &lt;p class="buttons" role="group"&gt;
+    | &lt;p class="flex-fill has-gap to-center" role="group"&gt;
     |   &lt;span class="button-set" role="group"&gt;
     |     &lt;button class="button has-title"&gt;
     |       &lt;span class="button-title title"&gt;
@@ -47,7 +47,7 @@ block content
     |   &lt;/button&gt;
     | &lt;/p&gt;
   #test-2.has-fill.has-pad.has-stroke
-    p.buttons(role='group')
+    p.flex-fill.has-gap.to-center(role='group')
       span.button-set(role='group')
         button.button.has-title
           span.button-title.title Button 1
@@ -56,7 +56,7 @@ block content
       button.button Button 2
   h3 With Icon
   pre: code
-    | &lt;p class="buttons" role="group"&gt;
+    | &lt;p class="flex-fill has-gap to-center" role="group"&gt;
     |   &lt;span class="button-set" role="group"&gt;
     |     &lt;button class="button has-icon" title="Select&amp;hellip;"&gt;
     |       &lt;svg class="button-icon icon" height="24" viewBox="0 0 24 24" width="24"&gt; &hellip; &lt;/svg&gt;
@@ -72,7 +72,7 @@ block content
     |   &lt;/button&gt;
     | &lt;/p&gt;
   #test-3.has-fill.has-pad.has-stroke
-    p.buttons(role='group')
+    p.flex-fill.has-gap.to-center(role='group')
       span.button-set(role='group')
         button.button.has-icon(title!='Select&hellip;')
           svg.button-icon.icon(height='24' viewBox='0 0 24 24' width='24')
@@ -83,7 +83,7 @@ block content
   h3 With Radios
   pre: code
     | &lt;form&gt;
-    |   &lt;p class="buttons" role="group"&gt;
+    |   &lt;p class="flex-fill has-gap to-center" role="group"&gt;
     |     &lt;span class="button-set" role="group"&gt;
     |       &lt;label class="button"&gt;
     |         &lt;input name="test-2" type="radio" value="1"&gt; Button 1
@@ -101,7 +101,7 @@ block content
     |   &lt;/p&gt;
     | &lt;/form&gt;
   form#test-4.has-fill.has-pad.has-stroke
-    p.buttons(role='group')
+    p.flex-fill.has-gap.to-center(role='group')
       span.button-set(role='group')
         label.button
           input(name='test-4' type='radio' value='1')
@@ -116,7 +116,7 @@ block content
   h3 With Checks
   pre: code
     | &lt;form&gt;
-    |   &lt;p class="buttons" role="group"&gt;
+    |   &lt;p class="flex-fill has-gap to-center" role="group"&gt;
     |     &lt;span class="button-set" role="group"&gt;
     |       &lt;label class="button"&gt;
     |         &lt;input name="test-3" type="checkbox" value="1"&gt; Button 1
@@ -134,7 +134,7 @@ block content
     |   &lt;/p&gt;
     | &lt;/form&gt;
   form#test-5.has-fill.has-pad.has-stroke
-    p.buttons(role='group')
+    p.flex-fill.has-gap.to-center(role='group')
       span.button-set(role='group')
         label.button
           input(name='test-5' type='checkbox' value='1')

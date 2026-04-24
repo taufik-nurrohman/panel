@@ -4,6 +4,34 @@
   flex: 1;
 }
 
+%flex-x {
+  align-items: stretch;
+  display: inline-flex;
+  flex: {
+    direction: row;
+    wrap: wrap;
+  }
+  vertical-align: middle;
+}
+
+%flex-x-fill {
+  @extend %flex-x;
+  display: flex;
+}
+
+%flex-y {
+  align-items: stretch;
+  display: inline-flex;
+  flex: {
+    direction: column;
+  }
+}
+
+%flex-y-fill {
+  @extend %flex-y;
+  display: flex;
+}
+
 %flex {
   align-items: stretch;
   display: inline-flex;
